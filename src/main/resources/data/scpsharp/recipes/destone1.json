@@ -1,0 +1,5 @@
+{
+  "type": "scpsharp:scp914_processing_simple",
+  "source": "minecraft:cobblestone",
+  "target": "minecraft:tnt"
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "scpsharp:block/scp914_framework"
+    }
+  }
+}

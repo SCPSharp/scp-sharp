@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "scpsharp",
+  "version": "${version}",
+  "name": "SCP: Sharp",
+  "description": "SCP: Go!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/scpsharp/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "com.xtex.scpsharp.InitializersKt::initMain"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "com.xtex.scpsharp.InitializersKt::initClient"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "com.xtex.scpsharp.integrate.ModMenuIntegrate"
+      }
+    ]
+  },
+  "mixins": [
+    "scpsharp.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": "*",
+    "fabric-language-kotlin": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}

@@ -1,0 +1,69 @@
+plugins {
+    id 'fabric-loom' version '0.11-SNAPSHOT'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'net.kyori.indra.license-header' version '2.1.1'
+    id 'maven-publish'
+}
+
+group 'com.xtex'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://maven.terraformersmc.com/releases/' }
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    modImplementation "net.fabricmc:fabric-language-kotlin:1.7.1+kotlin.1.6.10"
+
+    modImplementation 'com.terraformersmc:modmenu:3.0.1'
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+java {
+    withSourcesJar()
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.name}"}
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
+}

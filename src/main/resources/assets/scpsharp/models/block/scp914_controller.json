@@ -1,0 +1,14 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "#border",
+    "down": "#border",
+    "up": "#border",
+    "north": "#border",
+    "east": "#panel",
+    "south": "#border",
+    "west": "#border",
+    "border": "scpsharp:block/scp914_framework",
+    "panel": "scpsharp:block/scp914_controller"
+  }
+}
