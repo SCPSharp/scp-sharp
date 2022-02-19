@@ -30,6 +30,7 @@ jobs:
           ./gradlew licenseFormat
           ./gradlew build
           git commit -m "style(license): format license header" -a
+          git push
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2.3.1
