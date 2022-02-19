@@ -3,9 +3,9 @@
   "id": "scpsharp",
   "version": "${version}",
   "name": "SCP: Sharp",
-  "description": "SCP: Go!",
+  "description": "SCP: Sharp is a mod for Minecraft about SCP Foundation!",
   "authors": [
-    "Me!"
+    "xtexChooser"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
