@@ -15,4 +15,4 @@ under certain conditions; type `show c' for details.
 
 ### SCP Foundation
 
-Content relating to the SCP Foundation, including the SCP Foundation logo, is licensed under Creative Commons Sharealike 3.0 and all concepts originate from http://www.scpwiki.com and its authors.
+Content relating to the SCP Foundation, including the SCP Foundation logo, is licensed under [Creative Commons Sharealike 3.0](https://creativecommons.org/licenses/by-sa/3.0/) and all concepts originate from http://www.scpwiki.com and its authors.
