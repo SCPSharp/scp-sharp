@@ -36,8 +36,8 @@ jobs:
           ./gradlew licenseFormat build
           git config --global user.email action@github.com
           git config --global user.name github-actions
-          git commit -m "style(license): format license header" -a
-          git push
+          git commit -m "style(license): format license header" -a || true
+          git push || true
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2.3.1
