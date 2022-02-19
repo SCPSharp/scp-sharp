@@ -24,11 +24,18 @@ jobs:
           distribution: adopt
           cache: gradle
 
+      - name: Cache .gradle
+        uses: actions/cache@v2
+        with:
+          path: $USER_HOME/.gradle
+          key: ${{ runner.os }}-${{ hashFiles('*.gradle') }}-gradle-user-home
+
       - name: Build with Gradlew
         run: |
           chmod +x ./gradlew
-          ./gradlew licenseFormat
-          ./gradlew build
+          ./gradlew licenseFormat build
+          git config --global user.email zbwxtex@qq.com
+          git config --global user.name github-actions
           git commit -m "style(license): format license header" -a
           git push
 
