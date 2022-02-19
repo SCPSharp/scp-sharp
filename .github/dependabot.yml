@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: daily
+    ignore:
+      - dependency-name: "fabric-loom"
+      - dependency-name: "net.fabricmc.fabric-api:fabric-api"
+      - dependency-name: "net.fabricmc:yarn"
+    assignees: [ "xtexChooser" ]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
