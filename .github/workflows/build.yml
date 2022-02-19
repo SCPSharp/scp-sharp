@@ -34,7 +34,7 @@ jobs:
         run: |
           chmod +x ./gradlew
           ./gradlew licenseFormat build
-          git config --global user.email zbwxtex@qq.com
+          git config --global user.email action@github.com
           git config --global user.name github-actions
           git commit -m "style(license): format license header" -a
           git push
