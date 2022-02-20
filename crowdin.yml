@@ -1,12 +1,8 @@
-"project_id": "500740"
-"api_token_env": "CROWDIN_API_TOKEN"
-"base_path": "/"
-"base_url": "https://api.crowdin.com"
-"preserve_hierarchy": true
-
-"files": [
-  {
-    "source": "/src/main/resources/assets/scpsharp/zh_cn.json",
-    "translation": "/src/main/resources/assets/scpsharp/%locale_with_underscore%.json"
-  }
-]
+project_id: '500740'
+api_token_env: CROWDIN_API_TOKEN
+base_path: /
+base_url: 'https://api.crowdin.com'
+preserve_hierarchy: true
+files:
+  - source: /src/main/resources/assets/scpsharp/zh_cn.json
+    translation: /src/main/resources/assets/scpsharp/%locale_with_underscore%.json
