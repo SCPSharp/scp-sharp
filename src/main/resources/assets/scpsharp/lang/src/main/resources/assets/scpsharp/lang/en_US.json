@@ -1,14 +1,14 @@
 {
   "block.scpsharp.scp914_framework": "SCP-914",
-  "block.scpsharp.scp914_controller": "SCP-914控制器",
+  "block.scpsharp.scp914_controller": "SCP-914 Controller",
   "entity.scpsharp.scp173": "SCP-173",
-  "item.scpsharp.scp173_spawn_egg": "SCP-173刷怪蛋",
+  "item.scpsharp.scp173_spawn_egg": "SCP-173 Spawn Egg",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
-  "scpsharp.scp914.switched": "SCP-914已切换到 %s 模式",
-  "scpsharp.scp914.mode.very_bad": "粗加工",
-  "scpsharp.scp914.mode.bad": "半粗加工",
-  "scpsharp.scp914.mode.normal": "1：1",
-  "scpsharp.scp914.mode.fine": "半精加工",
-  "scpsharp.scp914.mode.very_fine": "精加工",
-  "subtitles.scpsharp.scp914_working": "SCP-914：工作"
+  "scpsharp.scp914.switched": "SCP-914 switched to %s mode",
+  "scpsharp.scp914.mode.very_bad": "Rough",
+  "scpsharp.scp914.mode.bad": "Coarse",
+  "scpsharp.scp914.mode.normal": "1 : 1",
+  "scpsharp.scp914.mode.fine": "Fine",
+  "scpsharp.scp914.mode.very_fine": "Very Fine",
+  "subtitles.scpsharp.scp914_working": "SCP-914 Working"
 }
