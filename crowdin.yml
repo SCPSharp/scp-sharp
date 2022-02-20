@@ -8,4 +8,4 @@ pull_request_title: 'feat(i18n): update translations'
 pull_request_labels: [ 'i18n', 'auto' ]
 files:
   - source: src/main/resources/assets/scpsharp/lang/zh_cn.json
-    translation: /%original_path%/src/main/resources/assets/scpsharp/lang/%locale_with_underscore%.json
+    translation: /%original_path%/%locale_with_underscore%.json
