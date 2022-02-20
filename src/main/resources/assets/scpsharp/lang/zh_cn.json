@@ -3,7 +3,7 @@
   "block.scpsharp.scp914_controller": "SCP-914控制器",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173刷怪蛋",
-  "itemGroup.scpsharp.scp_subjects": "SCP: Sharp",
+  "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
   "scpsharp.scp914.switched": "SCP-914已切换到 %s 模式",
   "scpsharp.scp914.mode.very_bad": "粗加工",
   "scpsharp.scp914.mode.bad": "半粗加工",
