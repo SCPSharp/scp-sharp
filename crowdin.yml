@@ -4,5 +4,5 @@ base_path: /
 base_url: 'https://api.crowdin.com'
 preserve_hierarchy: true
 files:
-  - source: /src/main/resources/assets/scpsharp/zh_cn.json
-    translation: /src/main/resources/assets/scpsharp/%locale_with_underscore%.json
+  - source: src/main/resources/assets/scpsharp/lang/zh_cn.json
+    translation: src/main/resources/assets/scpsharp/lang/%locale_with_underscore%.json
