@@ -6,4 +6,4 @@ preserve_hierarchy: true
 commit_message: 'feat(i18n): '
 files:
   - source: src/main/resources/assets/scpsharp/lang/zh_cn.json
-    translation: ./%original_path%/src/main/resources/assets/scpsharp/lang/%locale_with_underscore%.json
+    translation: /%original_path%/src/main/resources/assets/scpsharp/lang/%locale_with_underscore%.json
