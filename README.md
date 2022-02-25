@@ -1,5 +1,17 @@
 # SCP: Sharp
 
+## FAQ
+
+#### Why is the model of SCP-173 not good-looking?
+
+It is the best for me. I could not make it better. I tried to ask for help, but we tried our best.
+
+If you can make a better model, thanks, really!
+
+#### Blink effect for SCP-173 does not render on client side?
+
+Yeah, it is kind of difficult to get the tick timer on the client and the tick reference should never be synchronized to the client, so I could not know "Is time for wink?" on the client. There will be some delay if the time of the computer is used.
+
 ## License
 
 ### GNU GPL-3.0
