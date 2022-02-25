@@ -10,7 +10,8 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven { url 'https://maven.terraformersmc.com/releases/' }
+    maven { url 'https://maven.terraformersmc.com/releases/' } // modmenu
+    maven { url 'https://maven.shedaniel.me' }
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -22,10 +23,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    //implementation "org.jetbrains.kotlin:kotlin-stdlib"
     modImplementation "net.fabricmc:fabric-language-kotlin:1.7.1+kotlin.1.6.10"
 
     modImplementation 'com.terraformersmc:modmenu:3.0.1'
+    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:7.3.432'
+    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:7.3.432'
 }
 
 processResources {

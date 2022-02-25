@@ -32,6 +32,16 @@
         "adapter": "kotlin",
         "value": "com.xtex.scpsharp.integrate.ModMenuIntegrate"
       }
+    ],
+    "rei": [
+      {
+        "adapter": "kotlin",
+        "value": "com.xtex.scpsharp.integrate.rei.REIServerPlugin"
+      },
+      {
+        "adapter": "kotlin",
+        "value": "com.xtex.scpsharp.integrate.rei.REIClientPlugin"
+      }
     ]
   },
   "mixins": [
