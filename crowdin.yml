@@ -1,8 +1,4 @@
-project_id: '500746'
-api_token_env: CROWDIN_API_TOKEN
-base_path: /
-base_url: 'https://api.crowdin.com'
-preserve_hierarchy: true
+preserve_hierarchy: false
 commit_message: 'feat(i18n): '
 pull_request_title: 'feat(i18n): update translations'
 pull_request_labels: [ 'i18n', 'auto' ]
