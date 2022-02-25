@@ -36,8 +36,4 @@ object SCP173Client {
 
 }
 
-fun World.canSCP173MoveNow() = if(gameRules[GameRules.DO_DAYLIGHT_CYCLE].get()) {
-    (timeOfDay and 0b0111) == 0L
-} else {
-    (server!!.timeReference and 0b00001110) == 0L
-}
+fun World.canSCP173MoveNow() = (time and 0b0111) == 0L
