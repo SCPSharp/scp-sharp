@@ -14,9 +14,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+@file:Environment(EnvType.CLIENT)
+
 package com.xtex.scpsharp.content.scp173
 
 import com.xtex.scpsharp.util.id
+import net.fabricmc.api.EnvType
+import net.fabricmc.api.Environment
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
 import net.minecraft.client.model.*
@@ -27,7 +31,7 @@ import net.minecraft.client.render.entity.model.EntityModel
 import net.minecraft.client.render.entity.model.EntityModelLayer
 import net.minecraft.client.util.math.MatrixStack
 
-class SCP173EntityModel(val base: ModelPart) : EntityModel<SCP173Entity>() {
+class SCP173EntityModel(val model: ModelPart) : EntityModel<SCP173Entity>() {
 
     companion object {
 
@@ -56,7 +60,7 @@ class SCP173EntityModel(val base: ModelPart) : EntityModel<SCP173Entity>() {
     }
 
     init {
-        base.setPivot(0.0f, 24.0f * (1 / modelScale), 0.0f)
+        model.setPivot(0.0f, 24.0f * (1 / modelScale), 0.0f)
     }
 
     override fun render(
@@ -65,7 +69,7 @@ class SCP173EntityModel(val base: ModelPart) : EntityModel<SCP173Entity>() {
     ) {
         matrix.push()
         matrix.scale(modelScale, modelScale, modelScale)
-        base.render(matrix, buffer, packedLight, packedOverlay)
+        model.render(matrix, buffer, packedLight, packedOverlay)
         matrix.pop()
     }
 

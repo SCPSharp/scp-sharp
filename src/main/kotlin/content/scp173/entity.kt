@@ -16,22 +16,29 @@
  */
 package com.xtex.scpsharp.content.scp173
 
+import com.google.common.base.Predicates
+import com.xtex.scpsharp.content.SCPEntity
+import com.xtex.scpsharp.content.SCPIgnoredEntity
 import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.mixin.AttackGoalAccessor
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.SpawnGroup
+import net.minecraft.entity.ai.goal.*
 import net.minecraft.entity.attribute.DefaultAttributeContainer
-import net.minecraft.entity.mob.PathAwareEntity
+import net.minecraft.entity.attribute.EntityAttributes
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.SpawnEggItem
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 
-class SCP173Entity(entityType: EntityType<out PathAwareEntity>, world: World) : PathAwareEntity(entityType, world) {
+class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCPEntity(entityType, world) {
 
     companion object {
 
@@ -46,9 +53,11 @@ class SCP173Entity(entityType: EntityType<out PathAwareEntity>, world: World) : 
             .fireImmune()
             .build()
         val eggItemId = id("scp173_spawn_egg")
-        val eggItem = SpawnEggItem(type, 0xa87550, 0x825b3f, FabricItemSettings()
-            .group(scpSubjectItemGroup)
-            .rarity(Rarity.UNCOMMON))
+        val eggItem = SpawnEggItem(
+            type, 0xa87550, 0x825b3f, FabricItemSettings()
+                .group(scpSubjectItemGroup)
+                .rarity(Rarity.UNCOMMON)
+        )
 
         init {
             Registry.register(Registry.ENTITY_TYPE, id, type)
@@ -58,7 +67,41 @@ class SCP173Entity(entityType: EntityType<out PathAwareEntity>, world: World) : 
 
         @JvmStatic
         fun createAttributes(): DefaultAttributeContainer.Builder = createMobAttributes()
+            .add(EntityAttributes.GENERIC_MAX_HEALTH, 150.0)
+            .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 7.0)
+            .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 20.0)
+            .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 70.0)
 
+    }
+
+    override fun initGoals() {
+        super.initGoals()
+        goalSelector.add(1, SCP173AttackGoal(this))
+        goalSelector.add(2, LookAtEntityGoal(this, PlayerEntity::class.java, 20.0f))
+        goalSelector.add(3, SwimGoal(this))
+        goalSelector.add(4, WanderAroundGoal(this, 1.0))
+        goalSelector.add(4, LookAroundGoal(this))
+
+        targetSelector.add(1, RevengeGoal(this, SCPIgnoredEntity::class.java))
+        targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 0, true, false, Predicates.alwaysTrue()))
+        targetSelector.add(3, ActiveTargetGoal(this, LivingEntity::class.java, 0, true, true) { it !is SCPIgnoredEntity })
+    }
+
+    override fun canMoveVoluntarily() = super.canMoveVoluntarily() && world.canSCP173MoveNow()
+
+}
+
+class SCP173AttackGoal(private val mob: SCP173Entity) : AttackGoal(mob) {
+
+    override fun tick() {
+        super.tick()
+        val accessor = this as Any as AttackGoalAccessor
+        if (this.mob.squaredDistanceTo(accessor.getTarget().x, accessor.getTarget().y, accessor.getTarget().z) <= 4 * 4) {
+            if (accessor.getCoolDown() <= 3) {
+                accessor.setCoolDown(10)
+                mob.tryAttack(accessor.getTarget())
+            }
+        }
     }
 
 }

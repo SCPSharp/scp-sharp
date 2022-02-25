@@ -16,6 +16,8 @@
  */
 package com.xtex.scpsharp.content.scp173
 
+import net.minecraft.world.GameRules
+import net.minecraft.world.World
 import java.lang.invoke.MethodHandles
 
 object SCP173 {
@@ -32,4 +34,10 @@ object SCP173Client {
         MethodHandles.lookup().ensureInitialized(SCP173EntityRenderer::class.java)
     }
 
+}
+
+fun World.canSCP173MoveNow() = if(gameRules[GameRules.DO_DAYLIGHT_CYCLE].get()) {
+    (timeOfDay and 0b0111) == 0L
+} else {
+    (server!!.timeReference and 0b00001110) == 0L
 }

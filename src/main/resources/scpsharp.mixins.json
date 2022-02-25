@@ -4,6 +4,7 @@
   "package": "com.xtex.scpsharp.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AttackGoalAccessor"
   ],
   "client": [
   ],
