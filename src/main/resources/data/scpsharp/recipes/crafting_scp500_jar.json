@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "scpsharp:scp500"
+    },
+    {
+      "item": "scpsharp:scp500"
+    },
+    {
+      "item": "scpsharp:scp500"
+    },
+    {
+      "item": "scpsharp:scp500"
+    },
+    {
+      "item": "scpsharp:scp500"
+    }
+  ],
+  "result": {
+    "item": "scpsharp:scp500_jar"
+  }
+}
