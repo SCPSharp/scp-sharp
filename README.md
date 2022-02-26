@@ -1,5 +1,17 @@
 # SCP: Sharp
 
+[![Workflow status](https://img.shields.io/github/workflow/status/xtexChooser/scp-sharp/Build/main?style=flat-square&logo=github-actions)](https://github.com/xtexChooser/scp-sharp/actions)![Language](https://img.shields.io/badge/language-kotlin-%237f52ff?style=flat-square&logo=kotlin)![GitHub PRs](https://img.shields.io/badge/license-AGPL--3.0-informational?style=flat-square)![Gitter](https://img.shields.io/gitter/room/xtexChooser/scp-sharp?style=flat-square&logo=gitter)![GitHub stars](https://img.shields.io/github/stars/xtexChooser/scp-sharp?logo=github&style=flat-square)![GitHub repo size](https://img.shields.io/github/repo-size/xtexChooser/scp-sharp?style=flat-square)![Total lines](https://img.shields.io/tokei/lines/github/xtexChooser/scp-sharp?style=flat-square)![GitHub issues](https://img.shields.io/github/issues/xtexChooser/scp-sharp?style=flat-square)![GitHub PRs](https://img.shields.io/github/issues-pr/xtexChooser/scp-sharp?style=flat-square)![Commit activity](https://img.shields.io/github/commit-activity/m/xtexChooser/scp-sharp?style=flat-square)![GitHub contributors](https://img.shields.io/github/contributors/xtexChooser/scp-sharp?style=flat-square)[![JitPack](https://img.shields.io/jitpack/v/github/xtexChooser/scp-sharp?style=flat-square)](https://jitpack.io/#xtexChooser/scp-sharp)![GitHub downloads](https://img.shields.io/github/downloads/xtexChooser/scp-sharp/total?logo=github&style=flat-square)![GitHub release](https://img.shields.io/github/v/release/xtexChooser/scp-sharp?display_name=tag&include_prereleases&logo=github&style=flat-square)![Minecraft version](https://img.shields.io/badge/minecraft-1.18.1-brightgreen?style=flat-square&logo=mojang-studios)
+
+## Compatibility
+
+#### Mod Menu
+
+All things well but there is no configuration screen because no configuration file is in need.
+
+#### REI
+
+Recipes for SCP-914 is able to display in REI.
+
 ## FAQ
 
 #### Why is the model of SCP-173 not good-looking?
