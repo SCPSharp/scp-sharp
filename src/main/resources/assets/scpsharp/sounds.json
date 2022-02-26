@@ -1,8 +1,17 @@
 {
-  "scp914_working": {
-    "subtitle": "subtitles.scpsharp.scp914_working",
+  "scp173_rotate": {
+    "subtitle": "subtitles.scpsharp.scp173_rotate",
     "sounds": [
-      "scpsharp:scp914_working"
+      "scpsharp:scp173_rotate_1",
+      "scpsharp:scp173_rotate_2",
+      "scpsharp:scp173_rotate_3",
+      "scpsharp:scp173_rotate_4"
+    ]
+  },
+  "scp914_work": {
+    "subtitle": "subtitles.scpsharp.scp914_work",
+    "sounds": [
+      "scpsharp:scp914_work"
     ]
   }
 }

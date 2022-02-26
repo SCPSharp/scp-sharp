@@ -30,13 +30,13 @@ object SCP914 {
 
     val modeProperty: EnumProperty<SCP914Mode> = EnumProperty.of("mode", SCP914Mode::class.java)
 
-    val workingSoundEvent = SoundEvent(id("scp914_working"))
+    val workSoundEvent = SoundEvent(id("scp914_work"))
 
     init {
         MethodHandles.lookup().ensureInitialized(SCP914FrameworkBlock::class.java)
         MethodHandles.lookup().ensureInitialized(SCP914ControllerBlock::class.java)
         MethodHandles.lookup().ensureInitialized(SCP914Recipe::class.java)
-        Registry.register(Registry.SOUND_EVENT, workingSoundEvent.id, workingSoundEvent)
+        Registry.register(Registry.SOUND_EVENT, workSoundEvent.id, workSoundEvent)
     }
 
 }

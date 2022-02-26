@@ -97,7 +97,7 @@ class SCP173AttackGoal(private val mob: SCP173Entity) : AttackGoal(mob) {
 
     override fun tick() {
         super.tick()
-        val accessor = this as Any as AttackGoalAccessor
+        @Suppress("CAST_NEVER_SUCCEEDS") val accessor = this as AttackGoalAccessor
         if (this.mob.squaredDistanceTo(
                 accessor.getTarget().x,
                 accessor.getTarget().y,
@@ -107,6 +107,8 @@ class SCP173AttackGoal(private val mob: SCP173Entity) : AttackGoal(mob) {
             if (accessor.getCoolDown() <= 3) {
                 accessor.setCoolDown(10)
                 mob.tryAttack(accessor.getTarget())
+                @Suppress("CAST_NEVER_SUCCEEDS")
+                mob.playSound(SCP173.rotateSound, 1.0f, 0.5f)
             }
         }
     }

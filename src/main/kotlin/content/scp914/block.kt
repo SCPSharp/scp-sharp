@@ -228,7 +228,7 @@ object SCP914ControllerBlock : Block(
                 world.setBlockState(pos, state.with(Properties.AGE_3, 2))
             }
             2 -> {
-                world.playSound(null, pos, SCP914.workingSoundEvent, SoundCategory.MASTER, 1.0f, 1.0f)
+                world.playSound(null, pos, SCP914.workSoundEvent, SoundCategory.MASTER, 1.0f, 1.0f)
                 activate(state, world, pos)
                 world.setBlockState(pos, state.with(Properties.AGE_3, 3))
             }
