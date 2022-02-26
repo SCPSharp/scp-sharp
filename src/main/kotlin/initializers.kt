@@ -16,6 +16,8 @@
  */
 package com.xtex.scpsharp
 
+import com.xtex.scpsharp.content.scp008.SCP008
+import com.xtex.scpsharp.content.scp008.SCP008Client
 import com.xtex.scpsharp.content.scp173.SCP173
 import com.xtex.scpsharp.content.scp173.SCP173Client
 import com.xtex.scpsharp.content.scp500.SCP500
@@ -23,11 +25,13 @@ import com.xtex.scpsharp.content.scp914.SCP914
 import java.lang.invoke.MethodHandles
 
 fun initMain() {
-    MethodHandles.lookup().ensureInitialized(SCP914::class.java)
+    MethodHandles.lookup().ensureInitialized(SCP008::class.java)
     MethodHandles.lookup().ensureInitialized(SCP173::class.java)
     MethodHandles.lookup().ensureInitialized(SCP500::class.java)
+    MethodHandles.lookup().ensureInitialized(SCP914::class.java)
 }
 
 fun initClient() {
+    MethodHandles.lookup().ensureInitialized(SCP008Client::class.java)
     MethodHandles.lookup().ensureInitialized(SCP173Client::class.java)
 }

@@ -6,6 +6,7 @@
 
 ## SCP Subjects
 
+- SCP-008
 - SCP-173
 - SCP-500
 - SCP-914

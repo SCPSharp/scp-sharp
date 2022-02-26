@@ -21,6 +21,12 @@ import net.minecraft.entity.mob.PathAwareEntity
 import net.minecraft.world.World
 
 open class SCPEntity(entityType: EntityType<out SCPEntity>, world: World) : PathAwareEntity(entityType, world),
-    SCPIgnoredEntity
+    SCPIgnoredEntity {
+
+    override fun cannotDespawn() = true
+
+    override fun isDisallowedInPeaceful() = true
+
+}
 
 interface SCPIgnoredEntity
