@@ -64,6 +64,9 @@ object SCP5001Item : Item(
                 .filter { user.removeStatusEffect(it.effectType) }
                 .onEach { SCP500.logger.info("$it removed successfully by SCP-500 for $user") }
                 .apply { SCP500.logger.info("All $size non-beneficial effects removed for $user") }
+            if (user is PlayerEntity) {
+                user.incrementStat(SCP500.eatingStat)
+            }
         }
         return super.finishUsing(stack, world, user)
     }
@@ -87,6 +90,7 @@ object SCP500JarItem : Item(
         stack.damage(1, user) {}
         if (!world.isClient) {
             user.giveItemStack(ItemStack(SCP5001Item))
+            user.incrementStat(SCP500.takingOutStat)
             SCP500.logger.info("$user took out a SCP-500 from jar")
         }
         return TypedActionResult.consume(stack)

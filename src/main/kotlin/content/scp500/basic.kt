@@ -16,16 +16,29 @@
  */
 package com.xtex.scpsharp.content.scp500
 
+import com.xtex.scpsharp.util.id
 import com.xtex.scpsharp.util.logger
+import net.minecraft.stat.StatFormatter
+import net.minecraft.stat.Stats
+import net.minecraft.util.registry.Registry
 import java.lang.invoke.MethodHandles
 
 object SCP500 {
 
     val logger = logger("SCP-500")
 
+    val takingOutStat = id("take_out_scp500")
+
+    val eatingStat = id("eat_scp500")
+
     init {
         MethodHandles.lookup().ensureInitialized(SCP5001Item::class.java)
         MethodHandles.lookup().ensureInitialized(SCP500JarItem::class.java)
+
+        Registry.register(Registry.CUSTOM_STAT, takingOutStat, takingOutStat)
+        Stats.CUSTOM.getOrCreateStat(takingOutStat, StatFormatter.DEFAULT)
+        Registry.register(Registry.CUSTOM_STAT, eatingStat, eatingStat)
+        Stats.CUSTOM.getOrCreateStat(eatingStat, StatFormatter.DEFAULT)
     }
 
 }
