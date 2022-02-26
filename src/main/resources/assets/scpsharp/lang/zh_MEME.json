@@ -1,14 +1,15 @@
 {
-  "block.scpsharp.scp914_framework": "SCP-914",
   "block.scpsharp.scp914_controller": "SCP-914控制器",
+  "block.scpsharp.scp914_framework": "SCP-914",
+  "category.rei.scp914": "SCP-914加工",
   "entity.scpsharp.scp173": "花生",
-  "item.scpsharp.scp173_spawn_egg": "花生种子",
+  "item.scpsharp.scp173_spawn_egg": "小花生",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
+  "scpsharp.scp914.mode.bad": "差评",
+  "scpsharp.scp914.mode.fine": "好好评",
+  "scpsharp.scp914.mode.normal": "好评",
+  "scpsharp.scp914.mode.very_bad": "差差评",
+  "scpsharp.scp914.mode.very_fine": "好好好评",
   "scpsharp.scp914.switched": "SCP-914已切换到 %s 模式",
-  "scpsharp.scp914.mode.very_bad": "O5变馄饨",
-  "scpsharp.scp914.mode.bad": "O5变保安",
-  "scpsharp.scp914.mode.normal": "1对1",
-  "scpsharp.scp914.mode.fine": "九尾变O5",
-  "scpsharp.scp914.mode.very_fine": "DD变O5",
-  "subtitles.scpsharp.scp914_working": "SCP-914：干活"
+  "subtitles.scpsharp.scp914_working": "SCP-914：工作"
 }
