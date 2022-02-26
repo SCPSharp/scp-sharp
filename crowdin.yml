@@ -1,5 +1,5 @@
 preserve_hierarchy: false
-commit_message: 'feat(i18n): update translations for %language%/%locale%(%original_file_name%)'
+commit_message: 'feat(i18n): update translations for %language%(%original_file_name%)'
 append_commit_message: false
 pull_request_title: 'feat(i18n): update translations'
 pull_request_labels: [ 'i18n', 'auto' ]
