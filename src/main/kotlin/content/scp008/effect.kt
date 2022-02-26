@@ -1,11 +1,8 @@
 package com.xtex.scpsharp.content.scp008
 
-import com.mojang.blaze3d.platform.GlStateManager
 import com.mojang.blaze3d.systems.RenderSystem
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
-import net.minecraft.block.BlockWithEntity
-import net.minecraft.block.entity.BlockEntity
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.hud.InGameHud
 import net.minecraft.client.util.math.MatrixStack
@@ -15,7 +12,6 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
-import net.minecraft.inventory.Inventory
 import net.minecraft.util.registry.Registry
 
 
@@ -59,7 +55,7 @@ object SCP008OverlayRenderer : HudRenderCallback {
     }
 
     override fun onHudRender(matrix: MatrixStack, tickDelta: Float) {
-        if(MinecraftClient.getInstance().player!!.hasStatusEffect(SCP008StatusEffect)) {
+        if (MinecraftClient.getInstance().player!!.hasStatusEffect(SCP008StatusEffect)) {
             val width = MinecraftClient.getInstance().window.scaledWidth
             val height = MinecraftClient.getInstance().window.scaledHeight
             RenderSystem.enableBlend()
