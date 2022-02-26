@@ -4,6 +4,8 @@
   "category.rei.scp914": "SCP-914 Processing",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173 Spawn Egg",
+  "item.scpsharp.scp500": "SCP-500",
+  "item.scpsharp.scp500_jar": "SCP-500 cans",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
   "scpsharp.scp914.mode.bad": "Coarse",
   "scpsharp.scp914.mode.fine": "Fine",
