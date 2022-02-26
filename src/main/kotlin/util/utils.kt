@@ -17,8 +17,9 @@
 package com.xtex.scpsharp.util
 
 import net.minecraft.util.Identifier
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 fun id(path: String) = Identifier("scpsharp", path)
 
-fun logger(name: String) = LoggerFactory.getLogger("SCPSharp/$name")
+fun logger(name: String): Logger = LoggerFactory.getLogger("SCPSharp/$name")

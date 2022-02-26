@@ -25,16 +25,14 @@ import org.spongepowered.asm.mixin.gen.Accessor
 @Mixin(AttackGoal::class)
 interface AttackGoalAccessor {
 
-    @Accessor("mob")
-    fun getMob(): MobEntity
+    @get:Accessor("mob")
+    val mob: MobEntity
 
-    @Accessor("target")
-    fun getTarget(): LivingEntity
+    @get:Accessor("target")
+    val target: LivingEntity
 
-    @Accessor("cooldown")
-    fun getCoolDown(): Int
-
-    @Accessor("cooldown")
-    fun setCoolDown(value: Int)
+    @get:Accessor("cooldown")
+    @set:Accessor("cooldown")
+    var coolDown: Int
 
 }
