@@ -55,6 +55,7 @@
     "fabric-language-kotlin": "*"
   },
   "suggests": {
-    "modmenu": "*"
+    "modmenu": "*",
+    "rei": "*"
   }
 }
