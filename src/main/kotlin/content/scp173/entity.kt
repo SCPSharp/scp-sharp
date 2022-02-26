@@ -20,7 +20,6 @@ import com.google.common.base.Predicates
 import com.xtex.scpsharp.content.SCPEntity
 import com.xtex.scpsharp.content.SCPIgnoredEntity
 import com.xtex.scpsharp.content.scpSubjectItemGroup
-import com.xtex.scpsharp.mixin.AttackGoalAccessor
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
