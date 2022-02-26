@@ -4,6 +4,8 @@
   "category.rei.scp914": "SCP-914處理",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173刷怪蛋",
+  "item.scpsharp.scp500": "SCP-500",
+  "item.scpsharp.scp500_jar": "SCP-500罐子",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
   "scpsharp.scp914.mode.bad": "半粗加工",
   "scpsharp.scp914.mode.fine": "半精加工",
