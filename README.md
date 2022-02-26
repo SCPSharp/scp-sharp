@@ -10,7 +10,7 @@ All things well but there is no configuration screen because no configuration fi
 
 #### REI
 
-Recipes for SCP-914 is able to display in REI.
+Recipes for SCP-914 are able to display in REI.
 
 ## FAQ
 
