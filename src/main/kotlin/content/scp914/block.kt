@@ -16,7 +16,6 @@
  */
 package com.xtex.scpsharp.content.scp914
 
-import com.google.common.base.Predicates
 import com.xtex.scpsharp.content.scpSubjectItemGroup
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
@@ -24,9 +23,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
-import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.inventory.Inventory
 import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
@@ -34,15 +31,16 @@ import net.minecraft.item.ItemStack
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.state.StateManager
-import net.minecraft.state.property.EnumProperty
 import net.minecraft.state.property.Properties
-import net.minecraft.state.property.Property
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Rarity
 import net.minecraft.util.hit.BlockHitResult
-import net.minecraft.util.math.*
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Box
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.Vec3d
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
@@ -206,15 +204,17 @@ object SCP914ControllerBlock : Block(
     ) {
         super.neighborUpdate(state, world, pos, block, fromPos, notify)
         val isReceivingRedstonePower = world.isReceivingRedstonePower(pos)
-        if(state[Properties.POWERED]) {
-            if(!isReceivingRedstonePower) {
+        if (state[Properties.POWERED]) {
+            if (!isReceivingRedstonePower) {
                 world.setBlockState(pos, state.with(Properties.POWERED, false))
             }
         } else {
             if (state[Properties.AGE_3] == 0 && isReceivingRedstonePower) {
                 // Start activating
-                world.setBlockState(pos, state.with(Properties.AGE_3, 1)
-                        .with(Properties.POWERED, true))
+                world.setBlockState(
+                    pos, state.with(Properties.AGE_3, 1)
+                        .with(Properties.POWERED, true)
+                )
             }
         }
     }
@@ -228,7 +228,7 @@ object SCP914ControllerBlock : Block(
                 world.setBlockState(pos, state.with(Properties.AGE_3, 2))
             }
             2 -> {
-                world.playSound(null, pos,SCP914.workingSoundEvent,SoundCategory.MASTER,1.0f,1.0f)
+                world.playSound(null, pos, SCP914.workingSoundEvent, SoundCategory.MASTER, 1.0f, 1.0f)
                 activate(state, world, pos)
                 world.setBlockState(pos, state.with(Properties.AGE_3, 3))
             }
@@ -300,8 +300,14 @@ object SCP914ControllerBlock : Block(
         )
         val recipe = world.recipeManager.getAllMatches(SCP914Recipe.type, inventory, world)
             .filter { (mode == SCP914Mode.VERY_BAD || mode == SCP914Mode.BAD) || it.source.test(inventory.getStack(0)) }
-            .firstOrNull { (mode != SCP914Mode.VERY_BAD && mode != SCP914Mode.BAD) || it.target.test(inventory.getStack(0)) }
-        if(recipe == null) {
+            .firstOrNull {
+                (mode != SCP914Mode.VERY_BAD && mode != SCP914Mode.BAD) || it.target.test(
+                    inventory.getStack(
+                        0
+                    )
+                )
+            }
+        if (recipe == null) {
             SCP914.logger.info("No recipe found for ${inventory.getStack(0)}")
         }
         return recipe?.craft(inventory) ?: inventory.getStack(0).copy()

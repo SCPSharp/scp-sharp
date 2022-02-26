@@ -84,7 +84,9 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
 
         targetSelector.add(1, RevengeGoal(this, SCPIgnoredEntity::class.java))
         targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 0, true, false, Predicates.alwaysTrue()))
-        targetSelector.add(3, ActiveTargetGoal(this, LivingEntity::class.java, 0, true, true) { it !is SCPIgnoredEntity })
+        targetSelector.add(
+            3,
+            ActiveTargetGoal(this, LivingEntity::class.java, 0, true, true) { it !is SCPIgnoredEntity })
     }
 
     override fun canMoveVoluntarily() = super.canMoveVoluntarily() && world.canSCP173MoveNow()
@@ -96,7 +98,12 @@ class SCP173AttackGoal(private val mob: SCP173Entity) : AttackGoal(mob) {
     override fun tick() {
         super.tick()
         val accessor = this as Any as AttackGoalAccessor
-        if (this.mob.squaredDistanceTo(accessor.getTarget().x, accessor.getTarget().y, accessor.getTarget().z) <= 4 * 4) {
+        if (this.mob.squaredDistanceTo(
+                accessor.getTarget().x,
+                accessor.getTarget().y,
+                accessor.getTarget().z
+            ) <= 4 * 4
+        ) {
             if (accessor.getCoolDown() <= 3) {
                 accessor.setCoolDown(10)
                 mob.tryAttack(accessor.getTarget())

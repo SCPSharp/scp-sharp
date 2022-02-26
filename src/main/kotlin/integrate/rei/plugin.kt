@@ -18,15 +18,11 @@ package com.xtex.scpsharp.integrate.rei
 
 import com.xtex.scpsharp.content.scp914.SCP914ControllerBlock
 import com.xtex.scpsharp.content.scp914.SCP914Recipe
-import com.xtex.scpsharp.integrate.rei.SCP914REICategory
-import com.xtex.scpsharp.integrate.rei.SCP914REIDisplay
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
-import me.shedaniel.rei.api.client.registry.display.DisplayCategory
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
-import me.shedaniel.rei.api.common.entry.type.EntryTypeRegistry
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin
 import me.shedaniel.rei.api.common.util.EntryIngredients
 

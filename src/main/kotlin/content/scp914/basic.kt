@@ -19,7 +19,6 @@ package com.xtex.scpsharp.content.scp914
 import com.xtex.scpsharp.util.id
 import com.xtex.scpsharp.util.logger
 import net.minecraft.sound.SoundEvent
-import net.minecraft.sound.SoundEvents
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.registry.Registry
@@ -42,18 +41,19 @@ object SCP914 {
 
 }
 
-enum class SCP914Mode: StringIdentifiable {
+enum class SCP914Mode : StringIdentifiable {
 
     VERY_BAD, BAD, NORMAL, FINE, VERY_FINE;
 
     override fun asString() = name.lowercase()
 
-    val next get() = when(this) {
-        VERY_BAD -> BAD
-        BAD -> NORMAL
-        NORMAL -> FINE
-        FINE -> VERY_FINE
-        VERY_FINE -> VERY_BAD
-    }
+    val next
+        get() = when (this) {
+            VERY_BAD -> BAD
+            BAD -> NORMAL
+            NORMAL -> FINE
+            FINE -> VERY_FINE
+            VERY_FINE -> VERY_BAD
+        }
 
 }
