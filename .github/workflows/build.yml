@@ -30,7 +30,7 @@ jobs:
           path: $USER_HOME/.gradle
           key: ${{ runner.os }}-${{ hashFiles('*.gradle') }}-gradle-user-home
 
-      - name: Build with Gradlew
+      - name: Build
         run: |
           chmod +x ./gradlew
           ./gradlew licenseFormat build
@@ -38,6 +38,13 @@ jobs:
           git config --global user.name github-actions
           git commit -m "style(license): format license header" -a || true
           git push || true
+
+      - name: Publish
+        if: github.event_name == 'release'
+        env:
+          CURSEFORGE_API_TOKEN: ${{ secrets.CURSEFORGE_API_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: ./gradlew publish curseforge modrinth
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v2.3.1
