@@ -13,5 +13,6 @@
   "scpsharp.scp914.mode.very_bad": "Rough",
   "scpsharp.scp914.mode.very_fine": "Very Fine",
   "scpsharp.scp914.switched": "SCP-914 switched to %s mode",
-  "subtitles.scpsharp.scp914_working": "SCP-914 Working"
+  "subtitles.scpsharp.scp173_rotate": "SCP-173：扭头",
+  "subtitles.scpsharp.scp914_work": "SCP-914 Working"
 }
