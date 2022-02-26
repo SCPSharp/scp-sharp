@@ -42,7 +42,7 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
 
     companion object {
 
-        val id = id("scp173")
+        val identifier = id("scp173")
         val type: EntityType<SCP173Entity> = FabricEntityTypeBuilder.create(SpawnGroup.MISC, ::SCP173Entity)
             .dimensions(
                 EntityDimensions.fixed(
@@ -52,7 +52,7 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
             )
             .fireImmune()
             .build()
-        val eggItemId = id("scp173_spawn_egg")
+        val eggItemIdentifier = id("scp173_spawn_egg")
         val eggItem = SpawnEggItem(
             type, 0xa87550, 0x825b3f, FabricItemSettings()
                 .group(scpSubjectItemGroup)
@@ -60,8 +60,8 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
         )
 
         init {
-            Registry.register(Registry.ENTITY_TYPE, id, type)
-            Registry.register(Registry.ITEM, eggItemId, eggItem)
+            Registry.register(Registry.ENTITY_TYPE, identifier, type)
+            Registry.register(Registry.ITEM, eggItemIdentifier, eggItem)
             FabricDefaultAttributeRegistry.register(type, createAttributes())
         }
 

@@ -91,7 +91,7 @@ class SCP173EntityRenderer(context: EntityRendererFactory.Context) : MobEntityRe
 
     companion object {
 
-        val layer = EntityModelLayer(SCP173Entity.id, "main")
+        val layer = EntityModelLayer(SCP173Entity.identifier, "main")
         val texture = id("textures/entity/scp173.png")
 
         init {
