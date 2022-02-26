@@ -1,5 +1,5 @@
 {
-  "block.scpsharp.scp914_controller": "SCP-914控制器",
+  "block.scpsharp.scp914_controller": "SCP-914之卵",
   "block.scpsharp.scp914_framework": "SCP-914",
   "category.rei.scp914": "SCP-914處理",
   "entity.scpsharp.scp173": "SCP-173",
@@ -13,6 +13,8 @@
   "scpsharp.scp914.mode.very_bad": "粗加工",
   "scpsharp.scp914.mode.very_fine": "精加工",
   "scpsharp.scp914.switched": "SCP-914已切換到 %s 模式",
+  "stat.scpsharp.eat_scp500": "食用SCP-500",
+  "stat.scpsharp.take_out_scp500": "取出SCP-500",
   "subtitles.scpsharp.scp173_rotate": "SCP-173：扭頭",
   "subtitles.scpsharp.scp914_work": "SCP-914：方作"
 }

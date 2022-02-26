@@ -13,6 +13,8 @@
   "scpsharp.scp914.mode.very_bad": "Rough",
   "scpsharp.scp914.mode.very_fine": "Very Fine",
   "scpsharp.scp914.switched": "SCP-914 switched to %s mode",
+  "stat.scpsharp.eat_scp500": "Eating SCP-500",
+  "stat.scpsharp.take_out_scp500": "Taking out SCP-500",
   "subtitles.scpsharp.scp173_rotate": "SCP-173 Rotate Head",
   "subtitles.scpsharp.scp914_work": "SCP-914 Work"
 }
