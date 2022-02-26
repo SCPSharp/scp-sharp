@@ -34,6 +34,10 @@ dependencies {
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:7.3.432'
 }
 
+loom {
+    accessWidenerPath.set file("src/main/resources/scpsharp.accesswidener")
+}
+
 processResources {
     inputs.property 'version', project.version
 
