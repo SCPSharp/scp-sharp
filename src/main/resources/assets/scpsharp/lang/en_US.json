@@ -5,7 +5,7 @@
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173 Spawn Egg",
   "item.scpsharp.scp500": "SCP-500",
-  "item.scpsharp.scp500_jar": "SCP-500 cans",
+  "item.scpsharp.scp500_jar": "Jar of SCP-500",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
   "scpsharp.scp914.mode.bad": "Coarse",
   "scpsharp.scp914.mode.fine": "Fine",
@@ -13,6 +13,6 @@
   "scpsharp.scp914.mode.very_bad": "Rough",
   "scpsharp.scp914.mode.very_fine": "Very Fine",
   "scpsharp.scp914.switched": "SCP-914 switched to %s mode",
-  "subtitles.scpsharp.scp173_rotate": "SCP-173：扭头",
-  "subtitles.scpsharp.scp914_work": "SCP-914 Working"
+  "subtitles.scpsharp.scp173_rotate": "SCP-173 Rotate Head",
+  "subtitles.scpsharp.scp914_work": "SCP-914 Work"
 }
