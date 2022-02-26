@@ -1,9 +1,11 @@
 {
-  "block.scpsharp.scp914_controller": "SCP-914控制器",
+  "block.scpsharp.scp914_controller": "SCP-914之卵",
   "block.scpsharp.scp914_framework": "SCP-914",
   "category.rei.scp914": "SCP-914處理",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173之卵",
+  "item.scpsharp.scp500": "SCP-500",
+  "item.scpsharp.scp500_jar": "SCP-500罐子",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
   "scpsharp.scp914.mode.bad": "半粗加工",
   "scpsharp.scp914.mode.fine": "半精加工",
@@ -11,5 +13,5 @@
   "scpsharp.scp914.mode.very_bad": "粗加工",
   "scpsharp.scp914.mode.very_fine": "精加工",
   "scpsharp.scp914.switched": "SCP-914已切換到 %s 模式",
-  "subtitles.scpsharp.scp914_working": "SCP-914：運作"
+  "subtitles.scpsharp.scp914_working": "SCP-914：方作"
 }
