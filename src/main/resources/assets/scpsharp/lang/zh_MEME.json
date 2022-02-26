@@ -13,6 +13,8 @@
   "scpsharp.scp914.mode.very_bad": "差差评",
   "scpsharp.scp914.mode.very_fine": "好好好评",
   "scpsharp.scp914.switched": "SCP-914已切换到 %s 模式",
+  "stat.scpsharp.eat_scp500": "食用SCP-500",
+  "stat.scpsharp.take_out_scp500": "取出SCP-500",
   "subtitles.scpsharp.scp173_rotate": "花生：回头率增加",
   "subtitles.scpsharp.scp914_work": "SCP-914：干活"
 }
