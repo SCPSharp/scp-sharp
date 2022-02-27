@@ -13,13 +13,17 @@
 
 ## Compatibility
 
-#### Mod Menu
+#### [Mod Menu](https://github.com/TerraformersMC/ModMenu)
 
 All things well but there is no configuration screen because no configuration file is in need.
 
-#### REI
+#### [REI](https://github.com/shedaniel/RoughlyEnoughItems)
 
 Recipes for SCP-914 are able to display in REI.
+
+#### [Minecraft Meme Resource Pack](https://github.com/Teahouse-Studios/mcwzh-meme-resourcepack)
+
+We have a official translation support for `zh_meme`. This language only shows when the `mcwzh-meme-resourcepack` is installed.
 
 ## FAQ
 
