@@ -1,9 +1,7 @@
 accessWidener v1 named
-# SCP-173 Attack Goal
 accessible field net/minecraft/entity/ai/goal/AttackGoal target Lnet/minecraft/entity/LivingEntity;
 accessible field net/minecraft/entity/ai/goal/AttackGoal cooldown I
 accessible field net/minecraft/entity/ai/goal/AttackGoal mob Lnet/minecraft/entity/mob/MobEntity;
-# SCP-008 Status Effect
 accessible method net/minecraft/entity/damage/DamageSource <init> (Ljava/lang/String;)V
 accessible method net/minecraft/entity/damage/DamageSource setUnblockable ()Lnet/minecraft/entity/damage/DamageSource;
 accessible method net/minecraft/entity/damage/DamageSource setBypassesArmor ()Lnet/minecraft/entity/damage/DamageSource;
