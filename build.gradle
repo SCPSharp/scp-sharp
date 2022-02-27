@@ -78,6 +78,12 @@ publishing {
     }
 }
 
+tasks.curseforge {
+    onlyIf {
+        project.curseforge.apiKey != '' && false /* Project on CurseForge still not approved */
+    }
+}
+
 curseforge {
     if (System.getenv("CURSEFORGE_API_TOKEN") != null) {
         apiKey System.getenv("CURSEFORGE_API_TOKEN")
