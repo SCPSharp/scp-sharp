@@ -39,13 +39,14 @@ class PlayerEntityMixin {
         // Infect SCP-008 each other
         if (entity is LivingEntity) {
             val targetInfected = entity.hasStatusEffect(SCP008StatusEffect)
-            val selfInfected = !(this as PlayerEntity).hasStatusEffect(SCP008StatusEffect)
-            if (targetInfected && selfInfected) {
-                SCP008.logger.info("$this infected SCP-008 to $entity")
-                SCP008StatusEffect.infect((this as PlayerEntity), entity)
-            } else if (selfInfected && !targetInfected) {
-                SCP008.logger.info("$this infected SCP-008 from $entity")
-                SCP008StatusEffect.infect(entity, (this as PlayerEntity))
+            val selfPlayer = this as PlayerEntity
+            val selfInfected = selfPlayer.hasStatusEffect(SCP008StatusEffect)
+            if (targetInfected && !selfInfected && selfPlayer.health <= selfPlayer.maxHealth * 0.8f) {
+                SCP008.logger.info("$this infected SCP-008 from $entity by colliding")
+                SCP008StatusEffect.infect(selfPlayer, entity)
+            } else if (selfInfected && !targetInfected && entity.health <= entity.maxHealth * 0.8f) {
+                SCP008.logger.info("$this infected SCP-008 to $entity by colliding")
+                SCP008StatusEffect.infect(entity, selfPlayer)
             }
         }
     }
