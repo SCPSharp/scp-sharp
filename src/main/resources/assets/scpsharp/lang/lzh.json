@@ -1,7 +1,10 @@
 {
+  "block.scpsharp.scp008_containment": "SCP-008收容箱",
   "block.scpsharp.scp914_controller": "SCP-914之卵",
   "block.scpsharp.scp914_framework": "SCP-914",
   "category.rei.scp914": "SCP-914處理",
+  "death.attack.scp008": "%1$s 死於SCP-008感染",
+  "effect.scpsharp.scp008_infected": "SCP-008感染",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173之卵",
   "item.scpsharp.scp500": "SCP-500",

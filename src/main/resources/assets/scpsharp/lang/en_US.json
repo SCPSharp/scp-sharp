@@ -1,7 +1,10 @@
 {
+  "block.scpsharp.scp008_containment": "Containment Box of SCP-008",
   "block.scpsharp.scp914_controller": "SCP-914 Controller",
   "block.scpsharp.scp914_framework": "SCP-914",
   "category.rei.scp914": "SCP-914 Processing",
+  "death.attack.scp008": "%1$s was dead because of SCP-008 infections",
+  "effect.scpsharp.scp008_infected": "SCP-008 infection",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp173_spawn_egg": "SCP-173 Spawn Egg",
   "item.scpsharp.scp500": "SCP-500",
