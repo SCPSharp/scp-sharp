@@ -39,6 +39,13 @@ jobs:
           git commit -m "style(license): format license header" -a || true
           git push || true
 
+      - name: Generate changelog
+        if: github.event_name == 'release'
+        run: |
+          ./gradlew changelog
+          git commit -m "docs(changelog): update changelog" -a || true
+          git push || true
+
       - name: Publish
         if: github.event_name == 'release'
         env:
