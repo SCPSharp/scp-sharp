@@ -1,8 +1,10 @@
 # Changelog
 
 {{#tags}}
+{{#ifEquals name "Unreleased"}}{{else}}
 ## [{{name}}](https://github.com/xtexChooser/scp-sharp/compare/{{name}}) ({{tagDate .}})
 
+<details><summary>All {{commits.length}} commits by {{authors.length}} authors</summary><p>
 {{#ifContainsType commits type='feat'}}
 ### Features
 
@@ -34,4 +36,7 @@
 {{/ifCommitTypeOtherThan}}
 {{/commits}}
 
+</p></details>
+
+{{/ifEquals}}
 {{/tags}}
