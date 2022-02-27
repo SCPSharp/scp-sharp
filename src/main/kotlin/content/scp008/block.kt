@@ -23,13 +23,10 @@ import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntit
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
-import net.minecraft.block.entity.BlockEntityTicker
 import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
-import net.minecraft.network.Packet
-import net.minecraft.network.listener.ClientPlayPacketListener
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.particle.ParticleTypes
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -38,6 +35,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import java.util.*
 
 object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.METAL)) {
 
@@ -62,6 +60,10 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
         builder.add(Properties.OPEN)
     }
 
+    override fun createBlockEntity(pos: BlockPos, state: BlockState) = SCP008ContainmentBlockEntity(pos, state)
+
+    override fun getRenderType(state: BlockState) = BlockRenderType.MODEL
+
     override fun onUse(
         state: BlockState,
         world: World,
@@ -74,7 +76,20 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
         return ActionResult.SUCCESS
     }
 
-    override fun createBlockEntity(pos: BlockPos, state: BlockState) = SCP008ContainmentBlockEntity(pos, state)
+    override fun randomDisplayTick(state: BlockState, world: World, pos: BlockPos, random: Random) {
+        super.randomDisplayTick(state, world, pos, random)
+        if (state[Properties.OPEN]) {
+            for (i in 0..random.nextInt(10)) {
+                world.addParticle(
+                    ParticleTypes.CLOUD,
+                    pos.x - 0.5 + random.nextFloat(2.0f),
+                    pos.y + 0.7 + random.nextFloat(),
+                    pos.z - 0.5 + random.nextFloat(2.0f),
+                    0.0, 0.0, 0.0
+                )
+            }
+        }
+    }
 
 }
 

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "open=false": {
+      "model": "scpsharp:block/scp008_containment_closed"
+    },
+    "open=true": {
+      "model": "scpsharp:block/scp008_containment_open"
+    }
+  }
+}
