@@ -119,11 +119,12 @@ curseforge {
 
 task modrinth(type: TaskModrinthUpload, dependsOn: remapJar) {
     onlyIf {
-        System.getenv("MODRINTH_TOKEN") != null
+        System.getenv('MODRINTH_TOKEN') != null
     }
 
+    token = System.getenv('MODRINTH_TOKEN')
     projectId = 'p3O2a1Bc'
-    versionNumber = version
+    versionNumber = fullVersion
     versionName = fullVersion
     changelog = 'See GitHub for changelog'
 
