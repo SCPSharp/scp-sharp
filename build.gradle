@@ -32,7 +32,7 @@ dependencies {
 
     modImplementation 'com.terraformersmc:modmenu:3.0.1'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:7.3.432'
-    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:7.3.432'
+    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:8.0.442'
 }
 
 loom {
