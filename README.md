@@ -9,6 +9,7 @@
 - SCP-008
 - SCP-173
 - SCP-500
+- SCP-714
 - SCP-914
 
 ## Compatibility
