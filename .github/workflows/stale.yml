@@ -1,0 +1,25 @@
+name: Lock Inactive Issues
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 5 * * */3"
+
+jobs:
+  close-issues:
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/stale@v5.0.0
+        with:
+          days-before-stale: 30
+          days-before-close: 7
+          stale-issue-label: "status: stale"
+          stale-pr-label: "status: stale"
+          exempt-issue-labels: "status: stale"
+          exempt-pr-labels: "status: stale"
+          exempt-draft-pr: true

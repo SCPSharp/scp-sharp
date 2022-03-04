@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: daily
     labels:
-      - "type: auto"
+      - "flag: auto"
       - "type: deps"
 
   - package-ecosystem: github-actions
@@ -13,6 +13,6 @@ updates:
     schedule:
       interval: weekly
     labels:
-      - "type: auto"
+      - "flag: auto"
       - "type: deps"
       - "type: actions"
