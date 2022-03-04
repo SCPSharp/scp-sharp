@@ -21,7 +21,6 @@ import com.xtex.scpsharp.util.logger
 import net.minecraft.stat.StatFormatter
 import net.minecraft.stat.Stats
 import net.minecraft.util.registry.Registry
-import java.lang.invoke.MethodHandles
 
 object SCP500 {
 
@@ -32,8 +31,8 @@ object SCP500 {
     val eatingStat = id("eat_scp500")
 
     init {
-        MethodHandles.lookup().ensureInitialized(SCP5001Item::class.java)
-        MethodHandles.lookup().ensureInitialized(SCP500JarItem::class.java)
+        SCP5001Item
+        SCP500JarItem
 
         Registry.register(Registry.CUSTOM_STAT, takingOutStat, takingOutStat)
         Stats.CUSTOM.getOrCreateStat(takingOutStat, StatFormatter.DEFAULT)

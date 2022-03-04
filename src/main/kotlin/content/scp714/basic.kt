@@ -16,12 +16,10 @@
  */
 package com.xtex.scpsharp.content.scp714
 
-import java.lang.invoke.MethodHandles
-
 object SCP714 {
 
     init {
-        MethodHandles.lookup().ensureInitialized(SCP714Item::class.java)
+        SCP714Item
     }
 
 }

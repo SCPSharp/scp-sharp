@@ -20,14 +20,13 @@ import com.xtex.scpsharp.util.id
 import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
-import java.lang.invoke.MethodHandles
 
 object SCP173 {
 
     val rotateSound = SoundEvent(id("scp173_rotate"))
 
     init {
-        MethodHandles.lookup().ensureInitialized(SCP173Entity::class.java)
+        SCP173Entity
         Registry.register(Registry.SOUND_EVENT, rotateSound.id, rotateSound)
     }
 
@@ -36,7 +35,7 @@ object SCP173 {
 object SCP173Client {
 
     init {
-        MethodHandles.lookup().ensureInitialized(SCP173EntityRenderer::class.java)
+        SCP173EntityRenderer
     }
 
 }

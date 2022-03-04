@@ -22,7 +22,6 @@ import net.minecraft.sound.SoundEvent
 import net.minecraft.state.property.EnumProperty
 import net.minecraft.util.StringIdentifiable
 import net.minecraft.util.registry.Registry
-import java.lang.invoke.MethodHandles
 
 object SCP914 {
 
@@ -33,9 +32,9 @@ object SCP914 {
     val workSoundEvent = SoundEvent(id("scp914_work"))
 
     init {
-        MethodHandles.lookup().ensureInitialized(SCP914FrameworkBlock::class.java)
-        MethodHandles.lookup().ensureInitialized(SCP914ControllerBlock::class.java)
-        MethodHandles.lookup().ensureInitialized(SCP914Recipe::class.java)
+        SCP914ControllerBlock
+        SCP914FrameworkBlock
+        SCP914Recipe
         Registry.register(Registry.SOUND_EVENT, workSoundEvent.id, workSoundEvent)
     }
 
