@@ -40,7 +40,7 @@ abstract class ServerPlayerEntityMixin(world: World?, pos: BlockPos?, yaw: Float
         at = [At("HEAD")],
         cancellable = true
     )
-    fun trySleepIsDay(pos: BlockPos, info: CallbackInfoReturnable<Either<SleepFailureReason, Unit>>) {
+    fun trySleep(pos: BlockPos, info: CallbackInfoReturnable<Either<SleepFailureReason, Unit>>) {
         if (itemsHand.any { it.item is SCP714Item }) {
             info.returnValue = super.trySleep(pos)
         }
