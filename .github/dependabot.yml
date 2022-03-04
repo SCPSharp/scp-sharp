@@ -5,13 +5,14 @@ updates:
     schedule:
       interval: daily
     labels:
-      - deps
-      - auto
+      - "type: auto"
+      - "type: deps"
 
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
     labels:
-      - deps
-      - auto
+      - "type: auto"
+      - "type: deps"
+      - "type: actions"
