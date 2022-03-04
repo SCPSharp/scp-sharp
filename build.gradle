@@ -4,7 +4,6 @@ plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'net.kyori.indra.license-header' version '2.1.1'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
     id 'com.modrinth.minotaur' version '1.2.1'
     id 'maven-publish'
 }
@@ -76,41 +75,6 @@ publishing {
 
     repositories {
         mavenLocal()
-    }
-}
-
-tasks.curseforge {
-    onlyIf {
-        project.curseforge.apiKey != '' && false /* Project on CurseForge still not approved */
-    }
-}
-
-curseforge {
-    if (System.getenv("CURSEFORGE_API_TOKEN") != null) {
-        apiKey System.getenv("CURSEFORGE_API_TOKEN")
-    } else if (project.hasProperty('curseforge_api_token')) {
-        apiKey project.curseforge_api_token
-    } else {
-        apiKey ''
-    }
-    project {
-        id = '583329'
-        releaseType = 'release'
-        changelog = 'See GitHub for changelog'
-        addGameVersion 'Fabric'
-        addGameVersion 'Java 17'
-        addGameVersion project.minecraft_version
-
-        mainArtifact(remapJar) {
-            displayName = fullVersion
-        }
-
-        afterEvaluate {
-            uploadTask.dependsOn remapJar
-        }
-    }
-    options {
-        forgeGradleIntegration = false
     }
 }
 
