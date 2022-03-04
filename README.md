@@ -43,6 +43,8 @@ No and never, do not ask why.
 
 ## Contributing
 
+See [project](https://github.com/users/xtexChooser/projects/1) for developing road map.
+
 ### Issues
 
 If you have any questions, create an issue on [GitHub](https://github.com/xtexChooser/scp-sharp/issues/new/choose)
