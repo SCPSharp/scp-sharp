@@ -1,16 +1,14 @@
-import com.modrinth.minotaur.TaskModrinthUpload
-
 plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'net.kyori.indra.license-header' version '2.1.1'
-    id 'com.modrinth.minotaur' version '1.2.1'
+    id 'com.modrinth.minotaur' version '2.0.1'
     id 'maven-publish'
 }
 
 group 'com.xtex'
 version '1.2'
-def fullVersion = "mc${project.minecraft_version}-$project.version"
+String fullVersion = "mc${project.minecraft_version}-$project.version"
 
 repositories {
     mavenCentral()
@@ -78,12 +76,16 @@ publishing {
     }
 }
 
-task modrinth(type: TaskModrinthUpload, dependsOn: remapJar) {
-    onlyIf {
-        System.getenv('MODRINTH_TOKEN') != null
+afterEvaluate {
+    tasks.modrinth {
+        onlyIf {
+            System.getenv('MODRINTH_TOKEN') != null
+        }
+        dependsOn remapJar
     }
+}
 
-    token = System.getenv('MODRINTH_TOKEN')
+modrinth {
     projectId = 'p3O2a1Bc'
     versionNumber = fullVersion
     versionName = fullVersion
@@ -91,6 +93,6 @@ task modrinth(type: TaskModrinthUpload, dependsOn: remapJar) {
 
     uploadFile = remapJar
 
-    addGameVersion project.minecraft_version
-    addLoader 'fabric'
+    gameVersions = [ project.minecraft_version ]
+    dependencies = []
 }
