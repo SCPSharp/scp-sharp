@@ -11,7 +11,7 @@
   "item.scpsharp.scp500_jar": "Jar of SCP-500",
   "item.scpsharp.scp714": "SCP-714",
   "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
-  "scpsharp.scp714.wake_up_suppressed": "你佩戴了SCP-714，现在无法起床",
+  "scpsharp.scp714.wake_up_suppressed": "You wore SCP-714, so you can not get up now",
   "scpsharp.scp914.mode.bad": "Coarse",
   "scpsharp.scp914.mode.fine": "Fine",
   "scpsharp.scp914.mode.normal": "1 : 1",
