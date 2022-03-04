@@ -69,13 +69,12 @@ If you want to translate this mod to another new language, create an issue, and 
 
 ### GNU GPL-3.0
 
-This program is licensed under GNU General Program License-3.0(see `LICENSE` file for more).
+This program is licensed under GNU Lesser General Program License-3.0(see `LICENSE` file for more).
 
 ```
 SCPSharp  Copyright (C) 2022  xtexChooser
-This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
-This is free software, and you are welcome to redistribute it
-under certain conditions; type `show c' for details.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it under GNU LGPL-3.0.
 ```
 
 ### SCP Foundation
