@@ -23,12 +23,15 @@ import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.hud.InGameHud
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.tag.TagKey
 import net.minecraft.util.registry.Registry
+
 
 object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b) {
 
@@ -36,17 +39,20 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     val damageSource: DamageSource = DamageSource("scp008")
         .setBypassesArmor()
         .setUnblockable()
+    val bypassTag: TagKey<EntityType<*>> = TagKey.of(Registry.ENTITY_TYPE_KEY, id("scp008_bypass"))
 
     init {
         Registry.register(Registry.STATUS_EFFECT, identifier, this)
     }
 
     fun infect(entity: LivingEntity, source: Entity? = null) {
-        SCP008.logger.info("$entity infected SCP-008 because of $source")
-        entity.addStatusEffect(
-            StatusEffectInstance(SCP008StatusEffect, 20 * (563 + entity.world.random.nextInt(50))),
-            source
-        )
+        if (!entity.type.isIn(bypassTag)) {
+            SCP008.logger.info("$entity infected SCP-008 because of $source")
+            entity.addStatusEffect(
+                StatusEffectInstance(SCP008StatusEffect, 20 * (563 + entity.world.random.nextInt(50))),
+                source
+            )
+        }
     }
 
     override fun canApplyUpdateEffect(duration: Int, amplifier: Int) = duration == 1
