@@ -1,0 +1,17 @@
+name: Suggestion
+description: Type anything here!
+title: "[feat] <title>"
+labels:
+  - "type: feature"
+body:
+  - type: input
+    attributes:
+      label: Version
+      description: Included the mod version and the game version.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+    validations:
+      required: true

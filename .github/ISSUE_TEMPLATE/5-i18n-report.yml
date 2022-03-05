@@ -1,0 +1,22 @@
+name: Translation Correction
+description: Ahha, no!
+title: "[i18n] <title>"
+labels:
+  - "type: i18n"
+body:
+  - type: input
+    attributes:
+      label: Version
+      description: Included the mod version and the game version.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Language
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+    validations:
+      required: true

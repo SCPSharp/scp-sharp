@@ -1,0 +1,22 @@
+name: SCP Subject Request
+description: Add a new SCP into this mod!
+title: "[feat] <title>"
+labels:
+  - "type: feature"
+  - "type: subject"
+body:
+  - type: input
+    attributes:
+      label: Subject name
+      placeholder: SCP-XXX
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+      description: How do you think about how do this SCP subject appear in game?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional

@@ -1,0 +1,17 @@
+name: Document Correction
+description: May be it is a typo?
+title: "[docs] <title>"
+labels:
+  - "type: docs"
+body:
+  - type: input
+    attributes:
+      label: Location
+      description: Where is the error?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Description
+    validations:
+      required: true

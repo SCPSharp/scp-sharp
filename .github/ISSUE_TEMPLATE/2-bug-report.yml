@@ -1,0 +1,25 @@
+name: Bug Report
+description: Wait, what happened?
+title: "[bug] <title>"
+labels:
+  - "type: bug"
+body:
+  - type: input
+    attributes:
+      label: Version
+      description: Included the mod version and the game version.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Current Behavior
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What should happened?
+  - type: textarea
+    attributes:
+      label: Additional
