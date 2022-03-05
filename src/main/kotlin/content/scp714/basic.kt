@@ -16,7 +16,14 @@
  */
 package com.xtex.scpsharp.content.scp714
 
+import com.xtex.scpsharp.util.id
+import net.minecraft.entity.EntityType
+import net.minecraft.tag.TagKey
+import net.minecraft.util.registry.Registry
+
 object SCP714 {
+
+    val bypassTag: TagKey<EntityType<*>> = TagKey.of(Registry.ENTITY_TYPE_KEY, id("scp714_bypass"))
 
     init {
         SCP714Item

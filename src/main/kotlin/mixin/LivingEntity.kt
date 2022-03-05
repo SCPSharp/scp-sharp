@@ -18,6 +18,7 @@
 
 package com.xtex.scpsharp.mixin
 
+import com.xtex.scpsharp.content.scp714.SCP714
 import com.xtex.scpsharp.content.scp714.SCP714Item
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -38,7 +39,7 @@ class LivingEntityMixin {
     )
     fun wakeUp(info: CallbackInfo) {
         this as LivingEntity
-        if (itemsHand.any { it.item is SCP714Item } && attacker == null) {
+        if (itemsHand.any { it.item is SCP714Item } && attacker == null && !type.isIn(SCP714.bypassTag)) {
             if ((this as LivingEntity) is PlayerEntity
                 && ((this as LivingEntity) !is ServerPlayerEntity
                         || (this as ServerPlayerEntity).networkHandler != null)
