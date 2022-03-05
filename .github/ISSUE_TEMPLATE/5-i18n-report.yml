@@ -4,6 +4,10 @@ title: "[i18n] <title>"
 labels:
   - "type: i18n"
 body:
+  - type: markdown
+    attributes:
+      value: |
+        #### [Crowdin](https://crowdin.com/project/scp-sharp) is better than creating a issue!
   - type: input
     attributes:
       label: Version
