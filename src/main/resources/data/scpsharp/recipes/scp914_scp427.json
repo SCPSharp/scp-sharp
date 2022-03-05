@@ -1,0 +1,5 @@
+{
+  "type": "scpsharp:scp914_processing_simple",
+  "source": "scpsharp:scp500",
+  "target": "scpsharp:scp427"
+}
