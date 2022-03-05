@@ -6,6 +6,7 @@
 
 ## SCP Subjects
 
+- SCP-005
 - SCP-008
 - SCP-173
 - SCP-427
