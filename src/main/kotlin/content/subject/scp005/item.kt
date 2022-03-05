@@ -45,7 +45,7 @@ object SCP005Item : Item(
             && state.isIn(SCP005.doorFilterTag)
         ) {
             SCP005.logger.info("${context.player} using SCP-005 on $state at ${context.world} ${context.blockPos}")
-            context.world.setBlockState(context.blockPos, state.with(Properties.OPEN, !state[Properties.OPEN]))
+            context.world.setBlockState(context.blockPos, state.cycle(Properties.OPEN))
             return ActionResult.SUCCESS
         }
         return super.useOnBlock(context)

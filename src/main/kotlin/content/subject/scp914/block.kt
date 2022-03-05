@@ -186,11 +186,11 @@ object SCP914ControllerBlock : Block(
         if (world.isClient) {
             return ActionResult.SUCCESS
         }
-        world.setBlockState(pos, state.with(SCP914.modeProperty, state[SCP914.modeProperty].next))
+        world.setBlockState(pos, state.cycle(SCP914.modeProperty))
         player.sendMessage(
             TranslatableText(
                 "scpsharp.scp914.switched",
-                TranslatableText("scpsharp.scp914.mode.${state[SCP914.modeProperty].next.asString()}")
+                TranslatableText("scpsharp.scp914.mode.${state.cycle(SCP914.modeProperty)[SCP914.modeProperty].asString()}")
             ), true
         )
         return ActionResult.SUCCESS

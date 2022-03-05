@@ -46,13 +46,4 @@ enum class SCP914Mode : StringIdentifiable {
 
     override fun asString() = name.lowercase()
 
-    val next
-        get() = when (this) {
-            VERY_BAD -> BAD
-            BAD -> NORMAL
-            NORMAL -> FINE
-            FINE -> VERY_FINE
-            VERY_FINE -> VERY_BAD
-        }
-
 }
