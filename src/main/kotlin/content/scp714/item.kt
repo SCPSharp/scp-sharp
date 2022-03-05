@@ -23,6 +23,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.registry.Registry
@@ -44,6 +45,9 @@ object SCP714Item : Item(
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
         if (selected && entity is LivingEntity) {
+            if(entity is PlayerEntity) {
+                entity.incrementStat(SCP714.usingStat)
+            }
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 0, 1, true, false))
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 0, 0, true, false))
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.MINING_FATIGUE, 0, 1, true, false))

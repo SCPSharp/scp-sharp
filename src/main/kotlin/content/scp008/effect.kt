@@ -29,6 +29,7 @@ import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.tag.TagKey
 import net.minecraft.util.registry.Registry
 
@@ -60,6 +61,9 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
         if (!entity.world.isClient) {
             SCP008.logger.info("Killing $entity")
+            if(entity is PlayerEntity){
+                entity.incrementStat(SCP008.dyingStat)
+            }
             entity.damage(damageSource, Float.MAX_VALUE)
         }
     }

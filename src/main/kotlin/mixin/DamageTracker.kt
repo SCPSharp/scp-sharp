@@ -23,6 +23,7 @@ import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.damage.DamageTracker
 import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.state.property.Properties
 import org.spongepowered.asm.mixin.Final
 import org.spongepowered.asm.mixin.Mixin
@@ -56,6 +57,7 @@ abstract class DamageTrackerMixin {
             .filter { entity.world.getBlockState(it.pos)[Properties.OPEN] }
             .forEach {
                 SCP008.logger.info("$entity got $damageSource x$damage and getting infected from a open containment box at ${it.pos}")
+                (entity as? PlayerEntity)?.incrementStat(SCP008.infectingStat)
                 SCP008StatusEffect.infect(entity, damageSource.source)
             }
     }

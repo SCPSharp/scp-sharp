@@ -53,8 +53,15 @@ class SCP427Item private constructor(val open: Boolean) : Item(
 
     }
 
-    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> =
-        TypedActionResult.success(ItemStack(if (open) closedItem else openItem))
+    override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
+        if(open) {
+            user.incrementStat(SCP427.closingStat)
+            return TypedActionResult.success(ItemStack(closedItem))
+        } else {
+            user.incrementStat(SCP427.openingStat)
+            return TypedActionResult.success(ItemStack(openItem))
+        }
+    }
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
@@ -63,9 +70,12 @@ class SCP427Item private constructor(val open: Boolean) : Item(
                 LivingEntity::class.java,
                 Box.from(entity.pos).expand(3.0),
             ) {
-                it.type.isIn(SCP427.bypassTag)
+                !it.type.isIn(SCP427.bypassTag)
             }
                 .forEach {
+                    if(it is PlayerEntity) {
+                        it.incrementStat(SCP427.applyingStat)
+                    }
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 0, 0, true, false), entity)
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, 0, 0, true, false), entity)
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.RESISTANCE, 0, 1, true, false), entity)

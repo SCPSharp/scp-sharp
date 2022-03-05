@@ -16,15 +16,29 @@
  */
 package com.xtex.scpsharp.content.scp008
 
+import com.xtex.scpsharp.content.scp714.SCP714
+import com.xtex.scpsharp.util.id
 import com.xtex.scpsharp.util.logger
+import net.minecraft.stat.StatFormatter
+import net.minecraft.stat.Stats
+import net.minecraft.util.registry.Registry
 
 object SCP008 {
 
     val logger = logger("SCP-008")
 
+    val infectingStat = id("infecting_scp008_from_containment_box")
+
+    val dyingStat = id("dying_scp008")
+
     init {
         SCP008ContainmentBlock
         SCP008StatusEffect
+
+        Registry.register(Registry.CUSTOM_STAT, infectingStat, infectingStat)
+        Stats.CUSTOM.getOrCreateStat(infectingStat, StatFormatter.DEFAULT)
+        Registry.register(Registry.CUSTOM_STAT, dyingStat, dyingStat)
+        Stats.CUSTOM.getOrCreateStat(dyingStat, StatFormatter.DEFAULT)
     }
 
 }
