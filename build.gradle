@@ -38,7 +38,9 @@ loom {
 }
 
 processResources {
-    inputs.property 'gitVersion', indraGit.describe()
+    if(indraGit.describe() != null) {
+        inputs.property 'gitVersion', indraGit.describe()
+    }
     inputs.property 'projectVersion', project.version
 
     filesMatching('fabric.mod.json') {
