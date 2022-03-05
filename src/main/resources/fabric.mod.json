@@ -8,10 +8,11 @@
     "xtexChooser"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/xtexChooser/scp-sharp",
+    "issues": "https://github.com/xtexChooser/scp-sharp/issues",
+    "sources": "https://github.com/xtexChooser/scp-sharp"
   },
-  "license": "LGPL-3.0",
+  "license": "LGPL-3.0-or-later",
   "icon": "assets/scpsharp/icon.png",
   "environment": "*",
   "entrypoints": {
