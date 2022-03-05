@@ -16,7 +16,6 @@
  */
 package com.xtex.scpsharp.content.scp427
 
-import com.google.common.base.Predicates
 import com.xtex.scpsharp.content.scpSubjectItemGroup
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -63,8 +62,9 @@ class SCP427Item private constructor(val open: Boolean) : Item(
             world.getEntitiesByClass(
                 LivingEntity::class.java,
                 Box.from(entity.pos).expand(3.0),
-                Predicates.alwaysTrue()
-            )
+            ) {
+                it.type.isIn(SCP427.bypassTag)
+            }
                 .forEach {
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 0, 0, true, false), entity)
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.REGENERATION, 0, 0, true, false), entity)
