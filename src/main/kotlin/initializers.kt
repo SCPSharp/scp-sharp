@@ -16,6 +16,7 @@
  */
 package com.xtex.scpsharp
 
+import com.xtex.scpsharp.content.scp005.SCP005
 import com.xtex.scpsharp.content.scp008.SCP008
 import com.xtex.scpsharp.content.scp008.SCP008Client
 import com.xtex.scpsharp.content.scp173.SCP173
@@ -26,6 +27,7 @@ import com.xtex.scpsharp.content.scp714.SCP714
 import com.xtex.scpsharp.content.scp914.SCP914
 
 fun initMain() {
+    SCP005
     SCP008
     SCP173
     SCP427

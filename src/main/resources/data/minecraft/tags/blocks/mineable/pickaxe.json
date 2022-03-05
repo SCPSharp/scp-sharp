@@ -1,5 +1,6 @@
 {
   "values": [
+    "scpsharp:scp008_containment",
     "scpsharp:scp914_controller"
   ]
 }
