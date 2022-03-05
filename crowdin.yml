@@ -4,7 +4,9 @@ commit_message: 'feat(i18n): update translations for %language%(%original_file_n
 [ci skip]'
 append_commit_message: false
 pull_request_title: 'feat(i18n): update translations'
-pull_request_labels: [ 'i18n', 'auto' ]
+pull_request_labels:
+  - 'flag: auto'
+  - 'type: i18n'
 files:
   - source: src/main/resources/assets/scpsharp/lang/zh_cn.json
     translation: /%original_path%/%locale_with_underscore%.json
