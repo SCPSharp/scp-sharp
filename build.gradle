@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version '0.11-SNAPSHOT'
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'net.kyori.indra.license-header' version '2.1.1'
+    id 'net.kyori.indra.git' version '2.1.1'
     id 'com.modrinth.minotaur' version '2.0.1'
     id 'maven-publish'
 }
@@ -37,10 +38,11 @@ loom {
 }
 
 processResources {
-    inputs.property 'version', project.version
+    inputs.property 'gitVersion', indraGit.describe()
+    inputs.property 'projectVersion', project.version
 
     filesMatching('fabric.mod.json') {
-        expand 'version': project.version
+        expand 'version': "${indraGit.describe()}-${project.version}"
     }
 }
 
@@ -62,6 +64,7 @@ jar {
     from('LICENSE') {
         rename { "${it}_${project.name}" }
     }
+    indraGit.applyVcsInformationToManifest(manifest)
 }
 
 publishing {
@@ -89,7 +92,11 @@ modrinth {
     projectId = 'p3O2a1Bc'
     versionNumber = fullVersion
     versionName = fullVersion
-    changelog = 'See GitHub for changelog'
+    if(indraGit.headTag() == null) {
+        changelog = "See git for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
+    } else {
+        changelog = "See [GitHub](https://github.com/xtexChooser/scp-sharp/releases/tag/${indraGit.headTag().name}) for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
+    }
 
     uploadFile = remapJar
 
