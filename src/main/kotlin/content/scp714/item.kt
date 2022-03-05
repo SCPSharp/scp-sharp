@@ -44,9 +44,9 @@ object SCP714Item : Item(
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
         if (selected && entity is LivingEntity) {
-            entity.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 0, 1))
-            entity.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 0, 0))
-            entity.addStatusEffect(StatusEffectInstance(StatusEffects.MINING_FATIGUE, 0, 1))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 0, 1, true, false))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.SLOWNESS, 0, 0, true, false))
+            entity.addStatusEffect(StatusEffectInstance(StatusEffects.MINING_FATIGUE, 0, 1, true, false))
         }
     }
 
