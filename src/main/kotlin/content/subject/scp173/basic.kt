@@ -14,24 +14,30 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp005
+package com.xtex.scpsharp.content.scp173
 
 import com.xtex.scpsharp.util.id
-import com.xtex.scpsharp.util.logger
-import net.minecraft.block.Block
-import net.minecraft.tag.TagKey
+import net.minecraft.sound.SoundEvent
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.World
 
-object SCP005 {
+object SCP173 {
 
-    val logger = logger("SCP-005")
-
-    val bypassTag: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("scp005_bypass"))
-
-    val doorFilterTag: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("scp005_doors"))
+    val rotateSound = SoundEvent(id("scp173_rotate"))
 
     init {
-        SCP005Item
+        SCP173Entity
+        Registry.register(Registry.SOUND_EVENT, rotateSound.id, rotateSound)
     }
 
 }
+
+object SCP173Client {
+
+    init {
+        SCP173EntityRenderer
+    }
+
+}
+
+fun World.canSCP173MoveNow() = (time and 0b0111) == 0L
