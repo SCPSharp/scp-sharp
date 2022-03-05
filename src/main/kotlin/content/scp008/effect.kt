@@ -30,7 +30,6 @@ import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.util.registry.Registry
 
-
 object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b) {
 
     val identifier = id("scp008_infected")
