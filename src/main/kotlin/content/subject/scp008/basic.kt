@@ -14,9 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp008
+package com.xtex.scpsharp.content.subject.scp008
 
-import com.xtex.scpsharp.content.scp714.SCP714
 import com.xtex.scpsharp.util.id
 import com.xtex.scpsharp.util.logger
 import net.minecraft.stat.StatFormatter

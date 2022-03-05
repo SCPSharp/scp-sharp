@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp008
+package com.xtex.scpsharp.content.subject.scp008
 
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -42,7 +42,7 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
     val identifier = id("scp008_containment")
     val item = BlockItem(
         this, FabricItemSettings()
-            .group(scpSubjectItemGroup)
+            .group(SCPSubjects.itemGroup)
     )
     val entityType: BlockEntityType<SCP008ContainmentBlockEntity> = FabricBlockEntityTypeBuilder.create(
         { pos, state -> SCP008ContainmentBlockEntity(pos, state) }, SCP008ContainmentBlock

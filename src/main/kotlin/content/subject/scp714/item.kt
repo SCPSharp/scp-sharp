@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp714
+package com.xtex.scpsharp.content.subject.scp714
 
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.Entity
@@ -31,7 +31,7 @@ import net.minecraft.world.World
 
 object SCP714Item : Item(
     FabricItemSettings()
-        .group(scpSubjectItemGroup)
+        .group(SCPSubjects.itemGroup)
         .fireproof()
         .maxCount(1)
 ) {
@@ -45,7 +45,7 @@ object SCP714Item : Item(
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         super.inventoryTick(stack, world, entity, slot, selected)
         if (selected && entity is LivingEntity) {
-            if(entity is PlayerEntity) {
+            if (entity is PlayerEntity) {
                 entity.incrementStat(SCP714.usingStat)
             }
             entity.addStatusEffect(StatusEffectInstance(StatusEffects.WEAKNESS, 0, 1, true, false))

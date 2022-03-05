@@ -16,8 +16,6 @@
  */
 package com.xtex.scpsharp
 
-import com.xtex.scpsharp.content.scp008.SCP008Client
-import com.xtex.scpsharp.content.scp173.SCP173Client
 import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.content.subject.SCPSubjectsClient
 

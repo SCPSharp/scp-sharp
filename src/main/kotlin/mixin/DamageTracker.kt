@@ -16,13 +16,12 @@
  */
 package com.xtex.scpsharp.mixin
 
-import com.xtex.scpsharp.content.scp008.SCP008
-import com.xtex.scpsharp.content.scp008.SCP008ContainmentBlockEntity
-import com.xtex.scpsharp.content.scp008.SCP008StatusEffect
+import com.xtex.scpsharp.content.subject.scp008.SCP008
+import com.xtex.scpsharp.content.subject.scp008.SCP008ContainmentBlockEntity
+import com.xtex.scpsharp.content.subject.scp008.SCP008StatusEffect
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.damage.DamageTracker
-import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.state.property.Properties
 import org.spongepowered.asm.mixin.Final

@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp500
+package com.xtex.scpsharp.content.subject.scp500
 
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
@@ -34,7 +34,7 @@ import kotlin.math.min
 
 object SCP5001Item : Item(
     FabricItemSettings()
-        .group(scpSubjectItemGroup)
+        .group(SCPSubjects.itemGroup)
         .fireproof()
         .maxCount(16)
         .food(
@@ -75,7 +75,7 @@ object SCP5001Item : Item(
 
 object SCP500JarItem : Item(
     FabricItemSettings()
-        .group(scpSubjectItemGroup)
+        .group(SCPSubjects.itemGroup)
         .maxDamage(5)
 ) {
 

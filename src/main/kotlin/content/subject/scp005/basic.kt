@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp005
+package com.xtex.scpsharp.content.subject.scp005
 
 import com.xtex.scpsharp.util.id
 import com.xtex.scpsharp.util.logger

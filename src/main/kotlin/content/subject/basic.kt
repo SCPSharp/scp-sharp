@@ -16,17 +16,26 @@
  */
 package com.xtex.scpsharp.content.subject
 
-import com.xtex.scpsharp.content.scp005.SCP005
-import com.xtex.scpsharp.content.scp008.SCP008
-import com.xtex.scpsharp.content.scp008.SCP008Client
-import com.xtex.scpsharp.content.scp173.SCP173
-import com.xtex.scpsharp.content.scp173.SCP173Client
-import com.xtex.scpsharp.content.scp427.SCP427
-import com.xtex.scpsharp.content.scp500.SCP500
-import com.xtex.scpsharp.content.scp714.SCP714
-import com.xtex.scpsharp.content.scp914.SCP914
+import com.xtex.scpsharp.content.subject.scp005.SCP005
+import com.xtex.scpsharp.content.subject.scp008.SCP008
+import com.xtex.scpsharp.content.subject.scp008.SCP008Client
+import com.xtex.scpsharp.content.subject.scp173.SCP173
+import com.xtex.scpsharp.content.subject.scp173.SCP173Client
+import com.xtex.scpsharp.content.subject.scp427.SCP427
+import com.xtex.scpsharp.content.subject.scp500.SCP500
+import com.xtex.scpsharp.content.subject.scp714.SCP714
+import com.xtex.scpsharp.content.subject.scp914.SCP914
+import com.xtex.scpsharp.content.subject.scp914.SCP914ControllerBlock
+import com.xtex.scpsharp.util.id
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
 
 object SCPSubjects {
+
+    val itemGroup: ItemGroup = FabricItemGroupBuilder.create(id("scp_subject"))
+        .icon { ItemStack(SCP914ControllerBlock.item) }
+        .build()
 
     init {
         SCP005

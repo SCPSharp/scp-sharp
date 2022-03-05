@@ -14,12 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp173
+package com.xtex.scpsharp.content.subject.scp173
 
 import com.google.common.base.Predicates
 import com.xtex.scpsharp.content.SCPEntity
 import com.xtex.scpsharp.content.SCPIgnoredEntity
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
@@ -54,7 +54,7 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
         val eggItemIdentifier = id("scp173_spawn_egg")
         val eggItem = SpawnEggItem(
             type, 0xa87550, 0x825b3f, FabricItemSettings()
-                .group(scpSubjectItemGroup)
+                .group(SCPSubjects.itemGroup)
                 .rarity(Rarity.UNCOMMON)
         )
 

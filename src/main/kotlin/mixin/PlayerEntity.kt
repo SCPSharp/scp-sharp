@@ -18,8 +18,8 @@
 
 package com.xtex.scpsharp.mixin
 
-import com.xtex.scpsharp.content.scp008.SCP008
-import com.xtex.scpsharp.content.scp008.SCP008StatusEffect
+import com.xtex.scpsharp.content.subject.scp008.SCP008
+import com.xtex.scpsharp.content.subject.scp008.SCP008StatusEffect
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity

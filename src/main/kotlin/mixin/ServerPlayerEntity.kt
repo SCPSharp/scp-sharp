@@ -20,8 +20,8 @@ package com.xtex.scpsharp.mixin
 
 import com.mojang.authlib.GameProfile
 import com.mojang.datafixers.util.Either
-import com.xtex.scpsharp.content.scp714.SCP714
-import com.xtex.scpsharp.content.scp714.SCP714Item
+import com.xtex.scpsharp.content.subject.scp714.SCP714
+import com.xtex.scpsharp.content.subject.scp714.SCP714Item
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.util.Unit

@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.xtex.scpsharp.content.scp427
+package com.xtex.scpsharp.content.subject.scp427
 
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.Entity
@@ -34,7 +34,7 @@ import net.minecraft.world.World
 
 class SCP427Item private constructor(val open: Boolean) : Item(
     FabricItemSettings()
-        .group(scpSubjectItemGroup)
+        .group(SCPSubjects.itemGroup)
         .fireproof()
         .maxCount(1)
 ) {
@@ -54,7 +54,7 @@ class SCP427Item private constructor(val open: Boolean) : Item(
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {
-        if(open) {
+        if (open) {
             user.incrementStat(SCP427.closingStat)
             return TypedActionResult.success(ItemStack(closedItem))
         } else {
@@ -73,7 +73,7 @@ class SCP427Item private constructor(val open: Boolean) : Item(
                 !it.type.isIn(SCP427.bypassTag)
             }
                 .forEach {
-                    if(it is PlayerEntity) {
+                    if (it is PlayerEntity) {
                         it.incrementStat(SCP427.applyingStat)
                     }
                     it.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 0, 0, true, false), entity)

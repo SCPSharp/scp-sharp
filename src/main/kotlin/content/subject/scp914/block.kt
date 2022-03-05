@@ -16,9 +16,9 @@
  */
 @file:Suppress("DEPRECATION")
 
-package com.xtex.scpsharp.content.scp914
+package com.xtex.scpsharp.content.subject.scp914
 
-import com.xtex.scpsharp.content.scpSubjectItemGroup
+import com.xtex.scpsharp.content.subject.SCPSubjects
 import com.xtex.scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -70,7 +70,7 @@ object SCP914ControllerBlock : Block(
     val identifier = id("scp914_controller")
     val item = BlockItem(
         SCP914ControllerBlock, FabricItemSettings()
-            .group(scpSubjectItemGroup)
+            .group(SCPSubjects.itemGroup)
             .rarity(Rarity.UNCOMMON)
     )
 

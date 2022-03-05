@@ -16,8 +16,8 @@
  */
 package com.xtex.scpsharp.integrate.rei
 
-import com.xtex.scpsharp.content.scp914.SCP914ControllerBlock
-import com.xtex.scpsharp.content.scp914.SCP914Recipe
+import com.xtex.scpsharp.content.subject.scp914.SCP914ControllerBlock
+import com.xtex.scpsharp.content.subject.scp914.SCP914Recipe
 import com.xtex.scpsharp.util.id
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle

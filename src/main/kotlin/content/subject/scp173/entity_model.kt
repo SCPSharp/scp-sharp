@@ -16,7 +16,7 @@
  */
 @file:Environment(EnvType.CLIENT)
 
-package com.xtex.scpsharp.content.scp173
+package com.xtex.scpsharp.content.subject.scp173
 
 import com.xtex.scpsharp.util.id
 import net.fabricmc.api.EnvType
