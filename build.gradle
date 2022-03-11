@@ -97,7 +97,7 @@ modrinth {
     if(indraGit.headTag() == null) {
         changelog = "See git for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
     } else {
-        changelog = "See [GitHub](https://github.com/xtexChooser/scp-sharp/releases/tag/${indraGit.headTag().name}) for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
+        changelog = "See [GitHub](https://github.com/SCPSharp/scp-sharp/releases/tag/${indraGit.headTag().name}) for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
     }
 
     uploadFile = remapJar
