@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        #### If you are not sure about this, create an [discussion](https://github.com/xtexChooser/scp-sharp/discussions).
+        #### If you are not sure about this, create an [discussion](https://github.com/SCPSharp/scp-sharp/discussions).
   - type: input
     attributes:
       label: Subject name

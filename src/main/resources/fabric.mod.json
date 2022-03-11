@@ -8,9 +8,9 @@
     "xtexChooser"
   ],
   "contact": {
-    "homepage": "https://github.com/xtexChooser/scp-sharp",
-    "issues": "https://github.com/xtexChooser/scp-sharp/issues",
-    "sources": "https://github.com/xtexChooser/scp-sharp"
+    "homepage": "https://github.com/SCPSharp/scp-sharp",
+    "issues": "https://github.com/SCPSharp/scp-sharp/issues",
+    "sources": "https://github.com/SCPSharp/scp-sharp"
   },
   "license": "LGPL-3.0-or-later",
   "icon": "assets/scpsharp/icon.png",
@@ -19,29 +19,29 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "com.xtex.scpsharp.InitializersKt::initMain"
+        "value": "scpsharp.InitializersKt::initMain"
       }
     ],
     "client": [
       {
         "adapter": "kotlin",
-        "value": "com.xtex.scpsharp.InitializersKt::initClient"
+        "value": "scpsharp.InitializersKt::initClient"
       }
     ],
     "modmenu": [
       {
         "adapter": "kotlin",
-        "value": "com.xtex.scpsharp.integrate.ModMenuIntegrate"
+        "value": "scpsharp.integrate.ModMenuIntegrate"
       }
     ],
     "rei": [
       {
         "adapter": "kotlin",
-        "value": "com.xtex.scpsharp.integrate.rei.REIServerPlugin"
+        "value": "scpsharp.integrate.rei.REIServerPlugin"
       },
       {
         "adapter": "kotlin",
-        "value": "com.xtex.scpsharp.integrate.rei.REIClientPlugin"
+        "value": "scpsharp.integrate.rei.REIClientPlugin"
       }
     ]
   },

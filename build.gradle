@@ -7,7 +7,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'com.xtex'
+group 'scpsharp'
 version '1.4'
 String fullVersion = "mc${project.minecraft_version}-$project.version"
 
