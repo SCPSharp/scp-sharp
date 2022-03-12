@@ -1,6 +1,6 @@
 # SCP: Sharp
 
-[![Discord](https://img.shields.io/discord/895905824239669258?logo=discord&style=flat-square)](https://discord.gg/EerxhNx3fR) [![Workflow status](https://img.shields.io/github/workflow/status/SCPSharp/scp-sharp/Build/main?style=flat-square&logo=github-actions)](https://github.com/SCPSharp/scp-sharp/actions) ![Language](https://img.shields.io/badge/language-kotlin-7f52ff?style=flat-square&logo=kotlin) [![License](https://img.shields.io/badge/license-LGPL--3.0-informational?style=flat-square)](https://github.com/SCPSharp/scp-sharp/blob/main/LICENSE) ![GitHub stars](https://img.shields.io/github/stars/SCPSharp/scp-sharp?logo=github&style=flat-square) ![GitHub repo size](https://img.shields.io/github/repo-size/SCPSharp/scp-sharp?style=flat-square) ![Total lines](https://img.shields.io/tokei/lines/github/SCPSharp/scp-sharp?style=flat-square) [![GitHub issues](https://img.shields.io/github/issues/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/issues) ![GitHub PRs](https://img.shields.io/github/issues-pr/SCPSharp/scp-sharp?style=flat-square) [![Commit activity](https://img.shields.io/github/commit-activity/m/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/commits/main) [![GitHub contributors](https://img.shields.io/github/contributors/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/graphs/contributors) [![JitPack](https://img.shields.io/jitpack/v/github/SCPSharp/scp-sharp?style=flat-square)](https://jitpack.io/#SCPSharp/scp-sharp) [![Crowdin](https://img.shields.io/badge/translate-crowdin-brightgreen?style=flat-square&logo=crowdin)](https://crowdin.com/project/scp-sharp) ![GitHub release](https://img.shields.io/github/v/release/SCPSharp/scp-sharp?display_name=tag&include_prereleases&logo=github&style=flat-square) [![Modrinth](https://img.shields.io/badge/modrinth-download-green?style=flat-square)](https://modrinth.com/mod/scp-sharp) ![Minecraft version](https://img.shields.io/badge/minecraft-1.18.2-brightgreen?style=flat-square&logo=mojang-studios)
+[![Discord](https://img.shields.io/discord/895905824239669258?logo=discord&style=flat-square)](https://discord.gg/EerxhNx3fR) [![Workflow status](https://img.shields.io/github/workflow/status/SCPSharp/scp-sharp/Build/main?style=flat-square&logo=github-actions)](https://github.com/SCPSharp/scp-sharp/actions) ![Language](https://img.shields.io/badge/language-kotlin-7f52ff?style=flat-square&logo=kotlin) [![License](https://img.shields.io/badge/license-LGPL--3.0-informational?style=flat-square)](https://github.com/SCPSharp/scp-sharp/blob/main/LICENSE) ![GitHub stars](https://img.shields.io/github/stars/SCPSharp/scp-sharp?logo=github&style=flat-square) ![GitHub repo size](https://img.shields.io/github/repo-size/SCPSharp/scp-sharp?style=flat-square) ![Total lines](https://img.shields.io/tokei/lines/github/SCPSharp/scp-sharp?style=flat-square) [![GitHub issues](https://img.shields.io/github/issues/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/issues) ![GitHub PRs](https://img.shields.io/github/issues-pr/SCPSharp/scp-sharp?style=flat-square) [![Commit activity](https://img.shields.io/github/commit-activity/m/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/commits/main) [![GitHub contributors](https://img.shields.io/github/contributors/SCPSharp/scp-sharp?style=flat-square)](https://github.com/SCPSharp/scp-sharp/graphs/contributors) [![JitPack](https://img.shields.io/jitpack/v/github/SCPSharp/scp-sharp?style=flat-square)](https://jitpack.io/#SCPSharp/scp-sharp) [![Crowdin](https://img.shields.io/badge/translate-crowdin-brightgreen?style=flat-square&logo=crowdin)](https://crowdin.com/project/scp-sharp) ![GitHub release](https://img.shields.io/github/v/release/SCPSharp/scp-sharp?display_name=tag&include_prereleases&logo=github&style=flat-square) [![Modrinth](https://img.shields.io/badge/modrinth-download-green?style=flat-square)](https://modrinth.com/mod/scp-sharp) [![Wiki](https://img.shields.io/badge/wiki-Miraheze-brightgreen?style=flat-square)](https://scpsharp.miraheze.org/wiki/Main_Page)![Minecraft version](https://img.shields.io/badge/minecraft-1.18.2-brightgreen?style=flat-square&logo=mojang-studios)
 
 > SCP: Sharp is a mod for Minecraft about SCP Foundation
 
@@ -13,6 +13,8 @@
 - SCP-500
 - SCP-714
 - SCP-914
+
+Read our [wiki](https://scpsharp.miraheze.org/wiki/Main_Page) for more details.
 
 ## Compatibility
 
@@ -67,6 +69,10 @@ PRs are welcome, too, but you have better to create a draft PR. Attention on the
 Translations are working on [Crowdin](https://crowdin.com/project/scp-sharp). Create your suggestions.
 
 If you want to translate this mod to another new language, create an issue, and I will add it.
+
+### Wiki
+
+Yeah, every can create an account and do edits directly on our [wiki](https://scpsharp.miraheze.org/wiki/Main_Page).
 
 ## License
 
