@@ -3,7 +3,7 @@
   "block.scpsharp.scp914_controller": "通货膨胀中心",
   "block.scpsharp.scp914_framework": "通货膨胀机",
   "category.rei.scp914": "通货膨胀",
-  "death.attack.scp008": "%1$s 死于朊病毒感染",
+  "death.attack.scp008": "%1$s 因为朊病毒而失败了",
   "effect.scpsharp.scp008_infected": "朊病毒感染",
   "entity.scpsharp.scp173": "花生",
   "item.scpsharp.scp005": "P0级密钥泄露事故",
