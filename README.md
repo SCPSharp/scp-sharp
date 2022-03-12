@@ -48,7 +48,7 @@ No and never, do not ask why.
 
 ## Contributing
 
-See [project](https://github.com/users/xtexChooser/projects/1) for developing road map.
+See [project](https://github.com/orgs/SCPSharp/projects/1) for developing road map.
 
 ### Issues
 
@@ -72,7 +72,7 @@ If you want to translate this mod to another new language, create an issue, and 
 
 ### Wiki
 
-Yeah, every can create an account and do edits directly on our [wiki](https://scpsharp.miraheze.org/wiki/Main_Page).
+Yeah, everyone can create an account and do edits directly on our [wiki](https://scpsharp.miraheze.org/wiki/Main_Page).
 
 ## License
 
