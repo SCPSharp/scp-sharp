@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "scpsharp:block/card_reader"
+    },
+    "facing=south": {
+      "model": "scpsharp:block/card_reader",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "scpsharp:block/card_reader",
+      "y": 180
+    },
+    "facing=north": {
+      "model": "scpsharp:block/card_reader",
+      "y": 270
+    }
+  }
+}

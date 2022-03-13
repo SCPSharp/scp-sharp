@@ -100,10 +100,8 @@ object SCP914ControllerBlock : Block(
             .add(Properties.AGE_3)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
-        return super.getDefaultState()
-            .with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite)
-    }
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState = super.getDefaultState()
+        .with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite)
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         super.onStateReplaced(state, world, pos, newState, moved)
