@@ -33,7 +33,7 @@ import net.minecraft.item.ItemStack
 
 object SCPSubjects {
 
-    val itemGroup: ItemGroup = FabricItemGroupBuilder.create(id("scp_subject"))
+    val itemGroup: ItemGroup = FabricItemGroupBuilder.create(id("scp_subjects"))
         .icon { ItemStack(SCP914ControllerBlock.item) }
         .build()
 
