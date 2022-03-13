@@ -14,17 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package scpsharp
+package scpsharp.content.misc
 
-import scpsharp.content.misc.SCPMisc
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.content.subject.SCPSubjectsClient
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
+import scpsharp.content.misc.permission.SCPPermission
+import scpsharp.content.misc.permission.provider.CardReaderBlock
+import scpsharp.util.id
 
-fun initMain() {
-    SCPMisc
-    SCPSubjects
-}
+object SCPMisc {
 
-fun initClient() {
-    SCPSubjectsClient
+    val itemGroup: ItemGroup = FabricItemGroupBuilder.create(id("scp_misc"))
+        .icon { ItemStack(CardReaderBlock.item) }
+        .build()
+
+    init {
+        SCPPermission
+    }
+
 }

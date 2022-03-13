@@ -14,16 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package scpsharp.content.permission
+package scpsharp.content.misc.permission
 
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
+import scpsharp.content.misc.permission.provider.BuiltinPermissionCards
+import scpsharp.content.misc.permission.provider.CardReaderBlock
+import scpsharp.util.logger
 
 object SCPPermission {
 
+    val logger = logger("Permission")
+
     init {
+        CardReaderBlock
+        BuiltinPermissionCards
     }
 
     fun updateDoubleNeighbors(world: World, pos: BlockPos) {
@@ -55,7 +62,7 @@ object SCPPermission {
             val offsetPos = pos.offset(direction)
             val state = world.getBlockState(offsetPos)
             if (state.block is SCPPermissionEmitterBlock) {
-                if ((state.block as SCPPermissionEmitterBlock).isEmitting(world, pos, id)) {
+                if ((state.block as SCPPermissionEmitterBlock).isEmitting(world, offsetPos, id)) {
                     return true
                 }
             }
