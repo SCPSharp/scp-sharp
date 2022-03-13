@@ -29,4 +29,5 @@ open class SCPEntity(entityType: EntityType<out SCPEntity>, world: World) : Path
 
 }
 
+/* @TODO: move to tag */
 interface SCPIgnoredEntity

@@ -13,7 +13,7 @@
   "item.scpsharp.scp500": "SCP-500",
   "item.scpsharp.scp500_jar": "SCP-500罐子",
   "item.scpsharp.scp714": "SCP-714",
-  "itemGroup.scpsharp.scp_subject": "SCP: Sharp",
+  "itemGroup.scpsharp.scp_subjects": "SCP: Sharp - SCPs",
   "scpsharp.scp714.wake_up_suppressed": "你佩戴了SCP-714，现在无法起床",
   "scpsharp.scp914.mode.bad": "半粗加工",
   "scpsharp.scp914.mode.fine": "半精加工",
