@@ -57,6 +57,7 @@ class SimplePermissionCardItem(id: Identifier, settings: Settings) : Item(settin
                 .map(Resource::getInputStream)
                 .map(InputStream::bufferedReader)
                 .map { it.use(JsonHelper::deserialize) }
+                .sortedBy { if(it.has("priority")) it["priority"].asInt else 0 }
                 .filter { it.has("rules") }
                 .map { it["rules"] }
                 .flatMap(JsonElement::getAsJsonArray)
