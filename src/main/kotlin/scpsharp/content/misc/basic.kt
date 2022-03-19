@@ -14,36 +14,23 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package scpsharp.content.subject.scp914
+package scpsharp.content.misc
 
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
+import scpsharp.content.misc.permission.SCPPermission
+import scpsharp.content.misc.permission.provider.CardReaderBlock
 import scpsharp.util.id
-import scpsharp.util.logger
-import net.minecraft.sound.SoundEvent
-import net.minecraft.state.property.EnumProperty
-import net.minecraft.util.StringIdentifiable
-import net.minecraft.util.registry.Registry
 
-object SCP914 {
+object SCPMisc {
 
-    val logger = logger("SCP-914")
-
-    val modeProperty: EnumProperty<SCP914Mode> = EnumProperty.of("mode", SCP914Mode::class.java)
-
-    val workSoundEvent = SoundEvent(id("scp914_work"))
+    val itemGroup: ItemGroup = FabricItemGroupBuilder.create(id("scp_misc"))
+        .icon { ItemStack(CardReaderBlock.item) }
+        .build()
 
     init {
-        SCP914ControllerBlock
-        SCP914FrameworkBlock
-        SCP914Recipe
-        Registry.register(Registry.SOUND_EVENT, workSoundEvent.id, workSoundEvent)
+        SCPPermission
     }
-
-}
-
-enum class SCP914Mode : StringIdentifiable {
-
-    ROUGH, COARSE, NORMAL, FINE, VERY_FINE;
-
-    override fun asString() = name.lowercase()
 
 }

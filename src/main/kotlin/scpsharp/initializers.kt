@@ -16,12 +16,12 @@
  */
 package scpsharp
 
-import scpsharp.content.permission.SCPPermission
+import scpsharp.content.misc.SCPMisc
 import scpsharp.content.subject.SCPSubjects
 import scpsharp.content.subject.SCPSubjectsClient
 
 fun initMain() {
-    SCPPermission
+    SCPMisc
     SCPSubjects
 }
 

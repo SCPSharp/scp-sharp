@@ -100,10 +100,8 @@ object SCP914ControllerBlock : Block(
             .add(Properties.AGE_3)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState {
-        return super.getDefaultState()
-            .with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite)
-    }
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState = super.getDefaultState()
+        .with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite)
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         super.onStateReplaced(state, world, pos, newState, moved)
@@ -294,16 +292,16 @@ object SCP914ControllerBlock : Block(
         SCP914.logger.info("Processing $item with $mode")
         val inventory = SimpleInventory(
             when (mode) {
-                SCP914Mode.VERY_BAD -> processItem(SCP914Mode.BAD, item, world)
+                SCP914Mode.ROUGH -> processItem(SCP914Mode.COARSE, item, world)
                 SCP914Mode.FINE -> processItem(SCP914Mode.NORMAL, item, world)
                 SCP914Mode.VERY_FINE -> processItem(SCP914Mode.FINE, item, world)
                 else -> item
             }
         )
         val recipe = world.recipeManager.getAllMatches(SCP914Recipe.type, inventory, world)
-            .filter { (mode == SCP914Mode.VERY_BAD || mode == SCP914Mode.BAD) || it.source.test(inventory.getStack(0)) }
+            .filter { (mode == SCP914Mode.ROUGH || mode == SCP914Mode.COARSE) || it.source.test(inventory.getStack(0)) }
             .firstOrNull {
-                (mode != SCP914Mode.VERY_BAD && mode != SCP914Mode.BAD) || it.target.test(
+                (mode != SCP914Mode.ROUGH && mode != SCP914Mode.COARSE) || it.target.test(
                     inventory.getStack(
                         0
                     )

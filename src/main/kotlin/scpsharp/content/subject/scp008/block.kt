@@ -16,8 +16,6 @@
  */
 package scpsharp.content.subject.scp008
 
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
@@ -35,6 +33,8 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.id
 import java.util.*
 
 object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.METAL)) {
@@ -44,9 +44,8 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
         this, FabricItemSettings()
             .group(SCPSubjects.itemGroup)
     )
-    val entityType: BlockEntityType<SCP008ContainmentBlockEntity> = FabricBlockEntityTypeBuilder.create(
-        { pos, state -> SCP008ContainmentBlockEntity(pos, state) }, SCP008ContainmentBlock
-    ).build()
+    val entityType: BlockEntityType<SCP008ContainmentBlockEntity> =
+        FabricBlockEntityTypeBuilder.create(::SCP008ContainmentBlockEntity, this).build()
 
     init {
         Registry.register(Registry.BLOCK, identifier, this)

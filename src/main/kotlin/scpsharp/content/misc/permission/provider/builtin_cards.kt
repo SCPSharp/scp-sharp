@@ -14,19 +14,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package scpsharp.content.permission
+package scpsharp.content.misc.permission.provider
 
-import net.minecraft.block.BlockState
-import net.minecraft.util.Identifier
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.minecraft.util.Rarity
+import net.minecraft.util.registry.Registry
+import scpsharp.content.misc.SCPMisc
+import scpsharp.util.id
 
-interface SCPPermissionEmitterBlock {
+object BuiltinPermissionCards {
 
-    fun getAllProvidedPermissions(world: World, pos: BlockPos, state: BlockState): Collection<Identifier>
+    val o5Id = id("keycard_o5")
+    val o5Item = SimplePermissionCardItem(
+        o5Id, FabricItemSettings()
+            .group(SCPMisc.itemGroup)
+            .maxCount(1)
+            .fireproof()
+            .rarity(Rarity.EPIC)
+    )
 
-    fun getAllProvidedPermissions(world: World, pos: BlockPos) = getAllProvidedPermissions(world, pos, world.getBlockState(pos))
-
-    fun isEmitting(world: World, pos: BlockPos, id: Identifier) = id in getAllProvidedPermissions(world, pos)
+    init {
+        Registry.register(Registry.ITEM, o5Id, o5Item)
+    }
 
 }
