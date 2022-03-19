@@ -42,7 +42,7 @@ object SCP914 {
 
 enum class SCP914Mode : StringIdentifiable {
 
-    VERY_BAD, BAD, NORMAL, FINE, VERY_FINE;
+    ROUGH, COARSE, NORMAL, FINE, VERY_FINE;
 
     override fun asString() = name.lowercase()
 
