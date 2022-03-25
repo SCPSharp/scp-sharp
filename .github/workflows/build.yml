@@ -25,7 +25,7 @@ jobs:
           cache: gradle
 
       - name: Cache .gradle
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: $USER_HOME/.gradle
           key: ${{ runner.os }}-${{ hashFiles('*.gradle') }}-gradle-user-home
