@@ -58,6 +58,8 @@ If you have any questions, create an issue on [GitHub](https://github.com/SCPSha
 
 Pull requests are welcome.
 
+If you are not good at Chinese, just keep the language files and I will add them for you.
+
 ### Assets
 
 PRs are welcome, too, but you have better to create a draft PR. Attention on the license compatibility when using other resources.
@@ -72,7 +74,7 @@ If you want to translate this mod to another new language, create an issue, and 
 
 ### Wiki
 
-Yeah, everyone can create an account and do edits directly on our [wiki](https://scpsharp.miraheze.org/wiki/Main_Page).
+Yeah, everyone can create an account and do edits directly on our [wiki](https://wiki.scpsharp.ga/wiki/Main_Page/en).
 
 ## License
 
