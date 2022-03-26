@@ -82,11 +82,9 @@ Yeah, everyone can create an account and do edits directly on our [wiki](https:/
 
 This program is licensed under GNU Lesser General Program License-3.0(see `LICENSE` file for more).
 
-```
-SCPSharp  Copyright (C) 2022  SCPSharp Team
-This program comes with ABSOLUTELY NO WARRANTY.
-This is free software, and you are welcome to redistribute it under GNU LGPL-3.0.
-```
+> SCPSharp  Copyright (C) 2022  SCPSharp Team
+> This program comes with ABSOLUTELY NO WARRANTY.
+> This is free software, and you are welcome to redistribute it under GNU LGPL-3.0.
 
 ### SCP Foundation
 
