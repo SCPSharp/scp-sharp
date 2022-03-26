@@ -28,7 +28,7 @@ class StructureComponent(
     private val placementData: StructurePlacementData,
     pos: BlockPos,
     override val refs: Array<ComponentRef<*>>
-) : SimpleComponent {
+) : SimpleComponent() {
 
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
 
@@ -40,7 +40,7 @@ class StructureComponent(
 class StructureComponentFactory(
     val structureId: Identifier,
     val refsProvider: () -> Array<ComponentRef<*>> = ::emptyArray
-) : ComponentFactory<StructureComponent> {
+) : ComponentFactory<StructureComponent>() {
 
     override fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): StructureComponent =
         StructureComponent(

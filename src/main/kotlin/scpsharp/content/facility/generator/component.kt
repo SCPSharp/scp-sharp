@@ -17,28 +17,28 @@
 package scpsharp.content.facility.generator
 
 import com.mojang.serialization.Lifecycle
+import net.minecraft.tag.TagKey
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.MutableRegistry
-import net.minecraft.util.registry.Registry
-import net.minecraft.util.registry.RegistryKey
-import net.minecraft.util.registry.SimpleRegistry
+import net.minecraft.util.registry.*
 import scpsharp.util.id
+import java.util.function.Predicate
+import java.util.stream.Stream
 
-interface Component {
+abstract class Component {
 
-    fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
 
-    fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
 
 }
 
-interface SimpleComponent : Component {
+abstract class SimpleComponent : Component() {
 
-    val boxes: Array<BlockBox>
+    abstract val boxes: Array<BlockBox>
 
-    val refs: Array<ComponentRef<*>>
+    abstract val refs: Array<ComponentRef<*>>
 
     override fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction) =
         generator.allocator.pushStack().validate {
@@ -53,17 +53,17 @@ interface SimpleComponent : Component {
             .all { it }
                 && place(generator, pos, direction)
 
-    fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
 
 }
 
-interface ComponentFactory<T : Component> {
+abstract class ComponentFactory<T : Component> {
 
     companion object {
 
         val registryId = id("worldgen/facility_component_factory")
         val registryKey = RegistryKey.ofRegistry<ComponentFactory<*>>(registryId)
-        val registry = SimpleRegistry(registryKey, Lifecycle.stable(), null)
+        val registry = SimpleRegistry(registryKey, Lifecycle.stable(), ComponentFactory<*>::registryEntry)
 
         init {
             @Suppress("UNCHECKED_CAST")
@@ -72,7 +72,16 @@ interface ComponentFactory<T : Component> {
 
     }
 
-    fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
+    @Suppress("LeakingThis")
+    val registryEntry: RegistryEntry.Reference<ComponentFactory<*>> = registry.createEntry(this)
+
+    fun isIn(tag: TagKey<ComponentFactory<*>>) = registryEntry.isIn(tag)
+
+    fun matches(predicate: Predicate<RegistryKey<ComponentFactory<*>>>) = registryEntry.matches(predicate)
+
+    fun streamTags(): Stream<TagKey<ComponentFactory<*>>> = registryEntry.streamTags()
+
+    abstract fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
 
     fun create(
         generator: FacilityGenerator,
