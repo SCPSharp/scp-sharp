@@ -49,7 +49,7 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
             ),
             arrayListOf(
                 BiomePlacementModifier.of(),
-                RarityFilterPlacementModifier.of(256),
+                RarityFilterPlacementModifier.of(512),
                 SquarePlacementModifier()
             )
         )
