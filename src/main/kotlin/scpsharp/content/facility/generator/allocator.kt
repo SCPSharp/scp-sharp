@@ -16,12 +16,11 @@
  */
 package scpsharp.content.facility.generator
 
-import net.minecraft.util.math.BlockBox
 import java.util.*
 
-class SpaceAllocator {
+class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
 
-    private val stack = Stack<MutableSet<BlockBox>>()
+    private val stack = Stack<MutableSet<T>>()
 
     @Transient
     var frozen = false
@@ -48,10 +47,10 @@ class SpaceAllocator {
         frozen = true
     }
 
-    fun pushStack(): SpaceStackAllocation {
+    fun pushStack(): StackAreaAllocation {
         validateActive()
         stack.push(mutableSetOf())
-        return SpaceStackAllocation(this, stack.size)
+        return StackAreaAllocation(this, stack.size)
     }
 
     fun popStack() {
@@ -69,45 +68,45 @@ class SpaceAllocator {
         }
     }
 
-    fun allocate(box: BlockBox) =
-        tryAllocate(box) ?: throw IllegalStateException("Target box is colliding with other allocated box")
+    fun allocate(value: T) =
+        tryAllocate(value) ?: throw IllegalStateException("Target box is colliding with other allocated box")
 
-    fun tryAllocate(box: BlockBox): SpaceAllocation? {
+    fun tryAllocate(value: T): StackElementAllocation<T>? {
         validateActive()
-        if (allAllocatedSpaces.any(box::intersects)) {
+        if (allAllocatedSpaces.any { conflictMatcher(value, it) }) {
             return null
         }
-        if (!stack.peek().add(box)) {
+        if (!stack.peek().add(value)) {
             throw IllegalStateException("Target box has been allocated")
         }
-        return SpaceAllocation(this, box)
+        return StackElementAllocation(this, value)
     }
 
-    fun free(box: BlockBox) {
+    fun free(value: T) {
         validateActive()
-        if (!stack.peek().remove(box)) {
-            if (allAllocatedSpaces.contains(box)) {
-                throw IllegalStateException("Target box is not on the top stack, $box")
+        if (!stack.peek().remove(value)) {
+            if (allAllocatedSpaces.contains(value)) {
+                throw IllegalStateException("Target box is not on the top stack, $value")
             } else {
                 throw IllegalStateException("Target box is not allocated")
             }
         }
     }
 
-    fun validate(boxes: Array<BlockBox>, validator: () -> Boolean = { true }): Boolean {
-        val allocations = boxes.map(this::tryAllocate)
+    fun validate(value: Array<T>, validator: () -> Boolean = { true }): Boolean {
+        val allocations = value.map(this::tryAllocate)
         return if (!allocations.any(Objects::isNull) && validator()) {
             true
         } else {
             allocations.filterNotNull()
-                .forEach(SpaceAllocation::close)
+                .forEach(StackElementAllocation<T>::close)
             false
         }
     }
 
 }
 
-data class SpaceStackAllocation(val allocator: SpaceAllocator, val position: Int) : AutoCloseable {
+data class StackAreaAllocation(val allocator: StackAllocator<*>, val position: Int) : AutoCloseable {
 
     override fun close() {
         allocator.popStack()
@@ -135,10 +134,10 @@ data class SpaceStackAllocation(val allocator: SpaceAllocator, val position: Int
 
 }
 
-data class SpaceAllocation(val allocator: SpaceAllocator, val box: BlockBox) : AutoCloseable {
+data class StackElementAllocation<T>(val allocator: StackAllocator<T>, val value: T) : AutoCloseable {
 
     override fun close() {
-        allocator.free(box)
+        allocator.free(value)
     }
 
     fun validate(validator: () -> Boolean) = if (validator()) {

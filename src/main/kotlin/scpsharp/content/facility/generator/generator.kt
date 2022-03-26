@@ -54,7 +54,7 @@ class FacilityGenerator(
 
     }
 
-    val allocator = SpaceAllocator()
+    val allocator = StackAllocator(BlockBox::intersects)
 
     constructor(context: FeatureContext<*>) : this(
         context.world,
