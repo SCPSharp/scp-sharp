@@ -1,4 +1,5 @@
 {
+  "block.scpsharp.card_reader": "讀卡器",
   "block.scpsharp.scp008_containment": "SCP-008收容箱",
   "block.scpsharp.scp914_controller": "SCP-914之卵",
   "block.scpsharp.scp914_framework": "SCP-914",
@@ -13,6 +14,7 @@
   "item.scpsharp.scp500": "SCP-500",
   "item.scpsharp.scp500_jar": "SCP-500罐子",
   "item.scpsharp.scp714": "SCP-714",
+  "itemGroup.scpsharp.scp_misc": "SCP: Sharp - 雜項",
   "itemGroup.scpsharp.scp_subjects": "SCP: Sharp",
   "scpsharp.scp714.wake_up_suppressed": "你佩戴了SCP-714，现在無法起床",
   "scpsharp.scp914.mode.coarse": "半粗加工",
