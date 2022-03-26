@@ -1,4 +1,5 @@
 {
+  "block.scpsharp.card_reader": "SD卡读卡器",
   "block.scpsharp.scp008_containment": "朊病毒箱子",
   "block.scpsharp.scp914_controller": "通货膨胀中心",
   "block.scpsharp.scp914_framework": "通货膨胀机",
@@ -13,7 +14,8 @@
   "item.scpsharp.scp500": "有效治愈所有疾病的红色药片",
   "item.scpsharp.scp500_jar": "装有有效治愈所有疾病的红色药片的塑料小罐",
   "item.scpsharp.scp714": "昏睡戒指",
-  "itemGroup.scpsharp.scp_subjects": "SCP: Sharp",
+  "itemGroup.scpsharp.scp_misc": "SCP: Sharp - 垃圾堆",
+  "itemGroup.scpsharp.scp_subjects": "SCP: Sharp - 主语",
   "scpsharp.scp714.wake_up_suppressed": "你喝了昏睡红茶起不来力！",
   "scpsharp.scp914.mode.coarse": "差评",
   "scpsharp.scp914.mode.fine": "好好评",
