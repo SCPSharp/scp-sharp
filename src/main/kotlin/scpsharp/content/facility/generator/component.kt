@@ -16,9 +16,15 @@
  */
 package scpsharp.content.facility.generator
 
+import com.mojang.serialization.Lifecycle
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.registry.MutableRegistry
+import net.minecraft.util.registry.Registry
+import net.minecraft.util.registry.RegistryKey
+import net.minecraft.util.registry.SimpleRegistry
+import scpsharp.util.id
 
 interface Component {
 
@@ -52,6 +58,19 @@ interface SimpleComponent : Component {
 }
 
 interface ComponentFactory<T : Component> {
+
+    companion object {
+
+        val registryId = id("worldgen/facility_component_factory")
+        val registryKey = RegistryKey.ofRegistry<ComponentFactory<*>>(registryId)
+        val registry = SimpleRegistry(registryKey, Lifecycle.stable(), null)
+
+        init {
+            @Suppress("UNCHECKED_CAST")
+            Registry.ROOT.add(registryKey as RegistryKey<MutableRegistry<*>>, registry, registry.lifecycle)
+        }
+
+    }
 
     fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
 

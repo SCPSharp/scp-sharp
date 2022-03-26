@@ -7,3 +7,5 @@ accessible field net/minecraft/entity/ai/goal/AttackGoal mob Lnet/minecraft/enti
 accessible method net/minecraft/entity/damage/DamageSource <init> (Ljava/lang/String;)V
 accessible method net/minecraft/entity/damage/DamageSource setUnblockable ()Lnet/minecraft/entity/damage/DamageSource;
 accessible method net/minecraft/entity/damage/DamageSource setBypassesArmor ()Lnet/minecraft/entity/damage/DamageSource;
+# Facility Component Generator
+accessible field net/minecraft/util/registry/Registry ROOT Lnet/minecraft/util/registry/MutableRegistry;
