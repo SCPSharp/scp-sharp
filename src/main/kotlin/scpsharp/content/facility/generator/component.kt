@@ -53,16 +53,16 @@ interface SimpleComponent : Component {
 
 interface ComponentFactory<T : Component> {
 
-    fun create(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
+    fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
 
-    fun construct(
+    fun create(
         generator: FacilityGenerator,
         pos: BlockPos,
         direction: Direction,
         maxTries: Int = 5
     ): T? {
         for (i in 0 until maxTries) {
-            val component = create(generator, pos, direction)
+            val component = construct(generator, pos, direction)
             if (component.validate(generator, pos, direction)) {
                 return component
             }
@@ -77,10 +77,10 @@ interface ComponentFactory<T : Component> {
         maxTries: Int = 5,
         freezeAllocator: Boolean = false
     ): Boolean {
-        val component = construct(generator, pos, direction, maxTries)
-        if(freezeAllocator) {
+        val component = create(generator, pos, direction, maxTries)
+        if (freezeAllocator) {
             generator.allocator.freeze()
-            if(!generator.allocator.isOnBaseStack) {
+            if (!generator.allocator.isOnBaseStack) {
                 throw IllegalStateException("Space allocator frozen but not on the base stack")
             }
             // @TODO: Log here
@@ -103,7 +103,7 @@ data class ComponentReference<T : Component>(
     val direction: Direction
 ) {
 
-    val component: T? = factory.construct(generator, pos, direction)
+    val component: T? = factory.create(generator, pos, direction)
 
     fun generate() = component!!.generate(generator, pos, direction)
 
