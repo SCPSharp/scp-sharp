@@ -16,7 +16,6 @@
  */
 package scpsharp.content.facility.generator
 
-import com.google.common.base.Stopwatch
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.server.world.ServerWorld
@@ -29,7 +28,6 @@ import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import net.minecraft.world.gen.feature.util.FeatureContext
 import java.util.*
-import java.util.concurrent.atomic.AtomicBoolean
 
 class FacilityGenerator(
     val access: StructureWorldAccess,
@@ -40,25 +38,8 @@ class FacilityGenerator(
 
     companion object {
 
-        val extendedStackSize = 1024L * 1024L * 16
-        val generateTimeout = 1000L * 60L * 2
-
-        fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>): Boolean {
-            val synchronizer = Object()
-            val result = AtomicBoolean()
-            val time = Stopwatch.createStarted()
-            Thread(Thread.currentThread().threadGroup, {
-                result.set(FacilityGenerator(context).tryRandomGenerate(factory))
-                synchronized(synchronizer) {
-                    synchronizer.notifyAll()
-                }
-            }, "SCP Site Facility Generator", extendedStackSize).start()
-            synchronized(synchronizer) {
-                synchronizer.wait(generateTimeout)
-            }
-            println("generated in ${time.stop().elapsed()}")
-            return result.get()
-        }
+        fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>) =
+            FacilityGeneratorPool.request(context, factory)
 
     }
 
