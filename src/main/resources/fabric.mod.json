@@ -59,5 +59,8 @@
   "suggests": {
     "modmenu": "*",
     "rei": "*"
+  },
+  "custom": {
+    "scpsharp_full_version": "${fullVersion}"
   }
 }

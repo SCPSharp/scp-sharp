@@ -54,7 +54,8 @@ processResources {
     inputs.property 'projectVersion', project.version
 
     filesMatching('fabric.mod.json') {
-        expand 'version': "${indraGit.describe()}-${project.version}"
+        expand 'version': project.version,
+                'fullVersion': "${indraGit.describe()}-$project.version"
     }
 }
 
