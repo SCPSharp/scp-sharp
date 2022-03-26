@@ -16,12 +16,14 @@
  */
 package scpsharp.content.facility.generator
 
+import com.google.common.base.Stopwatch
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.BlockTags
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Direction
 import net.minecraft.world.Heightmap
 import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
@@ -44,11 +46,17 @@ class FacilityGenerator(
         fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>): Boolean {
             val synchronizer = Object()
             val result = AtomicBoolean()
+            val time = Stopwatch.createStarted()
             Thread(Thread.currentThread().threadGroup, {
-                result.set(factory.startRandomGenerate(FacilityGenerator(context)))
-                synchronizer.notifyAll()
+                result.set(FacilityGenerator(context).tryRandomGenerate(factory))
+                synchronized(synchronizer) {
+                    synchronizer.notifyAll()
+                }
             }, "SCP Site Facility Generator", extendedStackSize).start()
-            synchronizer.wait(generateTimeout)
+            synchronized(synchronizer) {
+                synchronizer.wait(generateTimeout)
+            }
+            println("generated in ${time.stop().elapsed()}")
             return result.get()
         }
 
@@ -65,7 +73,7 @@ class FacilityGenerator(
                 context.origin.z,
                 Heightmap.Type.WORLD_SURFACE_WG,
                 context.world
-            ) - 15
+            ) - 3
         ),
         context.generator
     )
@@ -85,15 +93,23 @@ class FacilityGenerator(
     fun getSurfaceHeight(x: Int, z: Int) =
         chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, access)
 
-    fun validateSpace(box: BlockBox) = BlockPos.stream(box).allMatch(::validateBlock)
+    fun tryRandomGenerate(factory: ComponentFactory<*>) =
+        factory.generate(this, origin, Direction.random(random), freezeAllocator = true)
 
-    fun validateSpaces(boxes: Collection<BlockBox>) = boxes.all(::validateSpace)
+    fun validateBlock(pos: BlockPos, exposedInAir: Boolean = false) =
+        validateBlock(get(pos), exposedInAir) && (pos.y < getSurfaceHeight(pos) || exposedInAir)
 
-    fun validateSpaces(boxes: Array<BlockBox>) = boxes.all(::validateSpace)
+    fun validateBlock(state: BlockState, exposedInAir: Boolean = false): Boolean =
+        (!state.isAir || exposedInAir) || state.isIn(BlockTags.STONE_ORE_REPLACEABLES) || state.isIn(ComponentTags.facilityReplaceable)
 
-    fun validateBlock(pos: BlockPos) = validateBlock(get(pos)) && pos.y < getSurfaceHeight(pos)
+    fun validateSpace(box: BlockBox, exposedInAir: Boolean = false) =
+        BlockPos.stream(box).allMatch { validateBlock(it, exposedInAir) }
 
-    fun validateBlock(state: BlockState): Boolean = state.isAir || state.isIn(BlockTags.STONE_ORE_REPLACEABLES)
+    fun validateSpaces(boxes: Collection<BlockBox>, exposedInAir: Boolean = false) =
+        boxes.all { validateSpace(it, exposedInAir) }
+
+    fun validateSpaces(boxes: Array<BlockBox>, exposedInAir: Boolean = false) =
+        boxes.all { validateSpace(it, exposedInAir) }
 
     fun validateReferences(refs: Collection<ComponentRef<*>>) = refs.map(ComponentRef<*>::component).all { it != null }
 
@@ -101,7 +117,7 @@ class FacilityGenerator(
 
     fun validateRefs(refs: Array<ComponentRef<*>>) = validateReferences(refs)
 
-    fun validate(boxes: Array<BlockBox>, refs: Array<ComponentRef<*>>): Boolean =
-        validateSpaces(boxes) && validateReferences(refs)
+    fun validate(boxes: Array<BlockBox>, refs: Array<ComponentRef<*>>, exposedInAir: Boolean = false): Boolean =
+        validateSpaces(boxes, exposedInAir) && validateReferences(refs)
 
 }

@@ -23,11 +23,12 @@ import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 
-class StructureComponent(
+open class StructureComponent(
     val structure: Structure,
     private val placementData: StructurePlacementData,
     pos: BlockPos,
-    override val refs: Array<ComponentRef<*>>
+    override val refs: Array<ComponentRef<*>>,
+    override val exposedInAir: Boolean
 ) : SimpleComponent() {
 
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
@@ -49,8 +50,7 @@ class StructureComponentFactory(
             StructurePlacementData()
                 .setRandom(generator.random)
                 .setUpdateNeighbors(true),
-            pos,
-            refsProvider()
+            pos, refsProvider(), isIn(ComponentTags.structureExposedInAir)
         )
 
 }

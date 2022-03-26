@@ -40,10 +40,12 @@ abstract class SimpleComponent : Component() {
 
     abstract val refs: Array<ComponentRef<*>>
 
+    open val exposedInAir: Boolean = false
+
     override fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction) =
         generator.allocator.pushStack().validate {
             generator.allocator.validate(boxes) {
-                generator.validate(boxes, refs)
+                generator.validate(boxes, refs, exposedInAir)
             }
         }
 
@@ -61,7 +63,7 @@ abstract class ComponentFactory<T : Component> {
 
     companion object {
 
-        val registryId = id("worldgen/facility_component_factory")
+        val registryId = id("worldgen/scpsharp_facility_component")
         val registryKey = RegistryKey.ofRegistry<ComponentFactory<*>>(registryId)
         val registry = SimpleRegistry(registryKey, Lifecycle.stable(), ComponentFactory<*>::registryEntry)
 
@@ -118,9 +120,6 @@ abstract class ComponentFactory<T : Component> {
         }
         return false
     }
-
-    fun startRandomGenerate(generator: FacilityGenerator) =
-        generate(generator, generator.origin, Direction.random(generator.random), freezeAllocator = true)
 
 }
 

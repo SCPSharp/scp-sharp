@@ -16,6 +16,7 @@
  */
 package scpsharp
 
+import scpsharp.content.facility.site63.Site63
 import scpsharp.content.misc.SCPMisc
 import scpsharp.content.subject.SCPSubjects
 import scpsharp.content.subject.SCPSubjectsClient
@@ -23,6 +24,7 @@ import scpsharp.content.subject.SCPSubjectsClient
 fun initMain() {
     SCPMisc
     SCPSubjects
+    Site63
 }
 
 fun initClient() {
