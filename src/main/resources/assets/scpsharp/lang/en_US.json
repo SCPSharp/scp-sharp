@@ -1,4 +1,5 @@
 {
+  "block.scpsharp.card_reader": "Card Reader",
   "block.scpsharp.scp008_containment": "Container of SCP-008",
   "block.scpsharp.scp914_controller": "SCP-914 Controller",
   "block.scpsharp.scp914_framework": "SCP-914",
@@ -13,6 +14,7 @@
   "item.scpsharp.scp500": "SCP-500",
   "item.scpsharp.scp500_jar": "Jar of SCP-500",
   "item.scpsharp.scp714": "SCP-714",
+  "itemGroup.scpsharp.scp_misc": "SCP: Sharp - Misc",
   "itemGroup.scpsharp.scp_subjects": "SCP: Sharp - SCPs",
   "scpsharp.scp714.wake_up_suppressed": "You wore SCP-714, so you can not get up now",
   "scpsharp.scp914.mode.coarse": "Coarse",
