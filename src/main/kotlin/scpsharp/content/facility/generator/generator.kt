@@ -32,7 +32,8 @@ class FacilityGenerator(
 
     }
 
-    val allocator = StackAllocator(BlockBox::intersects)
+    val spaceAllocator = StackAllocator(BlockBox::intersects)
+    val componentAllocator = StackAllocator<Component> { a, b -> a === b }
 
     constructor(context: FeatureContext<*>) : this(
         context.world,

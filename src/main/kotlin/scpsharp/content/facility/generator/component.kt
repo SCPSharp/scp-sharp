@@ -32,9 +32,13 @@ abstract class SimpleComponent : Component() {
     open val exposedInAir: Boolean = false
 
     override fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction) =
-        generator.allocator.pushStack().validate {
-            generator.allocator.validate(boxes) {
-                generator.validate(boxes, refs, exposedInAir)
+        generator.spaceAllocator.pushStack().validate {
+            generator.componentAllocator.pushStack().validate {
+                generator.componentAllocator.allocate(this).validate {
+                    generator.spaceAllocator.validate(boxes) {
+                        generator.validate(boxes, refs, exposedInAir)
+                    }
+                }
             }
         }
 
@@ -98,9 +102,13 @@ abstract class ComponentFactory<T : Component> {
     ): Boolean {
         val component = create(generator, pos, direction, maxTries)
         if (freezeAllocator) {
-            generator.allocator.freeze()
-            if (!generator.allocator.isOnBaseStack) {
+            generator.spaceAllocator.freeze()
+            if (!generator.spaceAllocator.isOnBaseStack) {
                 throw IllegalStateException("Space allocator frozen but not on the base stack")
+            }
+            generator.componentAllocator.freeze()
+            if (!generator.componentAllocator.isOnBaseStack) {
+                throw IllegalStateException("Component allocator frozen but not on the base stack")
             }
             // @TODO: Log here
         }
