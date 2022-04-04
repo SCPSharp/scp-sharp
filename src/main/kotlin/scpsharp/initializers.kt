@@ -13,7 +13,7 @@ import scpsharp.content.subject.SCPSubjectsClient
 fun initMain() {
     SCPMisc
     SCPSubjects
-    Site63
+    //Site63
 }
 
 fun initClient() {
