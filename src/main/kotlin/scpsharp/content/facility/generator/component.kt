@@ -17,9 +17,9 @@ import java.util.stream.Stream
 
 abstract class Component {
 
-    abstract fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean
 
-    abstract fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean
 
 }
 
@@ -29,26 +29,24 @@ abstract class SimpleComponent : Component() {
 
     abstract val refs: Array<ComponentRef<*>>
 
-    open val exposedInAir: Boolean = false
-
-    override fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction) =
+    override fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int) =
         generator.spaceAllocator.pushStack().validate {
             generator.componentAllocator.pushStack().validate {
                 generator.componentAllocator.allocate(this).validate {
                     generator.spaceAllocator.validate(boxes) {
-                        generator.validate(boxes, refs, exposedInAir)
+                        generator.validate(boxes, refs)
                     }
                 }
             }
         }
 
-    override fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean =
+    override fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean =
         refs.filter { it.component != null }
             .map(ComponentRef<*>::generate)
             .all { it }
-                && place(generator, pos, direction)
+                && place(generator, pos, direction, depth)
 
-    abstract fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean
+    abstract fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean
 
 }
 
@@ -57,7 +55,7 @@ abstract class ComponentFactory<T : Component> {
     companion object {
 
         val registryId = id("worldgen/scpsharp_facility_component")
-        val registryKey = RegistryKey.ofRegistry<ComponentFactory<*>>(registryId)
+        val registryKey: RegistryKey<Registry<ComponentFactory<*>>> = RegistryKey.ofRegistry<ComponentFactory<*>>(registryId)
         val registry = SimpleRegistry(registryKey, Lifecycle.stable(), ComponentFactory<*>::registryEntry)
 
         init {
@@ -76,17 +74,22 @@ abstract class ComponentFactory<T : Component> {
 
     fun streamTags(): Stream<TagKey<ComponentFactory<*>>> = registryEntry.streamTags()
 
-    abstract fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): T
+    abstract fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): T
 
     fun create(
         generator: FacilityGenerator,
         pos: BlockPos,
         direction: Direction,
-        maxTries: Int = 5
+        depth: Int,
+        maxTries: Int = 5,
+        maxDepth: Int = 32
     ): T? {
+        if(depth >= maxDepth) {
+            return null
+        }
         for (i in 0 until maxTries) {
-            val component = construct(generator, pos, direction)
-            if (component.validate(generator, pos, direction)) {
+            val component = construct(generator, pos, direction, depth)
+            if (component.validate(generator, pos, direction, depth)) {
                 return component
             }
         }
@@ -97,10 +100,12 @@ abstract class ComponentFactory<T : Component> {
         generator: FacilityGenerator,
         pos: BlockPos,
         direction: Direction,
+        depth: Int,
         maxTries: Int = 5,
+        maxDepth: Int = 32,
         freezeAllocator: Boolean = false
     ): Boolean {
-        val component = create(generator, pos, direction, maxTries)
+        val component = create(generator, pos, direction, depth, maxTries, maxDepth)
         if (freezeAllocator) {
             generator.spaceAllocator.freeze()
             if (!generator.spaceAllocator.isOnBaseStack) {
@@ -112,7 +117,7 @@ abstract class ComponentFactory<T : Component> {
             }
             // @TODO: Log here
         }
-        if (component != null && component.generate(generator, pos, direction)) {
+        if (component != null && component.generate(generator, pos, direction, depth)) {
             return true
         }
         return false
@@ -124,12 +129,13 @@ data class ComponentReference<T : Component>(
     val generator: FacilityGenerator,
     val factory: ComponentFactory<T>,
     val pos: BlockPos,
-    val direction: Direction
+    val direction: Direction,
+    val depth: Int
 ) {
 
-    val component: T? = factory.create(generator, pos, direction)
+    val component: T? by lazy { factory.create(generator, pos, direction, depth) }
 
-    fun generate() = component!!.generate(generator, pos, direction)
+    fun generate() = component!!.generate(generator, pos, direction, depth)
 
 }
 

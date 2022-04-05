@@ -22,8 +22,8 @@ class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
 
     val allAllocatedSpaces get() = stack.flatten()
     val topStack get() = stack.peek().toSet()
-    val currentStackDeepness get() = stack.size
-    val isOnBaseStack get() = currentStackDeepness == 1
+    val currentStackDepth get() = stack.size
+    val isOnBaseStack get() = currentStackDepth == 1
 
     private fun validateActive() {
         if (frozen) {
@@ -103,8 +103,8 @@ data class StackAreaAllocation(val allocator: StackAllocator<*>, val position: I
     }
 
     private fun validateFreed() {
-        if (allocator.currentStackDeepness != position - 1) {
-            throw IllegalStateException("The upper stacks are not popped, expect ${position - 1} but got ${allocator.currentStackDeepness}")
+        if (allocator.currentStackDepth != position - 1) {
+            throw IllegalStateException("The upper stacks are not popped, expect ${position - 1} but got ${allocator.currentStackDepth}")
         }
     }
 

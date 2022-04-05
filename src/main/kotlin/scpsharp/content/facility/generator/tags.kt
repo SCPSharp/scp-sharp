@@ -12,7 +12,15 @@ import scpsharp.util.id
 
 object ComponentTags {
 
-    val structureExposedInAir: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("structure_exposed_in_air"))
-    val facilityReplaceable: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("facility_replaceable"))
+    val facilityKeep: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("facility_keep"))
+
+    val facilityStart: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_start"))
+    val facilityPart: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_part"))
+    val facilityCorridor: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_corridor"))
+
+    val site63: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63"))
+    val site63Start: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_start"))
+    val site63Generating: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_generating"))
+    val site63Corridor: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_corridor"))
 
 }

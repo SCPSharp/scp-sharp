@@ -6,6 +6,7 @@
 package scpsharp.content.facility.generator
 
 import com.google.common.collect.Queues
+import net.minecraft.util.crash.CrashReport
 import net.minecraft.world.gen.feature.util.FeatureContext
 import scpsharp.util.logger
 import java.util.*
@@ -64,13 +65,13 @@ object FacilityGeneratorPool {
         synchronized(request.notifier) {
             request.notifier.wait(generationTimeout)
         }
-        return request.result
+        return request.result!!
     }
 
     private data class Request(
         val context: FeatureContext<*>,
         val factory: ComponentFactory<*>,
-        var result: Boolean = false,
+        var result: Boolean? = null,
         @Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") val notifier: Object = Object()
     )
 

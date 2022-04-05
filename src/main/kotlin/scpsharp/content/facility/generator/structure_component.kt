@@ -7,6 +7,8 @@ package scpsharp.content.facility.generator
 
 import net.minecraft.structure.Structure
 import net.minecraft.structure.StructurePlacementData
+import net.minecraft.util.BlockMirror
+import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
@@ -17,29 +19,38 @@ open class StructureComponent(
     private val placementData: StructurePlacementData,
     pos: BlockPos,
     override val refs: Array<ComponentRef<*>>,
-    override val exposedInAir: Boolean
 ) : SimpleComponent() {
 
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
 
-    override fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction): Boolean =
+    override fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean =
         structure.place(generator.access, pos, BlockPos(direction.vector), placementData, generator.random, 0)
 
 }
 
 class StructureComponentFactory(
     val structureId: Identifier,
-    val refsProvider: () -> Array<ComponentRef<*>> = ::emptyArray
+    val rotation: BlockRotation = BlockRotation.NONE,
+    val mirror: BlockMirror = BlockMirror.NONE,
+    val refsProvider: (generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int) -> Array<ComponentRef<*>> =
+        { _: FacilityGenerator, _: BlockPos, _: Direction, _: Int -> emptyArray<ComponentRef<*>>() }
 ) : ComponentFactory<StructureComponent>() {
 
-    override fun construct(generator: FacilityGenerator, pos: BlockPos, direction: Direction): StructureComponent =
+    override fun construct(
+        generator: FacilityGenerator,
+        pos: BlockPos,
+        direction: Direction,
+        depth: Int
+    ): StructureComponent =
         StructureComponent(
             generator.world.structureManager.getStructure(structureId)
                 .orElseThrow { IllegalArgumentException("Structure with id $structureId not found") },
             StructurePlacementData()
                 .setRandom(generator.random)
+                .setRotation(rotation)
+                .setMirror(mirror)
                 .setUpdateNeighbors(true),
-            pos, refsProvider(), isIn(ComponentTags.structureExposedInAir)
+            pos, refsProvider(generator, pos, direction, depth + 1)
         )
 
 }

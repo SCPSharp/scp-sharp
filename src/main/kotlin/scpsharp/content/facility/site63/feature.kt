@@ -18,6 +18,7 @@ import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
 import scpsharp.content.facility.generator.FacilityGenerator
 import scpsharp.util.id
+import sun.misc.Unsafe
 
 object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC) {
 
