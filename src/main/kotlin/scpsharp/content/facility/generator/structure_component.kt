@@ -24,7 +24,7 @@ open class StructureComponent(
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
 
     override fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean =
-        structure.place(generator.access, pos, BlockPos(direction.vector), placementData, generator.random, 0)
+        structure.place(generator.access, pos, BlockPos(direction.vector), placementData, generator.random, 3 /* NOTIFY_ALL */)
 
 }
 

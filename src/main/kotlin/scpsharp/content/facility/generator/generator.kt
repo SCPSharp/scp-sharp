@@ -7,7 +7,6 @@ package scpsharp.content.facility.generator
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
-import net.minecraft.server.world.ChunkTicketType
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.TagKey
 import net.minecraft.util.math.*
@@ -27,8 +26,6 @@ class FacilityGenerator(
 ) {
 
     companion object {
-
-        val chunkTicketType = ChunkTicketType.create("scpsharp_facility_generator", Vec3i::compareTo, 20 * 60 * 2)
 
         fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>) =
             //FacilityGeneratorPool.request(context, factory)
@@ -58,7 +55,7 @@ class FacilityGenerator(
         else throw UnsupportedOperationException("Target chunk not loaded")
 
     operator fun set(pos: BlockPos, state: BlockState) =
-        if (isChunkLoaded(pos)) access.setBlockState(pos, state, 0)
+        if (isChunkLoaded(pos)) access.setBlockState(pos, state, 3 /* NOTIFY_ALL */)
         else throw UnsupportedOperationException("Target chunk not loaded")
 
     operator fun set(pos: BlockPos, block: Block) = set(pos, block.defaultState)
@@ -67,10 +64,12 @@ class FacilityGenerator(
     val world: ServerWorld = access.toServerWorld()
     val server = access.server
 
-    fun isChunkLoaded(pos: BlockPos) = access.chunkManager.isChunkLoaded(
-        ChunkSectionPos.getSectionCoord(pos.x),
-        ChunkSectionPos.getSectionCoord(pos.z)
-    )
+    fun isChunkLoaded(posX: Int, posZ: Int) = access.chunkManager.isChunkLoaded(posX, posZ)
+
+    fun isChunkLoaded(pos: ChunkPos) = isChunkLoaded(pos.x, pos.z)
+
+    fun isChunkLoaded(pos: BlockPos) =
+        isChunkLoaded(ChunkSectionPos.getSectionCoord(pos.x), ChunkSectionPos.getSectionCoord(pos.z))
 
     fun getSurfaceHeight(pos: BlockPos) = getSurfaceHeight(pos.x, pos.z)
 
