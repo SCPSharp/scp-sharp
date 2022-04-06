@@ -21,11 +21,12 @@ object Site63 {
 
     val gateId = id("site63_gate")
     val gateFactory: StructureComponentFactory =
-        StructureComponentFactory(gateId, mirror = BlockMirror.FRONT_BACK) { generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int ->
+        StructureComponentFactory(gateId) { generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int ->
             arrayOf(
                 generator.randomComponentRef(
                     ComponentTags.site63Corridor,
-                    pos.offset(direction, 9),
+                    pos.offset(direction, 10)
+                        .offset(direction.rotateYCounterclockwise()),
                     direction,
                     depth
                 )

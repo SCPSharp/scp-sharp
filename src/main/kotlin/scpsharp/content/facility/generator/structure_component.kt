@@ -13,6 +13,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import scpsharp.util.asBlockRotation
 
 open class StructureComponent(
     val structure: Structure,
@@ -24,12 +25,13 @@ open class StructureComponent(
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
 
     override fun place(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean =
-        structure.place(generator.access, pos, BlockPos(direction.vector), placementData, generator.random, 3 /* NOTIFY_ALL */)
+        structure.place(generator.access, pos, BlockPos.ORIGIN, placementData, generator.random, 3 /* NOTIFY_ALL */)
 
 }
 
 class StructureComponentFactory(
     val structureId: Identifier,
+    val position: BlockPos = BlockPos.ORIGIN,
     val rotation: BlockRotation = BlockRotation.NONE,
     val mirror: BlockMirror = BlockMirror.NONE,
     val refsProvider: (generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int) -> Array<ComponentRef<*>> =
@@ -47,7 +49,8 @@ class StructureComponentFactory(
                 .orElseThrow { IllegalArgumentException("Structure with id $structureId not found") },
             StructurePlacementData()
                 .setRandom(generator.random)
-                .setRotation(rotation)
+                .setPosition(position.rotate(direction.asBlockRotation))
+                .setRotation(rotation.rotate(direction).asBlockRotation)
                 .setMirror(mirror)
                 .setUpdateNeighbors(true),
             pos, refsProvider(generator, pos, direction, depth + 1)

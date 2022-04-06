@@ -23,8 +23,8 @@ class Site63CorridorComponent(
 
     val boundingBox = BlockBox(
         pos, pos.offset(direction.rotateYClockwise(), 5)
-            .offset(direction.rotateClockwise(Direction.Axis.X), 5)
             .offset(direction, length)
+            .add(0, 5, 0)
     )
 
     override val boxes: Array<BlockBox> = arrayOf(boundingBox)
@@ -68,7 +68,7 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
             pos,
             direction,
             length,
-            if(depth <= 3) arrayOf(
+            if(depth <= 2) arrayOf(
                 generator.randomComponentRef(
                     ComponentTags.site63Generating,
                     pos.offset(direction, length + 1),
