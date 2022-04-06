@@ -33,7 +33,6 @@ class StructureComponentFactory(
     val structureId: Identifier,
     val position: BlockPos = BlockPos.ORIGIN,
     val rotation: BlockRotation = BlockRotation.NONE,
-    val mirror: BlockMirror = BlockMirror.NONE,
     val refsProvider: (generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int) -> Array<ComponentRef<*>> =
         { _: FacilityGenerator, _: BlockPos, _: Direction, _: Int -> emptyArray<ComponentRef<*>>() }
 ) : ComponentFactory<StructureComponent>() {
@@ -51,7 +50,7 @@ class StructureComponentFactory(
                 .setRandom(generator.random)
                 .setPosition(position.rotate(direction.asBlockRotation))
                 .setRotation(rotation.rotate(direction).asBlockRotation)
-                .setMirror(mirror)
+                .setMirror(if (rotation.rotate(direction) == Direction.WEST) BlockMirror.LEFT_RIGHT else BlockMirror.NONE)
                 .setUpdateNeighbors(true),
             pos, refsProvider(generator, pos, direction, depth + 1)
         )
