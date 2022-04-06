@@ -33,9 +33,9 @@ class Site63CorridorComponent(
         for (x in boundingBox.minX..boundingBox.maxX) {
             for (y in boundingBox.minY..boundingBox.maxY) {
                 for (z in boundingBox.minZ..boundingBox.maxZ) {
-                    generator[BlockPos(x, y, z)] = if ((x == boundingBox.minX || x == boundingBox.maxX)
-                        || (y == boundingBox.minY || y == boundingBox.maxY)
-                        || (z == boundingBox.minZ || z == boundingBox.maxZ)
+                    generator[BlockPos(x, y, z)] = if (((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
+                        || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
+                        || ((z == boundingBox.minZ || z == boundingBox.maxZ) && direction.offsetZ == 0)
                     ) {
                         Blocks.POLISHED_DEEPSLATE
                     } else {
