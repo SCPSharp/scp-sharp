@@ -6,13 +6,9 @@
 package scpsharp.content.subject.scp173
 
 import com.google.common.base.Predicates
-import scpsharp.content.SCPEntity
-import scpsharp.content.SCPIgnoredEntity
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricEntityTypeBuilder
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.EntityDimensions
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -25,6 +21,9 @@ import net.minecraft.item.SpawnEggItem
 import net.minecraft.util.Rarity
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.content.SCPEntity
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.id
 
 class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCPEntity(entityType, world) {
 
@@ -70,14 +69,22 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
         goalSelector.add(4, WanderAroundGoal(this, 1.0))
         goalSelector.add(4, LookAroundGoal(this))
 
-        targetSelector.add(1, RevengeGoal(this, SCPIgnoredEntity::class.java))
+        targetSelector.add(1, RevengeGoal(this))
         targetSelector.add(2, ActiveTargetGoal(this, PlayerEntity::class.java, 0, true, false, Predicates.alwaysTrue()))
         targetSelector.add(
             3,
-            ActiveTargetGoal(this, LivingEntity::class.java, 0, true, true) { it !is SCPIgnoredEntity })
+            ActiveTargetGoal(this, LivingEntity::class.java, true)
+        )
     }
 
     override fun canMoveVoluntarily() = super.canMoveVoluntarily() && world.canSCP173MoveNow()
+
+    override fun setTarget(target: LivingEntity?) {
+        if (target != null && target.type.isIn(SCPEntity.ignoreTag)) {
+            return
+        }
+        super.setTarget(target)
+    }
 
 }
 

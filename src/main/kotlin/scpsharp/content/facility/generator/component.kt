@@ -123,7 +123,6 @@ abstract class ComponentFactory<T : Component> {
             if (!generator.componentAllocator.isOnBaseStack) {
                 throw IllegalStateException("Component allocator frozen but not on the base stack")
             }
-            // @TODO: Log here
         }
         if (component != null && component.generate(generator, pos, direction, depth)) {
             return true
