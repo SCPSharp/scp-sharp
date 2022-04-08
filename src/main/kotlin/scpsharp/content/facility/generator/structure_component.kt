@@ -20,6 +20,7 @@ open class StructureComponent(
     private val placementData: StructurePlacementData,
     pos: BlockPos,
     override val refs: Array<ComponentRef<*>>,
+    override val type: ComponentFactory<*>,
 ) : SimpleComponent() {
 
     override val boxes: Array<BlockBox> = arrayOf(structure.calculateBoundingBox(placementData, pos))
@@ -53,7 +54,7 @@ class StructureComponentFactory(
                 .setRotation(rotation.rotate(direction).asBlockRotation)
                 .setMirror(mirror)
                 .setUpdateNeighbors(true),
-            pos, refsProvider(generator, pos, direction, depth + 1)
+            pos, refsProvider(generator, pos, direction, depth + 1), this
         )
 
 }

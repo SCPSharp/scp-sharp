@@ -18,7 +18,8 @@ class Site63CorridorComponent(
     pos: BlockPos,
     direction: Direction,
     val length: Int,
-    override val refs: Array<ComponentRef<*>>
+    override val refs: Array<ComponentRef<*>>,
+    override val type: ComponentFactory<*>
 ) : SimpleComponent() {
 
     val boundingBox = BlockBox(
@@ -33,20 +34,21 @@ class Site63CorridorComponent(
         for (x in boundingBox.minX..boundingBox.maxX) {
             for (y in boundingBox.minY..boundingBox.maxY) {
                 for (z in boundingBox.minZ..boundingBox.maxZ) {
-                    generator[BlockPos(x, y, z)] = if (((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
-                        || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
-                        || ((z == boundingBox.minZ || z == boundingBox.maxZ) && direction.offsetZ == 0)
-                    ) {
-                        Blocks.POLISHED_DEEPSLATE
-                    } else {
-                        Blocks.AIR
-                    }
+                    generator[BlockPos(x, y, z)] =
+                        if (((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
+                            || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
+                            || ((z == boundingBox.minZ || z == boundingBox.maxZ) && direction.offsetZ == 0)
+                        ) {
+                            Blocks.POLISHED_DEEPSLATE
+                        } else {
+                            Blocks.AIR
+                        }
                 }
             }
         }
-        for(i in 0 until length) {
+        for (i in 0 until length) {
             // @TODO: Use frog light after 1.19
-            val basePos = pos.offset(direction, i).add(0,5,0)
+            val basePos = pos.offset(direction, i).add(0, 5, 0)
             generator[basePos.offset(direction.rotateYClockwise(), 2)] = Blocks.SEA_LANTERN
             generator[basePos.offset(direction.rotateYClockwise(), 3)] = Blocks.SEA_LANTERN
         }
@@ -74,14 +76,15 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
             pos,
             direction,
             length,
-            if(depth <= 2) arrayOf(
+            if (depth <= 2) arrayOf(
                 generator.randomComponentRef(
                     ComponentTags.site63Generating,
                     pos.offset(direction, length + 1),
                     direction,
                     depth + 1
                 )
-            ) else emptyArray()
+            ) else emptyArray(),
+            this
         )
     }
 

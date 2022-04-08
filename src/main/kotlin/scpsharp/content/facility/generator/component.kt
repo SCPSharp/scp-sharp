@@ -17,9 +17,17 @@ import java.util.stream.Stream
 
 abstract class Component {
 
+    abstract val type: ComponentFactory<*>
+
     abstract fun validate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean
 
     abstract fun generate(generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int): Boolean
+
+    fun isIn(tag: TagKey<ComponentFactory<*>>) = type.isIn(tag)
+
+    fun matches(predicate: Predicate<RegistryKey<ComponentFactory<*>>>) = type.matches(predicate)
+
+    fun streamTags(): Stream<TagKey<ComponentFactory<*>>> = type.streamTags()
 
 }
 
