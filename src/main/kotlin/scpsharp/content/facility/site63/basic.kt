@@ -6,7 +6,6 @@
 package scpsharp.content.facility.site63
 
 import net.minecraft.util.BlockMirror
-import net.minecraft.util.BlockRotation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
