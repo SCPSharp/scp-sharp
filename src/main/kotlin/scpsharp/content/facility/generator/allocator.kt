@@ -11,6 +11,8 @@ class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
 
     private val stack = Stack<MutableSet<T>>()
 
+    val allAllocatedSpaces = mutableSetOf<T>()
+
     @Transient
     var frozen = false
         private set
@@ -20,7 +22,6 @@ class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
         pushStack()
     }
 
-    val allAllocatedSpaces get() = stack.flatten()
     val topStack get() = stack.peek().toSet()
     val currentStackDepth get() = stack.size
     val isOnBaseStack get() = currentStackDepth == 1
@@ -66,7 +67,10 @@ class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
             return null
         }
         if (!stack.peek().add(value)) {
-            throw IllegalStateException("Target box has been allocated")
+            throw IllegalStateException("Target box has been allocated in current stack")
+        }
+        if (!allAllocatedSpaces.add(value)) {
+            throw IllegalStateException("Target box has been allocated in other stack")
         }
         return StackElementAllocation(this, value)
     }
@@ -80,6 +84,7 @@ class StackAllocator<T>(val conflictMatcher: (T, T) -> Boolean) {
                 throw IllegalStateException("Target box is not allocated")
             }
         }
+        allAllocatedSpaces.remove(value)
     }
 
     fun validate(value: Array<T>, validator: () -> Boolean = { true }): Boolean {
