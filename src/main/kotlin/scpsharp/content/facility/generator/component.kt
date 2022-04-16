@@ -89,8 +89,8 @@ abstract class ComponentFactory<T : Component> {
         pos: BlockPos,
         direction: Direction,
         depth: Int,
-        maxTries: Int = 5,
-        maxDepth: Int = 32
+        maxTries: Int = 2,
+        maxDepth: Int = 16
     ): T? {
         if(depth >= maxDepth) {
             return null
@@ -109,8 +109,8 @@ abstract class ComponentFactory<T : Component> {
         pos: BlockPos,
         direction: Direction,
         depth: Int,
-        maxTries: Int = 5,
-        maxDepth: Int = 32,
+        maxTries: Int = 2,
+        maxDepth: Int = 16,
         freezeAllocator: Boolean = false
     ): Boolean {
         val component = create(generator, pos, direction, depth, maxTries, maxDepth)
