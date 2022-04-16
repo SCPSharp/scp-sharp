@@ -60,6 +60,18 @@ class FacilityGenerator(
 
     operator fun set(pos: BlockPos, block: Block) = set(pos, block.defaultState)
 
+    fun fillBlocks(box: BlockBox, state: BlockState) {
+        for (x in box.minX..box.maxX) {
+            for (y in box.minY..box.maxY) {
+                for (z in box.minZ..box.maxZ) {
+                    set(BlockPos(x, y, z), state)
+                }
+            }
+        }
+    }
+
+    fun fillBlocks(box: BlockBox, block: Block) = fillBlocks(box, block.defaultState)
+
     val seed = access.seed
     val world: ServerWorld = access.toServerWorld()
     val server = access.server
@@ -83,8 +95,16 @@ class FacilityGenerator(
 
     fun validateBlock(state: BlockState): Boolean = !state.isIn(ComponentTags.facilityKeep)
 
-    fun validateSpace(box: BlockBox) =
-        BlockPos.stream(box).allMatch { validateBlock(it) }
+    fun validateSpace(box: BlockBox) : Boolean {
+        for (x in box.minX..box.maxX) {
+            for (y in box.minY..box.maxY) {
+                for (z in box.minZ..box.maxZ) {
+                    if (!validateBlock(BlockPos(x, y, z))) return false
+                }
+            }
+        }
+        return true
+    }
 
     fun validateSpaces(boxes: Collection<BlockBox>) =
         boxes.all { validateSpace(it) }
