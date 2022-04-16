@@ -145,12 +145,6 @@ class Site63CrossingComponent(
                 )
             }
         }
-        /*for (i in 0 until) {
-            // @TODO: Use frog light after 1.19
-            val basePos = pos.offset(direction, i).add(0, 5, 0)
-            generator[basePos.offset(direction.rotateYClockwise(), 2)] = Blocks.SEA_LANTERN
-            generator[basePos.offset(direction.rotateYClockwise(), 3)] = Blocks.SEA_LANTERN
-        }*/
         return true
     }
 
