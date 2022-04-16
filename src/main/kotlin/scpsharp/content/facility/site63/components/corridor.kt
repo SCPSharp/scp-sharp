@@ -46,7 +46,7 @@ class Site63CorridorComponent(
                 }
             }
         }
-        { // Light
+        run { // Light
             for (i in 0 until length) {
                 // @TODO: Use frog light after 1.19
                 val basePos = pos.offset(direction, i).add(0, 5, 0)
