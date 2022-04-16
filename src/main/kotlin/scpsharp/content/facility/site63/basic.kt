@@ -14,6 +14,7 @@ import scpsharp.content.facility.generator.ComponentTags
 import scpsharp.content.facility.generator.FacilityGenerator
 import scpsharp.content.facility.generator.StructureComponentFactory
 import scpsharp.content.facility.site63.components.Site63CorridorComponentFactory
+import scpsharp.content.facility.site63.components.Site63CrossingComponentFactory
 import scpsharp.util.id
 
 object Site63 {
@@ -35,6 +36,7 @@ object Site63 {
     init {
         Site63Feature
         Site63CorridorComponentFactory
+        Site63CrossingComponentFactory
         Registry.register(ComponentFactory.registry, gateId, gateFactory)
     }
 
