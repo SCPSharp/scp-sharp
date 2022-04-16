@@ -5,7 +5,6 @@
  */
 package scpsharp.content.facility.site63
 
-import net.minecraft.util.BlockMirror
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.registry.Registry
@@ -25,8 +24,7 @@ object Site63 {
             arrayOf(
                 generator.randomComponentRef(
                     ComponentTags.site63Corridor,
-                    pos.offset(direction, 10)
-                        .offset(direction.rotateYCounterclockwise()),
+                    pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()),
                     direction,
                     depth
                 )

@@ -170,24 +170,25 @@ object Site63CrossingComponentFactory : ComponentFactory<Site63CrossingComponent
         direction: Direction,
         depth: Int
     ): Site63CrossingComponent {
-        val left = if (generator.random.nextInt(10) <= 6) generator.randomComponentRef(
-            ComponentTags.site63Corridor,
+        val left = if (generator.random.nextInt(10) <= 5) generator.randomComponentRef(
+            ComponentTags.site63Crossing,
             pos.offset(direction).offset(direction.rotateYCounterclockwise(), 2),
             direction.rotateYCounterclockwise(),
             depth + 1
         ) else null
-        val front = if (generator.random.nextInt(10) <= 6) generator.randomComponentRef(
-            ComponentTags.site63Corridor,
-            pos.offset(direction, 8),
-            direction,
-            depth + 1
-        ) else null
-        val right = if (generator.random.nextInt(10) <= 6 && (front != null && left == null)) generator.randomComponentRef(
-            ComponentTags.site63Corridor,
+        val right = if (generator.random.nextInt(10) <= 5) generator.randomComponentRef(
+            ComponentTags.site63Crossing,
             pos.offset(direction, 6).offset(direction.rotateYClockwise(), 7),
             direction.rotateYClockwise(),
             depth + 1
         ) else null
+        val front =
+            if (generator.random.nextInt(10) <= 3 && (left != null || right != null)) generator.randomComponentRef(
+                ComponentTags.site63Crossing,
+                pos.offset(direction, 8),
+                direction,
+                depth + 1
+            ) else null
         return Site63CrossingComponent(pos, direction, left, right, front, this)
     }
 

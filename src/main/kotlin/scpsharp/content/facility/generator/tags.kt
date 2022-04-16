@@ -17,10 +17,12 @@ object ComponentTags {
     val facilityStart: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_start"))
     val facilityPart: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_part"))
     val facilityCorridor: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_corridor"))
+    val facilityCrossing: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("facility_crossing"))
 
     val site63: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63"))
     val site63Start: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_start"))
     val site63Generating: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_generating"))
     val site63Corridor: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_corridor"))
+    val site63Crossing: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.registryKey, id("site63_crossing"))
 
 }
