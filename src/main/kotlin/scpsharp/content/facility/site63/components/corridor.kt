@@ -78,14 +78,14 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
             pos,
             direction,
             length,
-            if (depth <= 2) arrayOf(
+            arrayOf(
                 generator.randomComponentRef(
                     ComponentTags.site63Generating,
                     pos.offset(direction, length + 1),
                     direction,
                     depth + 1
                 )
-            ) else emptyArray(),
+            ),
             this
         )
     }
