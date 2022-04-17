@@ -25,13 +25,6 @@ class FacilityGenerator(
     val chunkGenerator: ChunkGenerator
 ) {
 
-    companion object {
-
-        fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>) =
-            FacilityGenerator(context).tryRandomGenerate(factory)
-
-    }
-
     val spaceAllocator = StackAllocator(BlockBox::intersects)
     val componentAllocator = StackAllocator<Component> { a, b -> a === b }
 
@@ -87,14 +80,24 @@ class FacilityGenerator(
     fun getSurfaceHeight(x: Int, z: Int) =
         chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, access)
 
-    fun tryRandomGenerate(factory: ComponentFactory<*>) =
-        factory.generate(this, origin, Direction.Type.HORIZONTAL.random(random), freezeAllocator = true, depth = 0)
+    fun tryRandomGenerate(factory: TagKey<ComponentFactory<*>>, extraValidator: (Component) -> Boolean) =
+        tryRandomGenerate(randomComponentFactory(factory), extraValidator)
+
+    fun <T : Component> tryRandomGenerate(factory: ComponentFactory<T>, extraValidator: (T) -> Boolean) =
+        factory.generate(
+            this,
+            origin,
+            Direction.Type.HORIZONTAL.random(random),
+            freezeAllocator = true,
+            depth = 0,
+            extraValidator = extraValidator
+        )
 
     fun validateBlock(pos: BlockPos) = isChunkLoaded(pos) && validateBlock(get(pos))
 
     fun validateBlock(state: BlockState): Boolean = !state.isIn(ComponentTags.facilityKeep)
 
-    fun validateSpace(box: BlockBox) : Boolean {
+    fun validateSpace(box: BlockBox): Boolean {
         for (x in box.minX..box.maxX) {
             for (y in box.minY..box.maxY) {
                 for (z in box.minZ..box.maxZ) {

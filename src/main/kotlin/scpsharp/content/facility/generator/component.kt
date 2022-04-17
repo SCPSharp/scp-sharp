@@ -5,6 +5,7 @@
  */
 package scpsharp.content.facility.generator
 
+import com.google.common.base.Predicates
 import com.mojang.serialization.Lifecycle
 import net.minecraft.tag.TagKey
 import net.minecraft.util.math.BlockBox
@@ -111,7 +112,8 @@ abstract class ComponentFactory<T : Component> {
         depth: Int,
         maxTries: Int = 2,
         maxDepth: Int = 16,
-        freezeAllocator: Boolean = false
+        freezeAllocator: Boolean = false,
+        extraValidator: (T) -> Boolean = { true }
     ): Boolean {
         val component = create(generator, pos, direction, depth, maxTries, maxDepth)
         if (freezeAllocator) {
@@ -124,7 +126,7 @@ abstract class ComponentFactory<T : Component> {
                 throw IllegalStateException("Component allocator frozen but not on the base stack")
             }
         }
-        if (component != null && component.generate(generator, pos, direction, depth)) {
+        if (component != null && extraValidator(component) && component.generate(generator, pos, direction, depth)) {
             return true
         }
         return false
