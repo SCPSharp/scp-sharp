@@ -28,7 +28,6 @@ class FacilityGenerator(
     companion object {
 
         fun generate(context: FeatureContext<*>, factory: ComponentFactory<*>) =
-            //FacilityGeneratorPool.request(context, factory)
             FacilityGenerator(context).tryRandomGenerate(factory)
 
     }
