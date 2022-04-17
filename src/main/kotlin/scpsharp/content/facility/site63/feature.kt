@@ -17,9 +17,9 @@ import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
 import scpsharp.content.facility.generator.ComponentTags
+import scpsharp.content.facility.generator.ExtraValidators
 import scpsharp.content.facility.generator.FacilityGenerator
 import scpsharp.util.id
-import sun.misc.Unsafe
 
 object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC) {
 
@@ -55,6 +55,8 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
     }
 
     override fun generate(context: FeatureContext<DefaultFeatureConfig>) =
-        FacilityGenerator(context).tryRandomGenerate(ComponentTags.site63Start)
+        FacilityGenerator(context).tryRandomGenerate(ComponentTags.site63Start) {
+            ExtraValidators.maxDepth(this, 4)
+        }
 
 }

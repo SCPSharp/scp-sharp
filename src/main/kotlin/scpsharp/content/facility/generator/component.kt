@@ -113,7 +113,7 @@ abstract class ComponentFactory<T : Component> {
         maxTries: Int = 2,
         maxDepth: Int = 16,
         freezeAllocator: Boolean = false,
-        extraValidator: (T) -> Boolean = { true }
+        extraValidator: T.() -> Boolean = { true }
     ): Boolean {
         val component = create(generator, pos, direction, depth, maxTries, maxDepth)
         if (freezeAllocator) {
@@ -126,7 +126,7 @@ abstract class ComponentFactory<T : Component> {
                 throw IllegalStateException("Component allocator frozen but not on the base stack")
             }
         }
-        if (component != null && extraValidator(component) && component.generate(generator, pos, direction, depth)) {
+        if (component != null && component.extraValidator() && component.generate(generator, pos, direction, depth)) {
             return true
         }
         return false

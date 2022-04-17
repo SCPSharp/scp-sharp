@@ -1,6 +1,7 @@
 {
   "values": [
     "#scpsharp:facility_corridor",
-    "#scpsharp:facility_crossing"
+    "#scpsharp:facility_crossing",
+    "#scpsharp:facility_containment_room"
   ]
 }

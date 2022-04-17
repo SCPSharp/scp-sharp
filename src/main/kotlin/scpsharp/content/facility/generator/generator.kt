@@ -7,6 +7,9 @@ package scpsharp.content.facility.generator
 
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
+import net.minecraft.entity.Entity
+import net.minecraft.entity.EntityType
+import net.minecraft.entity.SpawnReason
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.TagKey
 import net.minecraft.util.math.*
@@ -67,6 +70,7 @@ class FacilityGenerator(
     val seed = access.seed
     val world: ServerWorld = access.toServerWorld()
     val server = access.server
+    val ktRandom = random.asKotlinRandom()
 
     fun isChunkLoaded(posX: Int, posZ: Int) = access.chunkManager.isChunkLoaded(posX, posZ)
 
@@ -80,10 +84,10 @@ class FacilityGenerator(
     fun getSurfaceHeight(x: Int, z: Int) =
         chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, access)
 
-    fun tryRandomGenerate(factory: TagKey<ComponentFactory<*>>, extraValidator: (Component) -> Boolean) =
+    fun tryRandomGenerate(factory: TagKey<ComponentFactory<*>>, extraValidator: Component.() -> Boolean) =
         tryRandomGenerate(randomComponentFactory(factory), extraValidator)
 
-    fun <T : Component> tryRandomGenerate(factory: ComponentFactory<T>, extraValidator: (T) -> Boolean) =
+    fun <T : Component> tryRandomGenerate(factory: ComponentFactory<T>, extraValidator: T.() -> Boolean) =
         factory.generate(
             this,
             origin,
@@ -148,5 +152,10 @@ class FacilityGenerator(
         depth: Int,
         filter: (ComponentFactory<*>) -> Boolean = { true }
     ) = ComponentRef(this, randomComponentFactory(tag, filter), pos, direction, depth)
+
+    fun spawnEntity(entity: Entity) = access.spawnEntity(entity)
+
+    fun spawnEntity(type: EntityType<*>, pos: BlockPos) =
+        access.spawnEntity(type.spawn(world, null, null, null, pos, SpawnReason.CHUNK_GENERATION, false, false))
 
 }
