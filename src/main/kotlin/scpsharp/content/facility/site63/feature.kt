@@ -56,7 +56,9 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
 
     override fun generate(context: FeatureContext<DefaultFeatureConfig>) =
         FacilityGenerator(context).tryRandomGenerate(ComponentTags.site63Start) {
-            ExtraValidators.maxDepth(this, 4)
+            // @TODO: Fix this
+            true
+            //ExtraValidators.maxDepth(this, 2)
         }
 
 }
