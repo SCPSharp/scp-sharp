@@ -48,9 +48,9 @@ public abstract class DamageTrackerMixin {
                 .filter((entity) -> entity.getPos().getSquaredDistance(getEntity().getBlockPos()) <= 6 * 6)
                 .filter((entity) -> Objects.requireNonNull(entity.getWorld()).getBlockState(entity.getPos()).get(Properties.OPEN))
                 .forEach((entity) -> {
-                    SCP008.INSTANCE.getLogger().info(getEntity() + " got " + damageSource + " x" + damage + " and getting infected from a open containment box at " + entity.getPos());
+                    SCP008.INSTANCE.getLOGGER().info(getEntity() + " got " + damageSource + " x" + damage + " and getting infected from a open containment box at " + entity.getPos());
                     if (getEntity() != null && getEntity() instanceof PlayerEntity playerEntity) {
-                        playerEntity.incrementStat(SCP008.INSTANCE.getInfectingStat());
+                        playerEntity.incrementStat(SCP008.INSTANCE.getINFECTING_STAT());
                     }
                     SCP008StatusEffect.INSTANCE.infect(getEntity(), damageSource.getSource());
                 });

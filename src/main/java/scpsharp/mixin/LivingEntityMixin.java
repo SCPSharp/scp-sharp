@@ -28,7 +28,7 @@ public class LivingEntityMixin {
         var thisEntity = (LivingEntity) (Object) this;
         for (var stack : thisEntity.getItemsHand()) {
             if (stack.getItem() instanceof SCP714Item) {
-                if (thisEntity.getAttacker() != null && !thisEntity.getType().isIn(SCP714.INSTANCE.getBypassTag())) {
+                if (thisEntity.getAttacker() != null && !thisEntity.getType().isIn(SCP714.INSTANCE.getBYPASS_TAG())) {
                     if (thisEntity instanceof PlayerEntity thisPlayer
                             && (!(thisEntity instanceof ServerPlayerEntity)
                             || ((ServerPlayerEntity) thisEntity).networkHandler != null)) {

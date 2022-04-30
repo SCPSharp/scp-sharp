@@ -29,10 +29,10 @@ public class PlayerEntityMixin {
             var targetInfected = targetEntity.hasStatusEffect(SCP008StatusEffect.INSTANCE);
             var selfInfected = selfEntity.hasStatusEffect(SCP008StatusEffect.INSTANCE);
             if (targetInfected && !selfInfected && selfEntity.getHealth() <= selfEntity.getMaxHealth() * 0.8f) {
-                SCP008.INSTANCE.getLogger().info(this + " infected SCP-008 from " + entity + " by colliding");
+                SCP008.INSTANCE.getLOGGER().info(this + " infected SCP-008 from " + entity + " by colliding");
                 SCP008StatusEffect.INSTANCE.infect(selfEntity, targetEntity);
             } else if (selfInfected && !targetInfected && targetEntity.getHealth() <= targetEntity.getMaxHealth() * 0.8f) {
-                SCP008.INSTANCE.getLogger().info(this + " infected SCP-008 to " + entity + " by colliding");
+                SCP008.INSTANCE.getLOGGER().info(this + " infected SCP-008 to " + entity + " by colliding");
                 SCP008StatusEffect.INSTANCE.infect(targetEntity, selfEntity);
             }
         }

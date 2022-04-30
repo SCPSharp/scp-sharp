@@ -29,7 +29,7 @@ public class MilkBucketItemMixin {
     public void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> info) {
         // SCP-008 bypass
         if (user.hasStatusEffect(SCP008StatusEffect.INSTANCE) && !world.isClient) {
-            SCP008.INSTANCE.getLogger().info(user + " trying to drink milk when is SCP-008 infected");
+            SCP008.INSTANCE.getLOGGER().info(user + " trying to drink milk when is SCP-008 infected");
             user.removeStatusEffect(SCP008StatusEffect.INSTANCE);
             user.addStatusEffect(new StatusEffectInstance(SCP008StatusEffect.INSTANCE, 20 * (13 + world.random.nextInt(4))));
             stack.decrement(1);

@@ -36,7 +36,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
         var thisEntity = (ServerPlayerEntityMixin) this;
         for (var stack : getItemsHand()) {
             if (stack.getItem() instanceof SCP714Item) {
-                incrementStat(SCP714.INSTANCE.getSleepWithStat());
+                incrementStat(SCP714.INSTANCE.getSLEEP_WITH_STAT());
                 info.setReturnValue(super.trySleep(pos));
                 break;
             }
