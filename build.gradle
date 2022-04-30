@@ -37,7 +37,7 @@ dependencies {
 
     modImplementation 'com.terraformersmc:modmenu:3.2.1'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:8.1.449'
-    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:8.1.449'
+    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:8.1.457'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
