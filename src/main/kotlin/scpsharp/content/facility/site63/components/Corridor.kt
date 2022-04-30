@@ -64,7 +64,7 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
     val IDENTIFIER = id("site63_corridor")
 
     init {
-        Registry.register(ComponentFactory.REGISTRY, IDENTIFIER, this)
+        Registry.register(REGISTRY, IDENTIFIER, this)
     }
 
     override fun construct(
@@ -74,20 +74,13 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
         depth: Int
     ): Site63CorridorComponent {
         val length = generator.random.nextInt(8, 13)
-        return Site63CorridorComponent(
-            pos,
+        val connected = generator.randomComponentRef(
+            if (generator.random.nextInt(10) < 2) ComponentTags.SITE63_GENERATING else ComponentTags.SITE63_CORRIDOR_CONNECTED,
+            pos.offset(direction, length + 1),
             direction,
-            length,
-            arrayOf(
-                generator.randomComponentRef(
-                    ComponentTags.SITE63_GENERATING,
-                    pos.offset(direction, length + 1),
-                    direction,
-                    depth + 1
-                )
-            ),
-            this
+            depth + 1
         )
+        return Site63CorridorComponent(pos, direction, length, arrayOf(connected), this)
     }
 
 }

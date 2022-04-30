@@ -24,6 +24,7 @@ object ComponentTags {
     val SITE63_START: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.REGISTRY_KEY, id("site63_start"))
     val SITE63_GENERATING: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.REGISTRY_KEY, id("site63_generating"))
     val SITE63_CORRIDOR: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.REGISTRY_KEY, id("site63_corridor"))
+    val SITE63_CORRIDOR_CONNECTED: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.REGISTRY_KEY, id("site63_corridor_connected"))
     val SITE63_CROSSING: TagKey<ComponentFactory<*>> = TagKey.of(ComponentFactory.REGISTRY_KEY, id("site63_crossing"))
 
 }

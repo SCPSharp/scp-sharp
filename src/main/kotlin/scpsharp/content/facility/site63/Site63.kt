@@ -24,7 +24,7 @@ object Site63 {
         StructureComponentFactory(GATE_ID) { generator: FacilityGenerator, pos: BlockPos, direction: Direction, depth: Int ->
             arrayOf(
                 generator.randomComponentRef(
-                    ComponentTags.SITE63_CORRIDOR,
+                    ComponentTags.SITE63_CORRIDOR_CONNECTED,
                     pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()),
                     direction,
                     depth
