@@ -1,7 +1,7 @@
 preserve_hierarchy: false
-commit_message: 'feat(i18n): update translations for %language%(%original_file_name%)
-
-[ci skip]'
+commit_message: |-
+  feat(i18n): update translations for %language%(%original_file_name%)
+  [ci skip]
 append_commit_message: false
 pull_request_title: 'feat(i18n): update translations'
 pull_request_labels:
