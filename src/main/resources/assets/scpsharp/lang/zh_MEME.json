@@ -1,9 +1,9 @@
 {
   "block.scpsharp.card_reader": "SD卡读卡器",
   "block.scpsharp.scp008_containment": "朊病毒箱子",
-  "block.scpsharp.scp914_controller": "通货膨胀中心",
-  "block.scpsharp.scp914_framework": "通货膨胀机",
-  "category.rei.scp914": "通货膨胀",
+  "block.scpsharp.scp914_controller": "工人指挥中心",
+  "block.scpsharp.scp914_framework": "工人",
+  "category.rei.scp914": "工人加工",
   "death.attack.scp008": "%1$s 死于朊病毒感染",
   "effect.scpsharp.scp008_infected": "朊病毒感染",
   "entity.scpsharp.scp173": "花生",
