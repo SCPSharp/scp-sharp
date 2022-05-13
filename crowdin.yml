@@ -8,5 +8,5 @@ pull_request_labels:
   - 'flag: auto'
   - 'type: i18n'
 files:
-  - source: src/main/resources/assets/scpsharp/lang/zh_cn.json
+  - source: src/main/resources/assets/scpsharp/lang/en_us.json
     translation: /%original_path%/%locale_with_underscore%.json
