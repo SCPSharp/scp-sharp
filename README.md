@@ -58,8 +58,6 @@ If you have any questions, create an issue on [GitHub](https://github.com/SCPSha
 
 Pull requests are welcome.
 
-If you are not good at Chinese, just keep the language files and I will add them for you.
-
 ### Assets
 
 PRs are welcome, too, but you have better to create a draft PR. Attention on the license compatibility when using other resources.
