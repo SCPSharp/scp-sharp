@@ -6,10 +6,11 @@
 package scpsharp.content.facility.site63
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase
 import net.minecraft.util.registry.BuiltinRegistries
 import net.minecraft.util.registry.Registry
+import net.minecraft.world.biome.Biome
+import net.minecraft.world.dimension.DimensionOptions
 import net.minecraft.world.gen.GenerationStep
 import net.minecraft.world.gen.feature.*
 import net.minecraft.world.gen.feature.util.FeatureContext
@@ -45,7 +46,13 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
         )
         Registry.register(BuiltinRegistries.PLACED_FEATURE, IDENTIFIER, DEFAULT_PLACE)
         BiomeModifications.create(IDENTIFIER)
-            .add(ModificationPhase.ADDITIONS, BiomeSelectors.foundInOverworld()) { context ->
+            .add(ModificationPhase.ADDITIONS, { context ->
+                context.canGenerateIn(DimensionOptions.OVERWORLD)
+                        && context.biome.category != Biome.Category.RIVER
+                        && context.biome.category != Biome.Category.OCEAN
+                        && context.biomeKey.value.namespace == "minecraft"
+                        && BuiltinRegistries.BIOME.containsId(context.biomeKey.value)
+            }) { context ->
                 context.generationSettings.addFeature(
                     GenerationStep.Feature.UNDERGROUND_STRUCTURES,
                     BuiltinRegistries.PLACED_FEATURE.getKey(DEFAULT_PLACE).orElseThrow()
