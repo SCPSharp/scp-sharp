@@ -27,7 +27,6 @@ object REIClientPlugin : REIClientPlugin {
 
     override fun registerCategories(registry: CategoryRegistry) {
         registry.add(SCP914REICategory)
-        registry.removePlusButton(SCP914REICategory.identifier)
         registry.addWorkstations(SCP914REICategory.identifier, EntryIngredients.of(SCP914ControllerBlock.ITEM))
     }
 

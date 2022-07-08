@@ -10,44 +10,38 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
+import net.minecraft.server.world.ServerChunkManager
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.tag.TagKey
 import net.minecraft.util.math.*
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.RegistryEntry
 import net.minecraft.world.Heightmap
 import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import net.minecraft.world.gen.feature.util.FeatureContext
-import java.util.*
-import kotlin.random.asKotlinRandom
 
 class FacilityGenerator(
-    val access: StructureWorldAccess,
-    val random: Random,
-    val origin: BlockPos,
-    val chunkGenerator: ChunkGenerator
+    val access: StructureWorldAccess, val random: Random, val origin: BlockPos, val chunkGenerator: ChunkGenerator
 ) {
 
     val spaceAllocator = StackAllocator(BlockBox::intersects)
     val componentAllocator = StackAllocator<Component> { a, b -> a === b }
 
     constructor(context: FeatureContext<*>) : this(
-        context.world,
-        context.random,
-        context.origin.withY(
+        context.world, context.random, context.origin.withY(
             context.generator.getHeight(
                 context.origin.x,
                 context.origin.z,
                 Heightmap.Type.WORLD_SURFACE_WG,
-                context.world
+                context.world,
+                (context.world.chunkManager as ServerChunkManager).noiseConfig
             ) - 5
-        ),
-        context.generator
+        ), context.generator
     )
 
-    operator fun get(pos: BlockPos): BlockState =
-        if (isChunkLoaded(pos)) access.getBlockState(pos)
-        else throw UnsupportedOperationException("Target chunk not loaded")
+    operator fun get(pos: BlockPos): BlockState = if (isChunkLoaded(pos)) access.getBlockState(pos)
+    else throw UnsupportedOperationException("Target chunk not loaded")
 
     operator fun set(pos: BlockPos, state: BlockState) =
         if (isChunkLoaded(pos)) access.setBlockState(pos, state, 3 /* NOTIFY_ALL */)
@@ -67,22 +61,20 @@ class FacilityGenerator(
 
     fun fillBlocks(box: BlockBox, block: Block) = fillBlocks(box, block.defaultState)
 
-    val seed = access.seed
-    val world: ServerWorld = access.toServerWorld()
-    val server = access.server
-    val ktRandom = random.asKotlinRandom()
+    val seed get() = access.seed
+    val world: ServerWorld get() = access.toServerWorld()
+    val server get() = access.server
 
     fun isChunkLoaded(posX: Int, posZ: Int) = access.chunkManager.isChunkLoaded(posX, posZ)
-
     fun isChunkLoaded(pos: ChunkPos) = isChunkLoaded(pos.x, pos.z)
-
     fun isChunkLoaded(pos: BlockPos) =
         isChunkLoaded(ChunkSectionPos.getSectionCoord(pos.x), ChunkSectionPos.getSectionCoord(pos.z))
 
     fun getSurfaceHeight(pos: BlockPos) = getSurfaceHeight(pos.x, pos.z)
 
-    fun getSurfaceHeight(x: Int, z: Int) =
-        chunkGenerator.getHeight(x, z, Heightmap.Type.WORLD_SURFACE_WG, access)
+    fun getSurfaceHeight(x: Int, z: Int) = chunkGenerator.getHeight(
+        x, z, Heightmap.Type.WORLD_SURFACE_WG, access, (world.chunkManager as ServerChunkManager).noiseConfig
+    )
 
     fun tryRandomGenerate(factory: TagKey<ComponentFactory<*>>, extraValidator: Component.() -> Boolean) =
         tryRandomGenerate(randomComponentFactory(factory), extraValidator)
@@ -112,11 +104,9 @@ class FacilityGenerator(
         return true
     }
 
-    fun validateSpaces(boxes: Collection<BlockBox>) =
-        boxes.all { validateSpace(it) }
+    fun validateSpaces(boxes: Collection<BlockBox>) = boxes.all { validateSpace(it) }
 
-    fun validateSpaces(boxes: Array<BlockBox>) =
-        boxes.all { validateSpace(it) }
+    fun validateSpaces(boxes: Array<BlockBox>) = boxes.all { validateSpace(it) }
 
     fun validateReferences(refs: Collection<ComponentRef<*>>) = refs.map(ComponentRef<*>::component).all { it != null }
 
@@ -128,13 +118,10 @@ class FacilityGenerator(
         validateSpaces(boxes) && validateReferences(refs)
 
     fun randomComponentFactory(
-        tag: TagKey<ComponentFactory<*>>,
-        filter: (ComponentFactory<*>) -> Boolean = { true }
+        tag: TagKey<ComponentFactory<*>>, filter: (ComponentFactory<*>) -> Boolean = { true }
     ): ComponentFactory<*> =
-        ComponentFactory.REGISTRY.getOrCreateEntryList(tag)
-            .map(RegistryEntry<ComponentFactory<*>>::value)
-            .filter(filter)
-            .randomOrNull(random.asKotlinRandom())
+        ComponentFactory.REGISTRY.getOrCreateEntryList(tag).map(RegistryEntry<ComponentFactory<*>>::value)
+            .filter(filter).randomOrNull(kotlin.random.Random(random.nextLong()))
             ?: throw IllegalArgumentException("No component factory with tag $tag found")
 
     fun randomComponent(

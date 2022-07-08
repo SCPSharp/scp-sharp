@@ -41,8 +41,7 @@ class SimplePermissionCardItem(id: Identifier, settings: Settings) : Item(settin
             providedPermissions.clear()
             manager.allNamespaces
                 .map { Identifier(it, "scpsharp/permission_card/${id.namespace}/${id.path}.json") }
-                .filter(manager::containsResource)
-                .map(manager::getResource)
+                .flatMap { manager.getAllResources(it) }
                 .map(Resource::getInputStream)
                 .map(InputStream::bufferedReader)
                 .map { it.use(JsonHelper::deserialize) }

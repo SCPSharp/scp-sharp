@@ -35,11 +35,13 @@
         "value": "scpsharp.integrate.ModMenuIntegrate"
       }
     ],
-    "rei": [
+    "rei_server": [
       {
         "adapter": "kotlin",
         "value": "scpsharp.integrate.rei.REIServerPlugin"
-      },
+      }
+    ],
+    "rei_client": [
       {
         "adapter": "kotlin",
         "value": "scpsharp.integrate.rei.REIClientPlugin"
@@ -52,7 +54,7 @@
   "depends": {
     "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": "*",
     "fabric-language-kotlin": "*"
   },

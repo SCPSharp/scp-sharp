@@ -73,7 +73,7 @@ object Site63CorridorComponentFactory : ComponentFactory<Site63CorridorComponent
         direction: Direction,
         depth: Int
     ): Site63CorridorComponent {
-        val length = generator.random.nextInt(8, 13)
+        val length = generator.random.nextBetween(8, 13)
         val connected = generator.randomComponentRef(
             if (generator.random.nextInt(10) < 2) ComponentTags.SITE63_GENERATING else ComponentTags.SITE63_CORRIDOR_CONNECTED,
             pos.offset(direction, length + 1),

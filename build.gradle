@@ -9,11 +9,11 @@ buildscript {
 }
 
 plugins {
-    id 'fabric-loom' version '0.11-SNAPSHOT'
-    id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.0'
     id 'net.kyori.indra.license-header' version '2.1.1'
     id 'net.kyori.indra.git' version '2.1.1'
-    id 'com.modrinth.minotaur' version '2.2.0'
+    id 'com.modrinth.minotaur' version '2.4.1'
     id 'maven-publish'
 }
 
@@ -33,9 +33,11 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation "net.fabricmc:fabric-language-kotlin:1.7.1+kotlin.1.6.10"
+    modImplementation "net.fabricmc:fabric-language-kotlin:1.8.1+kotlin.1.7.0"
 
-    modImplementation 'com.terraformersmc:modmenu:4.0.2'
+    // @TODO: modmenu+mc1.19
+    //modImplementation 'com.terraformersmc:modmenu:4.0.2'
+    modCompileOnly 'com.terraformersmc:modmenu:4.0.2'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.503'
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:9.1.503'
 }
@@ -65,7 +67,7 @@ tasks.withType(JavaCompile).configureEach {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = '17'
     }
 }
 

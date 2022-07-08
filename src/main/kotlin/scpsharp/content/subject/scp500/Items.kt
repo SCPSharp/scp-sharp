@@ -20,6 +20,7 @@ import net.minecraft.util.TypedActionResult
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import kotlin.math.min
+import kotlin.random.Random
 
 object SCP5001Item : Item(
     FabricItemSettings()
@@ -48,7 +49,7 @@ object SCP5001Item : Item(
             SCP500.LOGGER.info("$user ate a SCP-500")
             user.activeStatusEffects.values
                 .filter { !it.effectType.isBeneficial }
-                .shuffled(world.random)
+                .shuffled(Random(world.random.nextLong()))
                 .run { subList(0, min(world.random.nextInt(5), size)) }
                 .filter { user.removeStatusEffect(it.effectType) }
                 .onEach { SCP500.LOGGER.info("$it removed successfully by SCP-500 for $user") }

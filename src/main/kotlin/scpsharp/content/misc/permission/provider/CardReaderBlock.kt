@@ -34,6 +34,7 @@ import net.minecraft.util.function.BooleanBiFunction
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
@@ -44,7 +45,6 @@ import scpsharp.content.misc.permission.SCPPermission
 import scpsharp.content.misc.permission.SCPPermissionCardItem
 import scpsharp.content.misc.permission.SCPPermissionEmitterBlock
 import scpsharp.util.id
-import java.util.*
 
 object CardReaderBlock : BlockWithEntity(
     FabricBlockSettings.of(Material.METAL)

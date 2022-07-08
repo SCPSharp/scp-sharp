@@ -5,9 +5,6 @@
  */
 package scpsharp.integrate.rei
 
-import scpsharp.content.subject.scp914.SCP914ControllerBlock
-import scpsharp.content.subject.scp914.SCP914Recipe
-import scpsharp.util.id
 import me.shedaniel.math.Point
 import me.shedaniel.math.Rectangle
 import me.shedaniel.rei.api.client.gui.Renderer
@@ -19,8 +16,13 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
 import me.shedaniel.rei.api.common.util.EntryIngredients
 import me.shedaniel.rei.api.common.util.EntryStacks
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.MutableText
+import net.minecraft.text.Text
+import net.minecraft.text.TranslatableTextContent
 import net.minecraft.util.Identifier
+import scpsharp.content.subject.scp914.SCP914ControllerBlock
+import scpsharp.content.subject.scp914.SCP914Recipe
+import scpsharp.util.id
 import java.util.*
 
 object SCP914REICategory : DisplayCategory<SCP914REIDisplay> {
@@ -29,7 +31,7 @@ object SCP914REICategory : DisplayCategory<SCP914REIDisplay> {
 
     override fun getIcon(): Renderer = EntryStacks.of(SCP914ControllerBlock.ITEM)
 
-    override fun getTitle() = TranslatableText("category.rei.scp914")
+    override fun getTitle(): Text = Text.translatable("category.rei.scp914")
 
     override fun getCategoryIdentifier() = identifier
 

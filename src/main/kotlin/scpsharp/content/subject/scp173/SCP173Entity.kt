@@ -96,7 +96,6 @@ class SCP173AttackGoal(mob: SCP173Entity) : AttackGoal(mob) {
             if (cooldown <= 3) {
                 cooldown = 10
                 mob.tryAttack(target)
-                @Suppress("CAST_NEVER_SUCCEEDS")
                 mob.playSound(SCP173.ROTATE_SOUND, 1.0f, 0.5f)
             }
         }

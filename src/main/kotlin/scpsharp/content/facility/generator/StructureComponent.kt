@@ -5,8 +5,8 @@
  */
 package scpsharp.content.facility.generator
 
-import net.minecraft.structure.Structure
 import net.minecraft.structure.StructurePlacementData
+import net.minecraft.structure.StructureTemplate
 import net.minecraft.util.BlockMirror
 import net.minecraft.util.BlockRotation
 import net.minecraft.util.Identifier
@@ -16,7 +16,7 @@ import net.minecraft.util.math.Direction
 import scpsharp.util.asBlockRotation
 
 open class StructureComponent(
-    val structure: Structure,
+    val structure: StructureTemplate,
     private val placementData: StructurePlacementData,
     pos: BlockPos,
     override val refs: Array<ComponentRef<*>>,
@@ -46,7 +46,7 @@ class StructureComponentFactory(
         depth: Int
     ): StructureComponent =
         StructureComponent(
-            generator.world.structureManager.getStructure(structureId)
+            generator.world.structureTemplateManager.getTemplate(structureId)
                 .orElseThrow { IllegalArgumentException("Structure with id $structureId not found") },
             StructurePlacementData()
                 .setRandom(generator.random)

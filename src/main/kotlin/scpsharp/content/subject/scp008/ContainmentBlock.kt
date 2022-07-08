@@ -5,9 +5,9 @@
  */
 package scpsharp.content.subject.scp008
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
@@ -20,11 +20,11 @@ import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import scpsharp.content.subject.SCPSubjects
 import scpsharp.util.id
-import java.util.*
 
 object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.METAL)) {
 
@@ -70,9 +70,9 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
             for (i in 0..random.nextInt(10)) {
                 world.addParticle(
                     ParticleTypes.CLOUD,
-                    pos.x - 0.5 + random.nextFloat(2.0f),
+                    pos.x - 0.5 + (random.nextFloat() * 2.0f),
                     pos.y + 0.7 + random.nextFloat(),
-                    pos.z - 0.5 + random.nextFloat(2.0f),
+                    pos.z - 0.5 + (random.nextFloat() * 2.0f),
                     0.0, 0.0, 0.0
                 )
             }

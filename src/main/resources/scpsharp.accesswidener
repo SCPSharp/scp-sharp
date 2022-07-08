@@ -9,5 +9,3 @@ accessible method net/minecraft/entity/damage/DamageSource setUnblockable ()Lnet
 accessible method net/minecraft/entity/damage/DamageSource setBypassesArmor ()Lnet/minecraft/entity/damage/DamageSource;
 # Facility Component Generator
 accessible field net/minecraft/util/registry/Registry ROOT Lnet/minecraft/util/registry/MutableRegistry;
-# Site-63 Feature
-accessible method net/minecraft/world/biome/Biome getCategory ()Lnet/minecraft/world/biome/Biome$Category;

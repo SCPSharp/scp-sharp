@@ -7,6 +7,7 @@ package scpsharp.content.facility.site63
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase
+import net.minecraft.tag.BiomeTags
 import net.minecraft.util.registry.BuiltinRegistries
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.biome.Biome
@@ -48,8 +49,9 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
         BiomeModifications.create(IDENTIFIER)
             .add(ModificationPhase.ADDITIONS, { context ->
                 context.canGenerateIn(DimensionOptions.OVERWORLD)
-                        && context.biome.category != Biome.Category.RIVER
-                        && context.biome.category != Biome.Category.OCEAN
+                        && !context.hasTag(BiomeTags.IS_RIVER)
+                        && !context.hasTag(BiomeTags.IS_OCEAN)
+                        && !context.hasTag(BiomeTags.IS_DEEP_OCEAN)
                         && context.biomeKey.value.namespace == "minecraft"
                         && BuiltinRegistries.BIOME.containsId(context.biomeKey.value)
             }) { context ->

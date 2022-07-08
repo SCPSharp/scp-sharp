@@ -7,10 +7,8 @@
 
 package scpsharp.content.subject.scp914
 
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
-import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
@@ -23,7 +21,7 @@ import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
-import net.minecraft.text.TranslatableText
+import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Hand
 import net.minecraft.util.Rarity
@@ -32,10 +30,12 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
+import net.minecraft.util.math.random.Random
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
-import java.util.*
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.id
 import kotlin.math.abs
 
 object SCP914FrameworkBlock : Block(
@@ -175,9 +175,9 @@ object SCP914ControllerBlock : Block(
         }
         world.setBlockState(pos, state.cycle(SCP914.MODE_PROPERTY))
         player.sendMessage(
-            TranslatableText(
+            Text.translatable(
                 "scpsharp.scp914.switched",
-                TranslatableText("scpsharp.scp914.mode.${state.cycle(SCP914.MODE_PROPERTY)[SCP914.MODE_PROPERTY].asString()}")
+                Text.translatable("scpsharp.scp914.mode.${state.cycle(SCP914.MODE_PROPERTY)[SCP914.MODE_PROPERTY].asString()}")
             ), true
         )
         return ActionResult.SUCCESS

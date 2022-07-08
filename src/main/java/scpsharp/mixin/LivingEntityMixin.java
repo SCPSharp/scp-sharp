@@ -8,7 +8,7 @@ package scpsharp.mixin;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -32,7 +32,7 @@ public class LivingEntityMixin {
                     if (thisEntity instanceof PlayerEntity thisPlayer
                             && (!(thisEntity instanceof ServerPlayerEntity)
                             || ((ServerPlayerEntity) thisEntity).networkHandler != null)) {
-                        thisPlayer.sendMessage(new TranslatableText("scpsharp.scp714.wake_up_suppressed"), true);
+                        thisPlayer.sendMessage(Text.translatable("scpsharp.scp714.wake_up_suppressed"), true);
                     }
                     info.cancel();
                 }
