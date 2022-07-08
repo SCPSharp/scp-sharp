@@ -9,4 +9,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'SCPSharp'
+rootProject.name = 'scp-sharp'
