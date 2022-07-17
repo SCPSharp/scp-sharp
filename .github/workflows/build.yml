@@ -31,6 +31,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('*.gradle') }}-gradle-user-home
 
       - name: Build
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
           chmod +x ./gradlew
           ./gradlew licenseFormat build
