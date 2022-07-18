@@ -16,6 +16,7 @@
   "license": "CC-BY-SA-4.0",
   "icon": "assets/scpsharp/icon.png",
   "environment": "*",
+  "accessWidener": "scp-sharp.accesswidener",
   "entrypoints": {
     "main": [
       {
@@ -47,7 +48,7 @@
     ]
   },
   "mixins": [
-    "scpsharp.mixins.json"
+    "scp-sharp.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",
