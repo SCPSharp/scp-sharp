@@ -26,7 +26,7 @@ public class LivingEntityMixin {
     )
     public void wakeUp(CallbackInfo info) {
         var thisEntity = (LivingEntity) (Object) this;
-        for (var stack : thisEntity.getItemsHand()) {
+        for (var stack : thisEntity.getHandItems()) {
             if (stack.getItem() instanceof SCP714Item) {
                 if (thisEntity.getAttacker() != null && !thisEntity.getType().isIn(SCP714.INSTANCE.getBYPASS_TAG())) {
                     if (thisEntity instanceof PlayerEntity thisPlayer

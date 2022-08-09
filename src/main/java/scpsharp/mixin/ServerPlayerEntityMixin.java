@@ -34,8 +34,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity {
             cancellable = true
     )
     public void trySleep(BlockPos pos, CallbackInfoReturnable<Either<SleepFailureReason, Unit>> info) {
-        var thisEntity = (ServerPlayerEntityMixin) this;
-        for (var stack : getItemsHand()) {
+        for (var stack : getHandItems()) {
             if (stack.getItem() instanceof SCP714Item) {
                 incrementStat(SCP714.INSTANCE.getSLEEP_WITH_STAT());
                 info.setReturnValue(super.trySleep(pos));
