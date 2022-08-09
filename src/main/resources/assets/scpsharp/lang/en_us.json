@@ -5,7 +5,7 @@
   "block.scpsharp.scp914_framework": "SCP-914",
   "category.rei.scp914": "SCP-914 Processing",
   "death.attack.scp008": "%1$s was dead because of SCP-008 infections",
-  "effect.scpsharp.scp008_infected": "SCP-008 infection",
+  "effect.scpsharp.scp008_infected": "SCP-008 Infection",
   "entity.scpsharp.scp173": "SCP-173",
   "item.scpsharp.scp005": "SCP-005",
   "item.scpsharp.scp173_spawn_egg": "SCP-173 Spawn Egg",
