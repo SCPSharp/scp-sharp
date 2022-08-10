@@ -5,7 +5,6 @@
  */
 package scpsharp.content.subject.scp008
 
-import scpsharp.util.id
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
@@ -16,6 +15,7 @@ import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.tag.TagKey
 import net.minecraft.util.registry.Registry
+import scpsharp.util.id
 
 object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b) {
 
@@ -30,7 +30,7 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     }
 
     fun infect(entity: LivingEntity, source: Entity? = null) {
-        if (!entity.type.isIn(BYPASS_TAG)) {
+        if (!entity.type.isIn(BYPASS_TAG) && !AntiSCP008Suit.isWoreFully(entity)) {
             SCP008.LOGGER.info("$entity infected SCP-008 because of $source")
             entity.addStatusEffect(
                 StatusEffectInstance(SCP008StatusEffect, 20 * (563 + entity.world.random.nextInt(50))),
@@ -44,7 +44,7 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     override fun applyUpdateEffect(entity: LivingEntity, amplifier: Int) {
         if (!entity.world.isClient) {
             SCP008.LOGGER.info("Killing $entity")
-            if(entity is PlayerEntity){
+            if (entity is PlayerEntity) {
                 entity.incrementStat(SCP008.DYING_STAT)
             }
             entity.damage(DAMAGE_SOURCE, Float.MAX_VALUE)

@@ -22,6 +22,7 @@ object SCP008 {
     init {
         SCP008ContainmentBlock
         SCP008StatusEffect
+        AntiSCP008Suit
 
         Registry.register(Registry.CUSTOM_STAT, INFECTING_STAT, INFECTING_STAT)
         Stats.CUSTOM.getOrCreateStat(INFECTING_STAT, StatFormatter.DEFAULT)
