@@ -5,6 +5,7 @@
  */
 package scpsharp.mixin;
 
+import kotlin.collections.CollectionsKt;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTracker;
@@ -21,7 +22,7 @@ import scpsharp.content.subject.scp008.SCP008;
 import scpsharp.content.subject.scp008.SCP008ContainmentBlockEntity;
 import scpsharp.content.subject.scp008.SCP008StatusEffect;
 
-import java.util.LinkedHashSet;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Mixin(DamageTracker.class)
@@ -37,23 +38,25 @@ public abstract class DamageTrackerMixin {
     )
     public void onDamage(DamageSource damageSource, float originalHealth, float damage, CallbackInfo info) {
         // Infect SCP-008 from containment block
-        var chunks = new LinkedHashSet<WorldChunk>();
-        chunks.add(getEntity().getWorld().getWorldChunk(getEntity().getBlockPos().add(6, 0, -6)));
-        chunks.add(getEntity().getWorld().getWorldChunk(getEntity().getBlockPos().add(6, 0, 6)));
-        chunks.add(getEntity().getWorld().getWorldChunk(getEntity().getBlockPos().add(-6, 0, -6)));
-        chunks.add(getEntity().getWorld().getWorldChunk(getEntity().getBlockPos().add(-6, 0, 6)));
-        chunks.stream()
-                .flatMap((chunk) -> chunk.getBlockEntities().values().stream())
-                .filter((entity) -> entity instanceof SCP008ContainmentBlockEntity)
-                .filter((entity) -> entity.getPos().getSquaredDistance(getEntity().getBlockPos()) <= 6 * 6)
-                .filter((entity) -> Objects.requireNonNull(entity.getWorld()).getBlockState(entity.getPos()).get(Properties.OPEN))
-                .forEach((entity) -> {
-                    SCP008.INSTANCE.getLOGGER().info(getEntity() + " got " + damageSource + " x" + damage + " and getting infected from a open containment box at " + entity.getPos());
-                    if (getEntity() != null && getEntity() instanceof PlayerEntity playerEntity) {
-                        playerEntity.incrementStat(SCP008.INSTANCE.getINFECTING_STAT());
-                    }
-                    SCP008StatusEffect.INSTANCE.infect(getEntity(), damageSource.getSource());
-                });
+        var world = getEntity().getWorld();
+        var chunks = new WorldChunk[]{
+                world.getWorldChunk(getEntity().getBlockPos().add(6, 0, 6)),
+                world.getWorldChunk(getEntity().getBlockPos().add(6, 0, -6)),
+                world.getWorldChunk(getEntity().getBlockPos().add(-6, 0, 6)),
+                world.getWorldChunk(getEntity().getBlockPos().add(-6, 0, -6)),
+        };
+        var entities = CollectionsKt.flatMap(Arrays.asList(chunks), (chunk) -> chunk.getBlockEntities().values());
+        entities = CollectionsKt.filter(entities, (entity) -> entity instanceof SCP008ContainmentBlockEntity);
+        entities = CollectionsKt.filter(entities, (entity) -> entity.getPos().getSquaredDistance(getEntity().getBlockPos()) <= 6 * 6);
+        entities = CollectionsKt.filter(entities, (entity) -> Objects.requireNonNull(entity.getWorld()).getBlockState(entity.getPos()).get(Properties.OPEN));
+        for (var entity : entities) {
+            SCP008.INSTANCE.getLOGGER().info(getEntity() + " got " + damageSource + " x" + damage + " and getting infected from a open containment box at " + entity.getPos());
+            if (getEntity() != null && getEntity() instanceof PlayerEntity playerEntity) {
+                playerEntity.incrementStat(SCP008.INSTANCE.getINFECTING_STAT());
+            }
+            SCP008StatusEffect.INSTANCE.infect(getEntity(), damageSource.getSource());
+            return;
+        }
     }
 
 }
