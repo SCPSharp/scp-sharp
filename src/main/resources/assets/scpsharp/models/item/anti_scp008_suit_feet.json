@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "scpsharp:item/scp427_closed"
+    "layer0": "scpsharp:item/anti_scp008_suit_feet"
   }
 }
