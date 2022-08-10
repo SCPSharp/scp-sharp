@@ -36,7 +36,7 @@ dependencies {
     modImplementation 'net.fabricmc:fabric-language-kotlin:1.8.2+kotlin.1.7.10'
 
     modImplementation 'com.terraformersmc:modmenu:4.0.6'
-    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.520'
+    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.524'
     // @TODO: Architectury mixin application failed
     //modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:9.1.520'
 }
