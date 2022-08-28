@@ -20,6 +20,6 @@ jobs:
           days-before-close: 7
           stale-issue-label: "status: stale"
           stale-pr-label: "status: stale"
-          exempt-issue-labels: "status: stale"
-          exempt-pr-labels: "status: stale"
+          exempt-issue-labels: "flag: long"
+          exempt-pr-labels: "flag: long"
           exempt-draft-pr: true
