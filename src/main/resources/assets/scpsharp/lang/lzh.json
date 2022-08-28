@@ -1,6 +1,6 @@
 {
-  "block.scpsharp.card_reader": "阅卡之器",
-  "block.scpsharp.scp008_containment": "容SCP-008于此箱",
+  "block.scpsharp.card_reader": "讀卡器",
+  "block.scpsharp.scp008_containment": "SCP-008收容箱",
   "block.scpsharp.scp914_controller": "異常914控製器",
   "block.scpsharp.scp914_framework": "異常914",
   "category.rei.scp914": "異常914加工",
