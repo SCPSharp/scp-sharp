@@ -54,7 +54,7 @@
   ],
   "depends": {
     "fabricloader": "*",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": "1.19.x",
     "java": "*",
     "fabric-language-kotlin": "*"
