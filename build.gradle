@@ -33,8 +33,17 @@ dependencies {
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:9.1.541'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+indra {
+    javaVersions {
+        target 17
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+}
 
 loom {
     accessWidenerPath.set file("src/main/resources/scp-sharp.accesswidener")
@@ -49,16 +58,6 @@ processResources {
     filesMatching('fabric.mod.json') {
         expand 'version': project.version,
                 'fullVersion': "${indraGit.describe()}-$project.version"
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.release.set 17
-}
-
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = '17'
     }
 }
 
