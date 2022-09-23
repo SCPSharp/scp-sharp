@@ -1,12 +1,4 @@
-import org.apache.commons.io.FileUtils
-
 import java.nio.charset.StandardCharsets
-
-buildscript {
-    dependencies {
-        classpath 'commons-io:commons-io:2.11.0'
-    }
-}
 
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
@@ -113,7 +105,7 @@ modrinth {
     gameVersions = [ project.minecraft_version ]
     dependencies = []
 
-    syncBodyFrom = FileUtils.readFileToString(rootProject.file('README.md'), StandardCharsets.UTF_8)
+    syncBodyFrom = new String(rootProject.file('README.md').readBytes(), StandardCharsets.UTF_8)
 }
 
 tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
