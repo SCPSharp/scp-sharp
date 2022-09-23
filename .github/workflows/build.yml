@@ -35,10 +35,10 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         run: |
           chmod +x ./gradlew
-          ./gradlew licenseFormat build
+          ./gradlew spotlessApply build
           git config --global user.email action@github.com
           git config --global user.name github-actions
-          git commit -m "style(license): format license header" -a || true
+          git commit -m "style(license): format license header [ci skip]" -a || true
           git push || true
 
       - name: Publish
