@@ -5,7 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.20'
     id 'net.kyori.indra' version '2.2.0'
     id 'net.kyori.indra.licenser.spotless' version '2.2.0'
-    id 'net.kyori.indra.git' version '2.2.0'
+    id 'net.kyori.indra.git' version '3.0.1'
     id 'com.modrinth.minotaur' version '2.4.4'
     id 'maven-publish'
 }
