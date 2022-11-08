@@ -29,7 +29,7 @@ dependencies {
     modImplementation 'net.fabricmc:fabric-language-kotlin:1.8.4+kotlin.1.7.20'
 
     modImplementation 'com.terraformersmc:modmenu:4.0.6'
-    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.541'
+    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.568'
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:9.1.541'
     modRuntimeOnly 'dev.architectury:architectury-fabric:6.2.46' // for REI
 }
