@@ -31,7 +31,7 @@ dependencies {
     modImplementation 'com.terraformersmc:modmenu:4.0.6'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:9.1.541'
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:9.1.541'
-    modRuntimeOnly 'dev.architectury:architectury-fabric:6.2.46' // for REI
+    modRuntimeOnly 'dev.architectury:architectury-fabric:7.0.64' // for REI
 }
 
 indra {
