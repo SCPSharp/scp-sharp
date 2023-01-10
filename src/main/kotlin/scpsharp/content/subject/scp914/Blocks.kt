@@ -17,6 +17,8 @@ import net.minecraft.inventory.SimpleInventory
 import net.minecraft.item.BlockItem
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.sound.SoundCategory
 import net.minecraft.state.StateManager
@@ -31,10 +33,10 @@ import net.minecraft.util.math.Box
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
 import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
 import scpsharp.util.id
 import kotlin.math.abs
 
@@ -46,7 +48,7 @@ object SCP914FrameworkBlock : Block(
     val IDENTIFIER = id("scp914_framework")
 
     init {
-        Registry.register(Registry.BLOCK, IDENTIFIER, SCP914FrameworkBlock)
+        Registry.register(Registries.BLOCK, IDENTIFIER, SCP914FrameworkBlock)
     }
 
 }
@@ -59,13 +61,13 @@ object SCP914ControllerBlock : Block(
     val IDENTIFIER = id("scp914_controller")
     val ITEM = BlockItem(
         SCP914ControllerBlock, FabricItemSettings()
-            .group(SCPSubjects.ITEM_GROUP)
             .rarity(Rarity.UNCOMMON)
     )
 
     init {
-        Registry.register(Registry.BLOCK, IDENTIFIER, SCP914ControllerBlock)
-        Registry.register(Registry.ITEM, IDENTIFIER, ITEM)
+        Registry.register(Registries.BLOCK, IDENTIFIER, SCP914ControllerBlock)
+        Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
+        SCPSubjects.ITEM_GROUP.addItem(ITEM)
         defaultState = defaultState.with(SCP914.MODE_PROPERTY, SCP914Mode.NORMAL)
             .with(Properties.POWERED, false)
             .with(Properties.AGE_3, 0)
@@ -106,9 +108,9 @@ object SCP914ControllerBlock : Block(
             }
         } else {
             when (newState[Properties.AGE_3]) {
-                1 -> world.createAndScheduleBlockTick(pos, this, 30) // Closing door
-                2 -> world.createAndScheduleBlockTick(pos, this, 10) // Activating
-                3 -> world.createAndScheduleBlockTick(pos, this, 30) // Opening door
+                1 -> world.scheduleBlockTick(pos, this, 30) // Closing door
+                2 -> world.scheduleBlockTick(pos, this, 10) // Activating
+                3 -> world.scheduleBlockTick(pos, this, 30) // Opening door
             }
         }
     }
@@ -216,11 +218,13 @@ object SCP914ControllerBlock : Block(
                 SCP914.LOGGER.info("Door of $pos closed")
                 world.setBlockState(pos, state.with(Properties.AGE_3, 2))
             }
+
             2 -> {
                 world.playSound(null, pos, SCP914.WORK_SOUND_EVENT, SoundCategory.MASTER, 1.0f, 1.0f)
                 activate(state, world, pos)
                 world.setBlockState(pos, state.with(Properties.AGE_3, 3))
             }
+
             3 -> {
                 openDoor(state, world, pos)
                 SCP914.LOGGER.info("Door of $pos open")

@@ -5,7 +5,9 @@
  */
 package scpsharp.content.misc
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
+import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import scpsharp.content.misc.permission.SCPPermission
@@ -14,7 +16,7 @@ import scpsharp.util.id
 
 object SCPMisc {
 
-    val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder.create(id("scp_misc"))
+    val ITEM_GROUP: ItemGroup = FabricItemGroup.builder(id("scp_misc"))
         .icon { ItemStack(CardReaderBlock.ITEM) }
         .build()
 

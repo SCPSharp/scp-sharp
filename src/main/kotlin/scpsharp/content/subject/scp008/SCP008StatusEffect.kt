@@ -13,8 +13,10 @@ import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
-import net.minecraft.tag.TagKey
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import scpsharp.util.id
 
 object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b) {
@@ -23,10 +25,10 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     val DAMAGE_SOURCE: DamageSource = DamageSource("scp008")
         .setBypassesArmor()
         .setUnblockable()
-    val BYPASS_TAG: TagKey<EntityType<*>> = TagKey.of(Registry.ENTITY_TYPE_KEY, id("scp008_bypass"))
+    val BYPASS_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("scp008_bypass"))
 
     init {
-        Registry.register(Registry.STATUS_EFFECT, IDENTIFIER, this)
+        Registry.register(Registries.STATUS_EFFECT, IDENTIFIER, this)
     }
 
     fun infect(entity: LivingEntity, source: Entity? = null) {

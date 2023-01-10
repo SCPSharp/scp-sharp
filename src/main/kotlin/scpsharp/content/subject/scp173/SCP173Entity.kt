@@ -18,11 +18,13 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer
 import net.minecraft.entity.attribute.EntityAttributes
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.SpawnEggItem
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Rarity
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import scpsharp.content.subject.SCPEntity
 import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
 import scpsharp.util.id
 
 class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCPEntity(entityType, world) {
@@ -41,14 +43,14 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : SCP
             .build()
         val EGG_ITEM_IDENTIFIER = id("scp173_spawn_egg")
         val EGG_ITEM = SpawnEggItem(
-            TYPE, 0xa87550, 0x825b3f, FabricItemSettings()
-                .group(SCPSubjects.ITEM_GROUP)
-                .rarity(Rarity.UNCOMMON)
+            TYPE, 0xa87550, 0x825b3f,
+            FabricItemSettings().rarity(Rarity.UNCOMMON)
         )
 
         init {
-            Registry.register(Registry.ENTITY_TYPE, IDENTIFIER, TYPE)
-            Registry.register(Registry.ITEM, EGG_ITEM_IDENTIFIER, EGG_ITEM)
+            Registry.register(Registries.ENTITY_TYPE, IDENTIFIER, TYPE)
+            Registry.register(Registries.ITEM, EGG_ITEM_IDENTIFIER, EGG_ITEM)
+            SCPSubjects.ITEM_GROUP.addItem(EGG_ITEM)
             FabricDefaultAttributeRegistry.register(TYPE, createAttributes())
         }
 

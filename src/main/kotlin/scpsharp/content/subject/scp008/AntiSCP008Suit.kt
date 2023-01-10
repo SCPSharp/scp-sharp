@@ -12,29 +12,35 @@ import net.minecraft.item.ArmorItem
 import net.minecraft.item.ArmorMaterial
 import net.minecraft.item.Items
 import net.minecraft.recipe.Ingredient
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
-import net.minecraft.util.registry.Registry
 import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
 import scpsharp.util.id
 
 
 object AntiSCP008Suit : ArmorMaterial {
 
-    val HELMET = ArmorItem(this, EquipmentSlot.HEAD, FabricItemSettings().group(SCPSubjects.ITEM_GROUP))
+    val HELMET = ArmorItem(this, EquipmentSlot.HEAD, FabricItemSettings())
     val HELMET_ID = id("anti_scp008_suit_helmet")
-    val CHEST = ArmorItem(this, EquipmentSlot.CHEST, FabricItemSettings().group(SCPSubjects.ITEM_GROUP))
+    val CHEST = ArmorItem(this, EquipmentSlot.CHEST, FabricItemSettings())
     val CHEST_ID = id("anti_scp008_suit_chest")
-    val LEGS = ArmorItem(this, EquipmentSlot.LEGS, FabricItemSettings().group(SCPSubjects.ITEM_GROUP))
+    val LEGS = ArmorItem(this, EquipmentSlot.LEGS, FabricItemSettings())
     val LEGS_ID = id("anti_scp008_suit_legs")
-    val FEET = ArmorItem(this, EquipmentSlot.FEET, FabricItemSettings().group(SCPSubjects.ITEM_GROUP))
+    val FEET = ArmorItem(this, EquipmentSlot.FEET, FabricItemSettings())
     val FEET_ID = id("anti_scp008_suit_feet")
 
     init {
-        Registry.register(Registry.ITEM, HELMET_ID, HELMET)
-        Registry.register(Registry.ITEM, CHEST_ID, CHEST)
-        Registry.register(Registry.ITEM, LEGS_ID, LEGS)
-        Registry.register(Registry.ITEM, FEET_ID, FEET)
+        Registry.register(Registries.ITEM, HELMET_ID, HELMET)
+        SCPSubjects.ITEM_GROUP.addItem(HELMET)
+        Registry.register(Registries.ITEM, CHEST_ID, CHEST)
+        SCPSubjects.ITEM_GROUP.addItem(CHEST)
+        Registry.register(Registries.ITEM, LEGS_ID, LEGS)
+        SCPSubjects.ITEM_GROUP.addItem(LEGS)
+        Registry.register(Registries.ITEM, FEET_ID, FEET)
+        SCPSubjects.ITEM_GROUP.addItem(FEET)
     }
 
     override fun getDurability(slot: EquipmentSlot) = 195

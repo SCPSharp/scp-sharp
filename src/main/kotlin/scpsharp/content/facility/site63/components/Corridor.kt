@@ -6,10 +6,10 @@
 package scpsharp.content.facility.site63.components
 
 import net.minecraft.block.Blocks
+import net.minecraft.registry.Registry
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.Registry
 import scpsharp.content.facility.generator.*
 import scpsharp.util.BlockBox
 import scpsharp.util.id

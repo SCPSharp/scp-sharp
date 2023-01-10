@@ -6,11 +6,12 @@
 package scpsharp.content.facility.generator
 
 import com.mojang.serialization.Lifecycle
-import net.minecraft.tag.TagKey
+import net.minecraft.registry.*
+import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.*
 import scpsharp.util.id
 import java.util.function.Predicate
 import java.util.stream.Stream
@@ -63,12 +64,12 @@ abstract class ComponentFactory<T : Component> {
     companion object {
 
         val REGISTRY_ID = id("worldgen/scpsharp_facility_component")
-        val REGISTRY_KEY: RegistryKey<Registry<ComponentFactory<*>>> = RegistryKey.ofRegistry<ComponentFactory<*>>(REGISTRY_ID)
-        val REGISTRY = SimpleRegistry(REGISTRY_KEY, Lifecycle.stable(), ComponentFactory<*>::registryEntry)
+        val REGISTRY_KEY: RegistryKey<Registry<ComponentFactory<*>>> = RegistryKey.ofRegistry(REGISTRY_ID)
+        val REGISTRY = SimpleRegistry(REGISTRY_KEY, Lifecycle.stable(), true)
 
         init {
             @Suppress("UNCHECKED_CAST")
-            Registry.ROOT.add(REGISTRY_KEY as RegistryKey<MutableRegistry<*>>, REGISTRY, REGISTRY.lifecycle)
+            Registries.ROOT.add(REGISTRY_KEY as RegistryKey<MutableRegistry<*>>, REGISTRY, REGISTRY.lifecycle)
         }
 
     }
@@ -92,7 +93,7 @@ abstract class ComponentFactory<T : Component> {
         maxTries: Int = 2,
         maxDepth: Int = 16
     ): T? {
-        if(depth >= maxDepth) {
+        if (depth >= maxDepth) {
             return null
         }
         for (i in 0 until maxTries) {

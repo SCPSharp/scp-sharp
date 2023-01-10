@@ -5,8 +5,6 @@
  */
 package scpsharp.content.subject.scp427
 
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -15,15 +13,18 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.Box
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
+import scpsharp.util.id
 
 class SCP427Item private constructor(val open: Boolean) : Item(
     FabricItemSettings()
-        .group(SCPSubjects.ITEM_GROUP)
         .fireproof()
         .maxCount(1)
 ) {
@@ -36,8 +37,10 @@ class SCP427Item private constructor(val open: Boolean) : Item(
         val OPEN_ITEM = SCP427Item(open = true)
 
         init {
-            Registry.register(Registry.ITEM, CLOSED_IDENTIFIER, CLOSED_ITEM)
-            Registry.register(Registry.ITEM, OPEN_IDENTIFIER, OPEN_ITEM)
+            Registry.register(Registries.ITEM, CLOSED_IDENTIFIER, CLOSED_ITEM)
+            SCPSubjects.ITEM_GROUP.addItem(CLOSED_ITEM)
+            Registry.register(Registries.ITEM, OPEN_IDENTIFIER, OPEN_ITEM)
+            SCPSubjects.ITEM_GROUP.addItem(OPEN_ITEM)
         }
 
     }

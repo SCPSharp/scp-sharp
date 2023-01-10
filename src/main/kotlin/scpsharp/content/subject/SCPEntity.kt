@@ -7,8 +7,8 @@ package scpsharp.content.subject
 
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.mob.PathAwareEntity
-import net.minecraft.tag.TagKey
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.World
 import scpsharp.util.id
 
@@ -16,9 +16,9 @@ open class SCPEntity(entityType: EntityType<out SCPEntity>, world: World) : Path
 
     companion object {
 
-        val SUBJECT_TAG: TagKey<EntityType<*>> = TagKey.of(Registry.ENTITY_TYPE_KEY, id("scp_subject"))
+        val SUBJECT_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("scp_subject"))
 
-        val IGNORE_TAG: TagKey<EntityType<*>> = TagKey.of(Registry.ENTITY_TYPE_KEY, id("scp_ignore"))
+        val IGNORE_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("scp_ignore"))
 
     }
 

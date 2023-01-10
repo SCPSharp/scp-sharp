@@ -5,6 +5,9 @@
  */
 package scpsharp.content.subject
 
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
+import net.minecraft.item.ItemGroup
+import net.minecraft.item.ItemStack
 import scpsharp.content.subject.scp005.SCP005
 import scpsharp.content.subject.scp008.SCP008
 import scpsharp.content.subject.scp008.SCP008Client
@@ -16,13 +19,10 @@ import scpsharp.content.subject.scp714.SCP714
 import scpsharp.content.subject.scp914.SCP914
 import scpsharp.content.subject.scp914.SCP914ControllerBlock
 import scpsharp.util.id
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
-import net.minecraft.item.ItemGroup
-import net.minecraft.item.ItemStack
 
 object SCPSubjects {
 
-    val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder.create(id("scp_subjects"))
+    val ITEM_GROUP: ItemGroup = FabricItemGroup.builder(id("scp_subjects"))
         .icon { ItemStack(SCP914ControllerBlock.ITEM) }
         .build()
 

@@ -10,12 +10,12 @@ import net.minecraft.block.BlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.SpawnReason
+import net.minecraft.registry.entry.RegistryEntry
+import net.minecraft.registry.tag.TagKey
 import net.minecraft.server.world.ServerChunkManager
 import net.minecraft.server.world.ServerWorld
-import net.minecraft.tag.TagKey
 import net.minecraft.util.math.*
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.RegistryEntry
 import net.minecraft.world.Heightmap
 import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.chunk.ChunkGenerator
@@ -143,6 +143,6 @@ class FacilityGenerator(
     fun spawnEntity(entity: Entity) = access.spawnEntity(entity)
 
     fun spawnEntity(type: EntityType<*>, pos: BlockPos) =
-        access.spawnEntity(type.spawn(world, null, null, null, pos, SpawnReason.CHUNK_GENERATION, false, false))
+        access.spawnEntity(type.spawn(world, pos, SpawnReason.CHUNK_GENERATION))
 
 }

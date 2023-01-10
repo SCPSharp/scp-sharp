@@ -8,4 +8,4 @@ accessible method net/minecraft/entity/damage/DamageSource <init> (Ljava/lang/St
 accessible method net/minecraft/entity/damage/DamageSource setUnblockable ()Lnet/minecraft/entity/damage/DamageSource;
 accessible method net/minecraft/entity/damage/DamageSource setBypassesArmor ()Lnet/minecraft/entity/damage/DamageSource;
 # Facility Component Generator
-accessible field net/minecraft/util/registry/Registry ROOT Lnet/minecraft/util/registry/MutableRegistry;
+accessible field net/minecraft/registry/Registries ROOT Lnet/minecraft/registry/MutableRegistry;

@@ -6,14 +6,15 @@
 package scpsharp.content.subject.scp914
 
 import com.google.gson.JsonObject
-import scpsharp.util.id
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.*
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.util.id
 
 data class SCP914Recipe(
     private val id: Identifier,
@@ -27,10 +28,11 @@ data class SCP914Recipe(
 
         val TYPE: RecipeType<SCP914Recipe> = RecipeType.register<SCP914Recipe>("scpsharp:scp914_processing")
 
-        val SERIALIZER: Serializer = Registry.register(Registry.RECIPE_SERIALIZER, id("scp914_processing"), Serializer())
+        val SERIALIZER: Serializer =
+            Registry.register(Registries.RECIPE_SERIALIZER, id("scp914_processing"), Serializer())
 
         val SIMPLE_SERIALIZER =
-            Registry.register(Registry.RECIPE_SERIALIZER, id("scp914_processing_simple"), SimpleSerializer())
+            Registry.register(Registries.RECIPE_SERIALIZER, id("scp914_processing_simple"), SimpleSerializer())
 
     }
 
@@ -90,8 +92,8 @@ data class SCP914Recipe(
     open class SimpleSerializer : Serializer() {
 
         override fun read(id: Identifier, json: JsonObject): SCP914Recipe {
-            val sourceItem = Registry.ITEM.get(Identifier(json["source"].asString))
-            val targetItem = Registry.ITEM.get(Identifier(json["target"].asString))
+            val sourceItem = Registries.ITEM.get(Identifier(json["source"].asString))
+            val targetItem = Registries.ITEM.get(Identifier(json["target"].asString))
             return SCP914Recipe(
                 id = id,
                 source = Ingredient.ofItems(sourceItem),

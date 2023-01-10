@@ -5,11 +5,12 @@
  */
 package scpsharp.content.subject.scp008
 
-import scpsharp.util.id
-import scpsharp.util.logger
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.stat.StatFormatter
 import net.minecraft.stat.Stats
-import net.minecraft.util.registry.Registry
+import scpsharp.util.id
+import scpsharp.util.logger
 
 object SCP008 {
 
@@ -24,9 +25,9 @@ object SCP008 {
         SCP008StatusEffect
         AntiSCP008Suit
 
-        Registry.register(Registry.CUSTOM_STAT, INFECTING_STAT, INFECTING_STAT)
+        Registry.register(Registries.CUSTOM_STAT, INFECTING_STAT, INFECTING_STAT)
         Stats.CUSTOM.getOrCreateStat(INFECTING_STAT, StatFormatter.DEFAULT)
-        Registry.register(Registry.CUSTOM_STAT, DYING_STAT, DYING_STAT)
+        Registry.register(Registries.CUSTOM_STAT, DYING_STAT, DYING_STAT)
         Stats.CUSTOM.getOrCreateStat(DYING_STAT, StatFormatter.DEFAULT)
     }
 

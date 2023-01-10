@@ -14,6 +14,8 @@ import net.minecraft.block.entity.BlockEntityType
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.BlockItem
 import net.minecraft.particle.ParticleTypes
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
@@ -21,25 +23,23 @@ import net.minecraft.util.Hand
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
 import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
 import scpsharp.util.id
 
 object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.METAL)) {
 
     val IDENTIFIER = id("scp008_containment")
-    val ITEM = BlockItem(
-        this, FabricItemSettings()
-            .group(SCPSubjects.ITEM_GROUP)
-    )
+    val ITEM = BlockItem(this, FabricItemSettings())
     val ENTITY_TYPE: BlockEntityType<SCP008ContainmentBlockEntity> =
         FabricBlockEntityTypeBuilder.create(::SCP008ContainmentBlockEntity, this).build()
 
     init {
-        Registry.register(Registry.BLOCK, IDENTIFIER, this)
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
-        Registry.register(Registry.ITEM, IDENTIFIER, ITEM)
+        Registry.register(Registries.BLOCK, IDENTIFIER, this)
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
+        Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
+        SCPSubjects.ITEM_GROUP.addItem(ITEM)
         defaultState = defaultState.with(Properties.OPEN, false)
     }
 

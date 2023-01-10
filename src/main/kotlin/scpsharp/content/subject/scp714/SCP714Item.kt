@@ -5,8 +5,6 @@
  */
 package scpsharp.content.subject.scp714
 
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.Entity
 import net.minecraft.entity.LivingEntity
@@ -15,12 +13,15 @@ import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.registry.Registry
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.world.World
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
+import scpsharp.util.id
 
 object SCP714Item : Item(
     FabricItemSettings()
-        .group(SCPSubjects.ITEM_GROUP)
         .fireproof()
         .maxCount(1)
 ) {
@@ -28,7 +29,8 @@ object SCP714Item : Item(
     val IDENTIFIER = id("scp714")
 
     init {
-        Registry.register(Registry.ITEM, IDENTIFIER, SCP714Item)
+        Registry.register(Registries.ITEM, IDENTIFIER, SCP714Item)
+        SCPSubjects.ITEM_GROUP.addItem(this)
     }
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {

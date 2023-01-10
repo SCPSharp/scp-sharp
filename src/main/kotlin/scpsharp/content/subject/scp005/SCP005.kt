@@ -5,19 +5,19 @@
  */
 package scpsharp.content.subject.scp005
 
+import net.minecraft.block.Block
+import net.minecraft.registry.RegistryKeys
+import net.minecraft.registry.tag.TagKey
 import scpsharp.util.id
 import scpsharp.util.logger
-import net.minecraft.block.Block
-import net.minecraft.tag.TagKey
-import net.minecraft.util.registry.Registry
 
 object SCP005 {
 
     val LOGGER = logger("SCP-005")
 
-    val BYPASS_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("scp005_bypass"))
+    val BYPASS_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id("scp005_bypass"))
 
-    val DOOR_FILTER_TAG: TagKey<Block> = TagKey.of(Registry.BLOCK_KEY, id("scp005_doors"))
+    val DOOR_FILTER_TAG: TagKey<Block> = TagKey.of(RegistryKeys.BLOCK, id("scp005_doors"))
 
     init {
         SCP005Item

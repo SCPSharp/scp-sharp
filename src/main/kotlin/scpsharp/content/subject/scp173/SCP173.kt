@@ -5,18 +5,19 @@
  */
 package scpsharp.content.subject.scp173
 
-import scpsharp.util.id
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.sound.SoundEvent
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.util.id
 
 object SCP173 {
 
-    val ROTATE_SOUND = SoundEvent(id("scp173_rotate"))
+    val ROTATE_SOUND: SoundEvent = SoundEvent.of(id("scp173_rotate"))
 
     init {
         SCP173Entity
-        Registry.register(Registry.SOUND_EVENT, ROTATE_SOUND.id, ROTATE_SOUND)
+        Registry.register(Registries.SOUND_EVENT, ROTATE_SOUND.id, ROTATE_SOUND)
     }
 
 }

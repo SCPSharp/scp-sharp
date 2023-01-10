@@ -5,8 +5,6 @@
  */
 package scpsharp.content.subject.scp500
 
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.util.id
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.effect.StatusEffectInstance
@@ -15,16 +13,19 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.FoodComponent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
-import net.minecraft.util.registry.Registry
 import net.minecraft.world.World
+import scpsharp.content.subject.SCPSubjects
+import scpsharp.util.addItem
+import scpsharp.util.id
 import kotlin.math.min
 import kotlin.random.Random
 
 object SCP5001Item : Item(
     FabricItemSettings()
-        .group(SCPSubjects.ITEM_GROUP)
         .fireproof()
         .maxCount(16)
         .food(
@@ -41,7 +42,8 @@ object SCP5001Item : Item(
     val IDENTIFIER = id("scp500")
 
     init {
-        Registry.register(Registry.ITEM, IDENTIFIER, SCP5001Item)
+        Registry.register(Registries.ITEM, IDENTIFIER, SCP5001Item)
+        SCPSubjects.ITEM_GROUP.addItem(this)
     }
 
     override fun finishUsing(stack: ItemStack, world: World, user: LivingEntity): ItemStack {
@@ -65,14 +67,14 @@ object SCP5001Item : Item(
 
 object SCP500JarItem : Item(
     FabricItemSettings()
-        .group(SCPSubjects.ITEM_GROUP)
         .maxDamage(5)
 ) {
 
     val IDENTIFIER = id("scp500_jar")
 
     init {
-        Registry.register(Registry.ITEM, IDENTIFIER, SCP500JarItem)
+        Registry.register(Registries.ITEM, IDENTIFIER, SCP500JarItem)
+        SCPSubjects.ITEM_GROUP.addItem(this)
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {

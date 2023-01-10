@@ -24,8 +24,8 @@ import scpsharp.content.subject.scp714.SCP714Item;
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin extends PlayerEntity {
 
-    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile, @Nullable PlayerPublicKey publicKey) {
-        super(world, pos, yaw, gameProfile, publicKey);
+    public ServerPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile gameProfile) {
+        super(world, pos, yaw, gameProfile);
     }
 
     @Inject(

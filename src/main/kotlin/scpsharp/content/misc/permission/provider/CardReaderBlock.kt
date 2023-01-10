@@ -7,9 +7,9 @@
 
 package scpsharp.content.misc.permission.provider
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.block.entity.BlockEntityType
@@ -24,6 +24,8 @@ import net.minecraft.nbt.NbtString
 import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.state.StateManager
 import net.minecraft.state.property.Properties
@@ -35,7 +37,6 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.random.Random
-import net.minecraft.util.registry.Registry
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
@@ -44,6 +45,7 @@ import scpsharp.content.misc.SCPMisc
 import scpsharp.content.misc.permission.SCPPermission
 import scpsharp.content.misc.permission.SCPPermissionCardItem
 import scpsharp.content.misc.permission.SCPPermissionEmitterBlock
+import scpsharp.util.addItem
 import scpsharp.util.id
 
 object CardReaderBlock : BlockWithEntity(
@@ -52,19 +54,16 @@ object CardReaderBlock : BlockWithEntity(
 ), SCPPermissionEmitterBlock {
 
     val IDENTIFIER = id("card_reader")
-    val ITEM = BlockItem(
-        this,
-        FabricItemSettings()
-            .group(SCPMisc.ITEM_GROUP)
-    )
+    val ITEM = BlockItem(this, FabricItemSettings())
     val ENTITY_TYPE: BlockEntityType<CardReaderBlockEntity> =
         FabricBlockEntityTypeBuilder.create(::CardReaderBlockEntity, this).build()
     val SHAPES: Map<BlockState, VoxelShape> = getShapesForStates(::createVoxelShape)
 
     init {
-        Registry.register(Registry.BLOCK, IDENTIFIER, this)
-        Registry.register(Registry.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
-        Registry.register(Registry.ITEM, IDENTIFIER, ITEM)
+        Registry.register(Registries.BLOCK, IDENTIFIER, this)
+        Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
+        Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
+        SCPMisc.ITEM_GROUP.addItem(ITEM)
 
         this.defaultState = defaultState.with(Properties.HORIZONTAL_FACING, Direction.WEST)
     }
@@ -84,21 +83,25 @@ object CardReaderBlock : BlockWithEntity(
                 createCuboidShape(14.0, 5.0, 6.0, 16.0, 11.0, 10.0),
                 BooleanBiFunction.OR
             )
+
             Direction.SOUTH -> VoxelShapes.combineAndSimplify(
                 createCuboidShape(9.0, 6.0, 2.0, 10.0, 10.0, 3.0),
                 createCuboidShape(6.0, 5.0, 0.0, 10.0, 11.0, 2.0),
                 BooleanBiFunction.OR
             )
+
             Direction.EAST -> VoxelShapes.combineAndSimplify(
                 createCuboidShape(2.0, 6.0, 6.0, 3.0, 10.0, 7.0),
                 createCuboidShape(0.0, 5.0, 6.0, 2.0, 11.0, 10.0),
                 BooleanBiFunction.OR
             )
+
             Direction.NORTH -> VoxelShapes.combineAndSimplify(
                 createCuboidShape(6.0, 6.0, 13.0, 7.0, 10.0, 14.0),
                 createCuboidShape(6.0, 5.0, 14.0, 10.0, 11.0, 16.0),
                 BooleanBiFunction.OR
             )
+
             else -> throw IllegalStateException(state[Properties.HORIZONTAL_FACING].name)
         }
 
@@ -108,7 +111,10 @@ object CardReaderBlock : BlockWithEntity(
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState = super.getDefaultState()
-        .with(Properties.HORIZONTAL_FACING, if(ctx.side.axis == Direction.Axis.Y) ctx.playerFacing.opposite else ctx.side)
+        .with(
+            Properties.HORIZONTAL_FACING,
+            if (ctx.side.axis == Direction.Axis.Y) ctx.playerFacing.opposite else ctx.side
+        )
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, itemStack: ItemStack) {
         super.onPlaced(world, pos, state, placer, itemStack)
@@ -151,7 +157,7 @@ object CardReaderBlock : BlockWithEntity(
                 blockEntity.markDirty()
                 SCPPermission.LOGGER.info("$player applied $item to card reader at $world $pos")
                 SCPPermission.updateDoubleNeighbors(world, pos)
-                world.createAndScheduleBlockTick(pos, this, 20 * 2)
+                world.scheduleBlockTick(pos, this, 20 * 2)
                 return ActionResult.SUCCESS
             }
         }

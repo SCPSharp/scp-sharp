@@ -41,6 +41,7 @@ indra {
     }
 }
 
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 compileKotlin {
     kotlinOptions {
         jvmTarget = '17'

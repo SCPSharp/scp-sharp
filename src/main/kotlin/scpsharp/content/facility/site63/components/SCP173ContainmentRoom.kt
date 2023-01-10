@@ -6,10 +6,10 @@
 package scpsharp.content.facility.site63.components
 
 import net.minecraft.block.Blocks
+import net.minecraft.registry.Registry
 import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
-import net.minecraft.util.registry.Registry
 import scpsharp.content.facility.generator.ComponentFactory
 import scpsharp.content.facility.generator.ComponentRef
 import scpsharp.content.facility.generator.FacilityGenerator
@@ -125,7 +125,7 @@ object SCP173ContainmentRoomComponentFactory : ComponentFactory<SCP173Containmen
     val IDENTIFIER = id("scp173_containment_room")
 
     init {
-        Registry.register(ComponentFactory.REGISTRY, IDENTIFIER, this)
+        Registry.register(REGISTRY, IDENTIFIER, this)
     }
 
     override fun construct(
