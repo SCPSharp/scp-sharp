@@ -73,6 +73,9 @@ class FacilityGenerator(
     fun isChunkLoaded(pos: BlockPos) =
         isChunkLoaded(ChunkSectionPos.getSectionCoord(pos.x), ChunkSectionPos.getSectionCoord(pos.z))
 
+    fun isChunkLoadedAtBlock(x: Int, z: Int) =
+        isChunkLoaded(ChunkSectionPos.getSectionCoord(x), ChunkSectionPos.getSectionCoord(z))
+
     fun getSurfaceHeight(pos: BlockPos) = getSurfaceHeight(pos.x, pos.z)
 
     fun getSurfaceHeight(x: Int, z: Int) = chunkGenerator.getHeight(
@@ -92,11 +95,16 @@ class FacilityGenerator(
             extraValidator = extraValidator
         )
 
-    fun validateBlock(pos: BlockPos) = isChunkLoaded(pos) && validateBlock(get(pos))
+    fun validateBlock(pos: BlockPos) = validateBlock(get(pos))
 
     fun validateBlock(state: BlockState): Boolean = !state.isIn(ComponentTags.FACILITY_KEEP)
 
     fun validateSpace(box: BlockBox): Boolean {
+        for (x in box.minX..box.maxX step 16) {
+            for (z in box.minZ..box.maxZ step 16) {
+                if (!isChunkLoadedAtBlock(x, z)) return false
+            }
+        }
         for (x in box.minX..box.maxX) {
             for (y in box.minY..box.maxY) {
                 for (z in box.minZ..box.maxZ) {
