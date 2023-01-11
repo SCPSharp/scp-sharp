@@ -2,7 +2,7 @@ import java.nio.charset.StandardCharsets
 
 plugins {
     id 'fabric-loom' version '1.0-SNAPSHOT'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.20'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
     id 'net.kyori.indra' version '2.2.0'
     id 'net.kyori.indra.licenser.spotless' version '2.2.0'
     id 'net.kyori.indra.git' version '2.2.0'
@@ -26,7 +26,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation 'net.fabricmc:fabric-language-kotlin:1.8.4+kotlin.1.7.20'
+    modImplementation 'net.fabricmc:fabric-language-kotlin:1.9.0+kotlin.1.8.0'
 
     modImplementation 'com.terraformersmc:modmenu:5.0.2'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:10.0.581'

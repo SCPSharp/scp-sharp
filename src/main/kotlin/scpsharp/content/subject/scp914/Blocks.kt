@@ -53,6 +53,7 @@ object SCP914FrameworkBlock : Block(
 
 }
 
+@Suppress("OVERRIDE_DEPRECATION")
 object SCP914ControllerBlock : Block(
     FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY)
         .strength(8f, 10f)
