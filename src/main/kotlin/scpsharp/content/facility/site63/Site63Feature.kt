@@ -8,7 +8,6 @@ package scpsharp.content.facility.site63
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.ModificationPhase
-import net.minecraft.registry.BuiltinRegistries
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
@@ -16,11 +15,11 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.BiomeTags
 import net.minecraft.world.dimension.DimensionOptions
 import net.minecraft.world.gen.GenerationStep
-import net.minecraft.world.gen.feature.*
+import net.minecraft.world.gen.feature.ConfiguredFeature
+import net.minecraft.world.gen.feature.DefaultFeatureConfig
+import net.minecraft.world.gen.feature.Feature
+import net.minecraft.world.gen.feature.PlacedFeature
 import net.minecraft.world.gen.feature.util.FeatureContext
-import net.minecraft.world.gen.placementmodifier.BiomePlacementModifier
-import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
-import net.minecraft.world.gen.placementmodifier.SquarePlacementModifier
 import scpsharp.content.facility.generator.ComponentTags
 import scpsharp.content.facility.generator.FacilityGenerator
 import scpsharp.util.id
@@ -29,8 +28,8 @@ object Site63Feature : Feature<DefaultFeatureConfig>(DefaultFeatureConfig.CODEC)
 
     val IDENTIFIER = id("site63")
 
-    val DEFAULT_CONFIGURATION_KEY = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, IDENTIFIER)
-    val DEFAULT_PLACE_KEY = RegistryKey.of(RegistryKeys.PLACED_FEATURE, IDENTIFIER)
+    val DEFAULT_CONFIGURATION_KEY: RegistryKey<ConfiguredFeature<*, *>> = RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, IDENTIFIER)
+    val DEFAULT_PLACE_KEY: RegistryKey<PlacedFeature> = RegistryKey.of(RegistryKeys.PLACED_FEATURE, IDENTIFIER)
 
     init {
         Registry.register(Registries.FEATURE, IDENTIFIER, this)
