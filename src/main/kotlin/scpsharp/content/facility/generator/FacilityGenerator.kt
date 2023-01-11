@@ -18,6 +18,7 @@ import net.minecraft.util.math.*
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.Heightmap
 import net.minecraft.world.StructureWorldAccess
+import net.minecraft.world.chunk.ChunkStatus
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import net.minecraft.world.gen.feature.util.FeatureContext
 
@@ -40,11 +41,11 @@ class FacilityGenerator(
         ), context.generator
     )
 
-    operator fun get(pos: BlockPos): BlockState = if (isChunkLoaded(pos)) access.getBlockState(pos)
+    operator fun get(pos: BlockPos): BlockState = if (isChunkLoaded(pos)) access.toServerWorld().getBlockState(pos)
     else throw UnsupportedOperationException("Target chunk not loaded")
 
     operator fun set(pos: BlockPos, state: BlockState) =
-        if (isChunkLoaded(pos)) access.setBlockState(pos, state, 3 /* NOTIFY_ALL */)
+        if (isChunkLoaded(pos)) access.toServerWorld().setBlockState(pos, state, 3 /* NOTIFY_ALL */)
         else throw UnsupportedOperationException("Target chunk not loaded")
 
     operator fun set(pos: BlockPos, block: Block) = set(pos, block.defaultState)
@@ -65,7 +66,9 @@ class FacilityGenerator(
     val world: ServerWorld get() = access.toServerWorld()
     val server get() = access.server
 
-    fun isChunkLoaded(posX: Int, posZ: Int) = access.chunkManager.isChunkLoaded(posX, posZ)
+    fun isChunkLoaded(posX: Int, posZ: Int) =
+        access.chunkManager.getChunk(posX, posZ, ChunkStatus.EMPTY, false) != null
+
     fun isChunkLoaded(pos: ChunkPos) = isChunkLoaded(pos.x, pos.z)
     fun isChunkLoaded(pos: BlockPos) =
         isChunkLoaded(ChunkSectionPos.getSectionCoord(pos.x), ChunkSectionPos.getSectionCoord(pos.z))
