@@ -15,7 +15,6 @@ class Site63Structure(config: Config) : FacilityStructure(config) {
     companion object {
 
         val IDENTIFIER = id("site63")
-        val LOGGER = logger("Site-63")
 
         val CODEC: Codec<Site63Structure> =
             RecordCodecBuilder.create { instance ->
@@ -30,7 +29,7 @@ class Site63Structure(config: Config) : FacilityStructure(config) {
     }
 
     override fun getStructurePosition(context: Context): Optional<StructurePosition> =
-        getStructurePosition(context) { pos, direction ->
+        getStructurePosition(IDENTIFIER, context) { pos, direction ->
             random(Site63Tags.START, pos, direction)
         }
 

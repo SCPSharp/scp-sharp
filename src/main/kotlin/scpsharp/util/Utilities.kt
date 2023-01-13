@@ -6,6 +6,8 @@
 package scpsharp.util
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.util.BlockRotation
@@ -14,6 +16,7 @@ import net.minecraft.util.math.BlockBox
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.math.Vec3i
+import net.minecraft.world.StructureWorldAccess
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -39,3 +42,8 @@ fun ItemGroup.addItem(item: Item) {
             content.add(item)
         })
 }
+
+operator fun StructureWorldAccess.set(pos: BlockPos, state: BlockState) =
+    setBlockState(pos, state, Block.NOTIFY_LISTENERS)
+
+operator fun StructureWorldAccess.set(pos: BlockPos, block: Block) = set(pos, block.defaultState)

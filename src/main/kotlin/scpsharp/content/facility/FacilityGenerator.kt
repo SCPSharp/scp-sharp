@@ -19,15 +19,10 @@ class FacilityGenerator(val ctx: Structure.Context) : StructurePiecesHolder {
 
     inline fun piece(crossinline content: FacilityGenerator.() -> Boolean): Boolean {
         pieces.push()
-        return try {
-            if (content()) {
-                pieces.squash()
-                true
-            } else {
-                pieces.drop()
-                false
-            }
-        } catch (e: Throwable) {
+        return if (content()) {
+            pieces.squash()
+            true
+        } else {
             pieces.drop()
             false
         }

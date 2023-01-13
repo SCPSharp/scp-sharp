@@ -18,6 +18,8 @@ import net.minecraft.world.gen.StructureAccessor
 import net.minecraft.world.gen.chunk.ChunkGenerator
 import scpsharp.content.facility.FacilityGenerator
 import scpsharp.content.facility.FacilityStructurePiece
+import scpsharp.content.facility.site63.Site63Tags
+import scpsharp.util.asBlockRotation
 import scpsharp.util.id
 
 class Site63Gate : FacilityStructurePiece {
@@ -32,14 +34,14 @@ class Site63Gate : FacilityStructurePiece {
                     Site63Gate(
                         ctx.structureTemplateManager.getTemplateOrBlank(IDENTIFIER)!!,
                         depth,
-                        pos,
+                        pos.down(5),
                         direction
                     )
-                ) /*&& generator.random(
+                ) && generator.random(
                     Site63Tags.CORRIDOR,
                     pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()),
                     direction
-                )*/
+                )
             }
 
             override fun load(context: StructureContext, nbt: NbtCompound) =
@@ -51,15 +53,16 @@ class Site63Gate : FacilityStructurePiece {
             Registry.register(Registries.STRUCTURE_PIECE, IDENTIFIER, TYPE)
         }
 
-        fun createPlacementData() = StructurePlacementData()
+        fun createPlacementData(direction: Direction) =
+            StructurePlacementData().apply { rotation = direction.asBlockRotation }
 
     }
 
     private val template: StructureTemplate
     private val pos: BlockPos
 
-    constructor(template: StructureTemplate, length: Int, pos: BlockPos, direction: Direction) : super(
-        TYPE, length, template.calculateBoundingBox(createPlacementData(), pos)
+    constructor(template: StructureTemplate, depth: Int, pos: BlockPos, direction: Direction) : super(
+        TYPE, depth, template.calculateBoundingBox(createPlacementData(direction), pos)
     ) {
         this.template = template
         this.pos = pos
@@ -84,7 +87,7 @@ class Site63Gate : FacilityStructurePiece {
         chunkPos: ChunkPos,
         pivot: BlockPos
     ) {
-        val placementData = createPlacementData()
+        val placementData = createPlacementData(facing!!)
         placementData.boundingBox = chunkBox
         boundingBox = template.calculateBoundingBox(placementData, pos)
         template.place(world, pos, pivot, placementData, random, Block.NOTIFY_LISTENERS)

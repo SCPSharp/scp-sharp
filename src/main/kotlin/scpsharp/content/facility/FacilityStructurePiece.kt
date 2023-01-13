@@ -15,7 +15,7 @@ import net.minecraft.world.gen.chunk.ChunkGenerator
 
 abstract class FacilityStructurePiece : StructurePiece {
 
-    constructor(type: StructurePieceType, length: Int, boundingBox: BlockBox) : super(type, length, boundingBox)
+    constructor(type: StructurePieceType, depth: Int, boundingBox: BlockBox) : super(type, depth, boundingBox)
     constructor(type: StructurePieceType, nbt: NbtCompound) : super(type, nbt)
 
     abstract override fun writeNbt(context: StructureContext, nbt: NbtCompound)
