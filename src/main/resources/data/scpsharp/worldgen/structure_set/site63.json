@@ -1,0 +1,15 @@
+{
+  "structures": [
+    {
+      "structure": "scpsharp:site63",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1055020144,
+    "frequency": 0.8,
+    "spacing": 20,
+    "separation": 15
+  }
+}

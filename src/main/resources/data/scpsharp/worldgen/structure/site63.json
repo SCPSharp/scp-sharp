@@ -1,0 +1,6 @@
+{
+  "type": "scpsharp:site63",
+  "biomes": "#scpsharp:has_structure/site63",
+  "step": "underground_structures",
+  "spawn_overrides": {}
+}

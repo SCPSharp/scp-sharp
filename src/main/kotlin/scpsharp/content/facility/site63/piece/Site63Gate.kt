@@ -1,0 +1,93 @@
+package scpsharp.content.facility.site63.piece
+
+import net.minecraft.block.Block
+import net.minecraft.nbt.NbtCompound
+import net.minecraft.nbt.NbtHelper
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
+import net.minecraft.structure.StructureContext
+import net.minecraft.structure.StructurePlacementData
+import net.minecraft.structure.StructureTemplate
+import net.minecraft.util.math.BlockBox
+import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.ChunkPos
+import net.minecraft.util.math.Direction
+import net.minecraft.util.math.random.Random
+import net.minecraft.world.StructureWorldAccess
+import net.minecraft.world.gen.StructureAccessor
+import net.minecraft.world.gen.chunk.ChunkGenerator
+import scpsharp.content.facility.FacilityGenerator
+import scpsharp.content.facility.FacilityStructurePiece
+import scpsharp.util.id
+
+class Site63Gate : FacilityStructurePiece {
+
+    companion object {
+
+        val IDENTIFIER = id("site63/gate")
+        val TYPE = object : Type {
+
+            override fun invoke(generator: FacilityGenerator, pos: BlockPos, direction: Direction) = generator.piece {
+                add(
+                    Site63Gate(
+                        ctx.structureTemplateManager.getTemplateOrBlank(IDENTIFIER)!!,
+                        depth,
+                        pos,
+                        direction
+                    )
+                ) /*&& generator.random(
+                    Site63Tags.CORRIDOR,
+                    pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()),
+                    direction
+                )*/
+            }
+
+            override fun load(context: StructureContext, nbt: NbtCompound) =
+                Site63Gate(context.structureTemplateManager().getTemplateOrBlank(IDENTIFIER)!!, nbt)
+
+        }
+
+        init {
+            Registry.register(Registries.STRUCTURE_PIECE, IDENTIFIER, TYPE)
+        }
+
+        fun createPlacementData() = StructurePlacementData()
+
+    }
+
+    private val template: StructureTemplate
+    private val pos: BlockPos
+
+    constructor(template: StructureTemplate, length: Int, pos: BlockPos, direction: Direction) : super(
+        TYPE, length, template.calculateBoundingBox(createPlacementData(), pos)
+    ) {
+        this.template = template
+        this.pos = pos
+        this.setOrientation(direction)
+    }
+
+    constructor(template: StructureTemplate, nbt: NbtCompound) : super(TYPE, nbt) {
+        this.template = template
+        this.pos = NbtHelper.toBlockPos(nbt.getCompound("Pos"))
+    }
+
+    override fun writeNbt(context: StructureContext, nbt: NbtCompound) {
+        nbt.put("Pos", NbtHelper.fromBlockPos(pos))
+    }
+
+    override fun generate(
+        world: StructureWorldAccess,
+        structureAccessor: StructureAccessor,
+        chunkGenerator: ChunkGenerator,
+        random: Random,
+        chunkBox: BlockBox,
+        chunkPos: ChunkPos,
+        pivot: BlockPos
+    ) {
+        val placementData = createPlacementData()
+        placementData.boundingBox = chunkBox
+        boundingBox = template.calculateBoundingBox(placementData, pos)
+        template.place(world, pos, pivot, placementData, random, Block.NOTIFY_LISTENERS)
+    }
+
+}
