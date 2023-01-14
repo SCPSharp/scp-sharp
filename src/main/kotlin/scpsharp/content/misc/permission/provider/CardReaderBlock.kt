@@ -3,7 +3,7 @@
  *
  * This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. See LICENSE file for more.
  */
-@file:Suppress("DEPRECATION")
+@file:Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
 
 package scpsharp.content.misc.permission.provider
 
@@ -57,7 +57,7 @@ object CardReaderBlock : BlockWithEntity(
     val ITEM = BlockItem(this, FabricItemSettings())
     val ENTITY_TYPE: BlockEntityType<CardReaderBlockEntity> =
         FabricBlockEntityTypeBuilder.create(::CardReaderBlockEntity, this).build()
-    val SHAPES: Map<BlockState, VoxelShape> = getShapesForStates(::createVoxelShape)
+    private val SHAPES: Map<BlockState, VoxelShape> = getShapesForStates(::createVoxelShape)
 
     init {
         Registry.register(Registries.BLOCK, IDENTIFIER, this)
@@ -110,11 +110,11 @@ object CardReaderBlock : BlockWithEntity(
         builder.add(Properties.HORIZONTAL_FACING)
     }
 
-    override fun getPlacementState(ctx: ItemPlacementContext): BlockState = super.getDefaultState()
-        .with(
-            Properties.HORIZONTAL_FACING,
-            if (ctx.side.axis == Direction.Axis.Y) ctx.playerFacing.opposite else ctx.side
-        )
+    override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
+        val direction = if (ctx.side.axis == Direction.Axis.Y) ctx.playerFacing.opposite!! else ctx.side!!
+        if (ctx.world.getBlockState(ctx.blockPos.offset(direction.opposite)).isAir) return null
+        return super.getDefaultState().with(Properties.HORIZONTAL_FACING, direction)
+    }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, itemStack: ItemStack) {
         super.onPlaced(world, pos, state, placer, itemStack)
