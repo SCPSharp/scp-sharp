@@ -176,7 +176,19 @@ class SCP173ContainmentRoom : FacilityStructurePiece {
         }
         // Spawn SCP-173
         if (entityPos != null && entityPos in chunkBox) {
-            world.spawnEntity(SCP173Entity.TYPE.spawn(world.toServerWorld(), entityPos, SpawnReason.STRUCTURE))
+            val entity = SCP173Entity.TYPE.create(world.toServerWorld())
+            if (entity != null) {
+                entity.setPersistent()
+                entity.refreshPositionAndAngles(
+                    entityPos.x.toDouble(),
+                    entityPos.y.toDouble(),
+                    entityPos.z.toDouble(),
+                    0.0f,
+                    0.0f
+                )
+                entity.initialize(world, world.getLocalDifficulty(pos), SpawnReason.STRUCTURE, null, null)
+                world.spawnEntity(entity)
+            }
         }
     }
 

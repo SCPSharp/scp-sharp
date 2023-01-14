@@ -13,7 +13,7 @@ plugins {
 }
 
 group 'scpsharp'
-version '1.12'
+version '1.12.1'
 String fullVersion = "mc${project.minecraft_version}-$project.version"
 
 repositories {
