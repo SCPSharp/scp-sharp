@@ -80,7 +80,7 @@ Yeah, everyone can create an account and do edits directly on our [wiki](https:/
 
 This program is licensed under CC BY-SA 4.0(see `LICENSE` file or [CC Website](https://creativecommons.org/licenses/by-sa/4.0/) for more).
 
-> Copyright (C) 2022  SCPSharp Team
+> Copyright (C) 2023  SCPSharp Team
 > 
 > This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. See LICENSE file for more.
 
