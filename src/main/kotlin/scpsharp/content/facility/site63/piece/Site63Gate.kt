@@ -44,7 +44,7 @@ class Site63Gate : FacilityStructurePiece {
                     )
                 ) && generator.random(
                     Site63Tags.CORRIDOR,
-                    pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()),
+                    pos.offset(direction, 10).offset(direction.rotateYCounterclockwise()).down(5),
                     direction
                 )
             }

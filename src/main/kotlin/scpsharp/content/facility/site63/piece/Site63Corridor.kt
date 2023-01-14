@@ -24,6 +24,7 @@ import scpsharp.content.facility.FacilityGenerator
 import scpsharp.content.facility.FacilityStructurePiece
 import scpsharp.content.facility.site63.Site63Tags
 import scpsharp.util.BlockBox
+import scpsharp.util.coerce
 import scpsharp.util.id
 import scpsharp.util.set
 
@@ -38,7 +39,7 @@ class Site63Corridor : FacilityStructurePiece {
                 generator.depth > 10 || generator.piece {
                     val len = ctx.random.nextBetween(8, 20)
                     add(
-                        Site63Corridor(depth, pos.down(5), direction, len)
+                        Site63Corridor(depth, pos, direction, len)
                     ) && generator.random(
                         Site63Tags.CORRIDOR_CONNECTED,
                         pos.offset(direction, len + 1),
@@ -94,13 +95,11 @@ class Site63Corridor : FacilityStructurePiece {
         pivot: BlockPos
     ) {
         val direction = this.facing!!
-        val xRange = boundingBox.minX.coerceAtLeast(chunkBox.minX)..boundingBox.maxX.coerceAtMost(chunkBox.maxX)
-        val yRange = boundingBox.minY.coerceAtLeast(chunkBox.minY)..boundingBox.maxY.coerceAtMost(chunkBox.maxY)
-        val zRange = boundingBox.minZ.coerceAtLeast(chunkBox.minZ)..boundingBox.maxZ.coerceAtMost(chunkBox.maxZ)
+        val box = boundingBox.coerce(chunkBox)
         val pos = BlockPos.Mutable()
-        for (x in xRange) {
-            for (y in yRange) {
-                for (z in zRange) {
+        for (x in box.minX..box.maxX) {
+            for (y in box.minY..box.maxY) {
+                for (z in box.minZ..box.maxZ) {
                     pos.set(x, y, z)
                     val border = ((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
                             || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
