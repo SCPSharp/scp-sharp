@@ -170,7 +170,7 @@ class SCP173ContainmentRoom : FacilityStructurePiece {
             )
         }
         // Spawn SCP-173
-        if (entityPos != null) {
+        if (entityPos != null && entityPos in chunkBox) {
             world.spawnEntity(SCP173Entity.TYPE.spawn(world.toServerWorld(), entityPos, SpawnReason.STRUCTURE))
         }
     }
