@@ -155,7 +155,6 @@ object CardReaderBlock : BlockWithEntity(
                     (item.item as SCPPermissionCardItem).getAllProvidedPermissions(world, item)
                 )
                 blockEntity.markDirty()
-                SCPPermission.LOGGER.info("$player applied $item to card reader at $world $pos")
                 SCPPermission.updateDoubleNeighbors(world, pos)
                 world.scheduleBlockTick(pos, this, 20 * 2)
                 return ActionResult.SUCCESS
@@ -170,7 +169,6 @@ object CardReaderBlock : BlockWithEntity(
         val blockEntity = world.getBlockEntity(pos) as CardReaderBlockEntity
         blockEntity.permissions.clear()
         blockEntity.markDirty()
-        SCPPermission.LOGGER.info("Card reader at $world $pos closed")
         SCPPermission.updateDoubleNeighbors(world, pos)
     }
 

@@ -66,7 +66,7 @@ class SimplePermissionCardItem(id: Identifier, settings: Settings) : Item(settin
                 .forEach { (operator, identifier) -> operator(identifier) }
             timer.stop()
             SCPPermission.LOGGER.info("Finished reloading card $id with ${timer.elapsed()}")
-            SCPPermission.LOGGER.info("Permission card $id now is able to provide these permissions: $providedPermissions")
+            SCPPermission.LOGGER.info("Permission card $id is now able to provide: $providedPermissions")
         }
 
         override fun getFabricId() = id("reload_permission_card_" + id.toUnderscoreSeparatedString())
