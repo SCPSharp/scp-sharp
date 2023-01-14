@@ -75,13 +75,13 @@ class Site63Corridor : FacilityStructurePiece {
     }
 
     constructor(nbt: NbtCompound) : super(TYPE, nbt) {
-        this.pos = NbtHelper.toBlockPos(nbt.getCompound("CPos"))
-        this.length = nbt.getInt("CLen")
+        this.pos = NbtHelper.toBlockPos(nbt.getCompound("Pos"))
+        this.length = nbt.getInt("Len")
     }
 
     override fun writeNbt(context: StructureContext, nbt: NbtCompound) {
-        nbt.put("CPos", NbtHelper.fromBlockPos(pos))
-        nbt.putInt("CLen", length)
+        nbt.put("Pos", NbtHelper.fromBlockPos(pos))
+        nbt.putInt("Len", length)
     }
 
     override fun generate(
