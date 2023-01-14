@@ -16,6 +16,9 @@ operator fun StructureWorldAccess.set(pos: BlockPos, state: BlockState) =
 
 operator fun StructureWorldAccess.set(pos: BlockPos, block: Block) = set(pos, block.defaultState)
 
+operator fun StructureWorldAccess.set(chunkBox: BlockBox, pos: BlockPos, block: Block) = pos !in chunkBox
+        || set(pos, block.defaultState)
+
 fun StructureWorldAccess.fillBlocks(box: BlockBox, state: BlockState) {
     for (x in box.minX..box.maxX) {
         for (y in box.minY..box.maxY) {

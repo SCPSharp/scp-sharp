@@ -5,6 +5,7 @@
  */
 package scpsharp.content.facility.site63
 
+import scpsharp.content.facility.site63.piece.SCP173ContainmentRoom
 import scpsharp.content.facility.site63.piece.Site63Corridor
 import scpsharp.content.facility.site63.piece.Site63Crossing
 import scpsharp.content.facility.site63.piece.Site63Gate
@@ -16,6 +17,7 @@ object Site63 {
         Site63Gate
         Site63Corridor
         Site63Crossing
+        SCP173ContainmentRoom
     }
 
 }

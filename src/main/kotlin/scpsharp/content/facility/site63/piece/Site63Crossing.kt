@@ -40,7 +40,7 @@ class Site63Crossing : FacilityStructurePiece {
                 for (left in setOf(genLeft, false)) {
                     for (front in setOf(genFront, false)) {
                         for (right in setOf(genRight, false)) {
-                            if (!left && front && !right) continue
+                            if (!left && !right) continue
                             val succeeded = generator.piece {
                                 add(Site63Crossing(depth, pos, direction, Triple(left, front, right))) &&
                                         (!left || generator.random(

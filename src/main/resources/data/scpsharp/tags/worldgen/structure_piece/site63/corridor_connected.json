@@ -1,6 +1,7 @@
 {
   "values": [
     "#scpsharp:site63/corridor",
-    "#scpsharp:site63/crossing"
+    "#scpsharp:site63/crossing",
+    "scpsharp:site63/scp173_containment_room"
   ]
 }

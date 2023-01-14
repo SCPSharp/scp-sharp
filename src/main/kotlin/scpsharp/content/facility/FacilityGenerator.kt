@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.gen.structure.Structure
 import kotlin.jvm.optionals.getOrNull
+import kotlin.reflect.KClass
 
 class FacilityGenerator(val ctx: Structure.Context) : StructurePiecesHolder {
 
@@ -64,5 +65,7 @@ class FacilityGenerator(val ctx: Structure.Context) : StructurePiecesHolder {
                     error("$tag registered $randomEntry but is SCP# incompatible structure pieces")
                 }
             }
+
+    fun count(type: KClass<*>) = pieces.count { type.isInstance(it) }
 
 }
