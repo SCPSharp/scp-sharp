@@ -114,7 +114,6 @@ class Site63Corridor : FacilityStructurePiece {
         val lightBlock = if (Xoroshiro128PlusPlusRandom(chunkPos.toLong()).nextInt(20) == 2)
             Blocks.VERDANT_FROGLIGHT else Blocks.SEA_LANTERN
         for (i in 0 until length) {
-            // @TODO: Use frog light after 1.19
             var pos = this.pos.offset(direction, i).add(0, 5, 0)
                 .offset(ycwDirection, 2)
             if (pos in chunkBox) {
