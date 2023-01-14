@@ -114,14 +114,14 @@ class Site63Corridor : FacilityStructurePiece {
         val lightBlock = if (Xoroshiro128PlusPlusRandom(chunkPos.toLong()).nextInt(20) == 2)
             Blocks.VERDANT_FROGLIGHT else Blocks.SEA_LANTERN
         for (i in 0 until length) {
-            var pos = this.pos.offset(direction, i).add(0, 5, 0)
+            var lightPos = this.pos.offset(direction, i).add(0, 5, 0)
                 .offset(ycwDirection, 2)
-            if (pos in chunkBox) {
-                world[pos] = lightBlock
+            if (lightPos in chunkBox) {
+                world[lightPos] = lightBlock
             }
-            pos = pos.offset(ycwDirection)
-            if (pos in chunkBox) {
-                world[pos] = lightBlock
+            lightPos = lightPos.offset(ycwDirection)
+            if (lightPos in chunkBox) {
+                world[lightPos] = lightBlock
             }
         }
     }
