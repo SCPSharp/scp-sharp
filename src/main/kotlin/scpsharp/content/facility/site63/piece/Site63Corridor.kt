@@ -96,15 +96,17 @@ class Site63Corridor : FacilityStructurePiece {
     ) {
         val direction = this.facing!!
         val box = boundingBox.coerce(chunkBox)
-        val pos = BlockPos.Mutable()
-        for (x in box.minX..box.maxX) {
-            for (y in box.minY..box.maxY) {
-                for (z in box.minZ..box.maxZ) {
-                    pos.set(x, y, z)
-                    val border = ((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
-                            || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
-                            || ((pos.z == boundingBox.minZ || z == boundingBox.maxZ) && direction.offsetZ == 0)
-                    world[pos] = if (border) Blocks.POLISHED_DEEPSLATE else Blocks.AIR
+        if (box != null) {
+            val pos = BlockPos.Mutable()
+            for (x in box.minX..box.maxX) {
+                for (y in box.minY..box.maxY) {
+                    for (z in box.minZ..box.maxZ) {
+                        pos.set(x, y, z)
+                        val border = ((x == boundingBox.minX || x == boundingBox.maxX) && direction.offsetX == 0)
+                                || ((y == boundingBox.minY || y == boundingBox.maxY) && direction.offsetY == 0)
+                                || ((pos.z == boundingBox.minZ || z == boundingBox.maxZ) && direction.offsetZ == 0)
+                        world[pos] = if (border) Blocks.POLISHED_DEEPSLATE else Blocks.AIR
+                    }
                 }
             }
         }
@@ -113,15 +115,8 @@ class Site63Corridor : FacilityStructurePiece {
         val lightBlock = if (Xoroshiro128PlusPlusRandom(chunkPos.toLong()).nextInt(20) == 2)
             Blocks.VERDANT_FROGLIGHT else Blocks.SEA_LANTERN
         for (i in 0 until length) {
-            var lightPos = this.pos.offset(direction, i).add(0, 5, 0)
-                .offset(ycwDirection, 2)
-            if (lightPos in chunkBox) {
-                world[lightPos] = lightBlock
-            }
-            lightPos = lightPos.offset(ycwDirection)
-            if (lightPos in chunkBox) {
-                world[lightPos] = lightBlock
-            }
+            world[chunkBox, this.pos.offset(direction, i).add(0, 5, 0).offset(ycwDirection, 2)] = lightBlock
+            world[chunkBox, this.pos.offset(direction, i).add(0, 5, 0).offset(ycwDirection, 3)] = lightBlock
         }
     }
 

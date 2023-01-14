@@ -23,6 +23,7 @@ import scpsharp.content.facility.FacilityGenerator
 import scpsharp.content.facility.FacilityStructurePiece
 import scpsharp.content.facility.site63.Site63Tags
 import scpsharp.util.BlockBox
+import scpsharp.util.coerce
 import scpsharp.util.fillBlocks
 import scpsharp.util.id
 
@@ -123,7 +124,7 @@ class Site63Crossing : FacilityStructurePiece {
                 pos.up(5)
                     .offset(direction, 6)
                     .offset(direction.rotateYClockwise(), 5)
-            ), Blocks.POLISHED_DEEPSLATE
+            ).coerce(chunkBox), Blocks.POLISHED_DEEPSLATE
         )
         world.fillBlocks(
             BlockBox(
@@ -132,7 +133,7 @@ class Site63Crossing : FacilityStructurePiece {
                 pos.up(4)
                     .offset(direction, 5)
                     .offset(direction.rotateYClockwise(), 4)
-            ), Blocks.AIR
+            ).coerce(chunkBox), Blocks.AIR
         )
         val (left, front, right) = neighbors
         if (left) {
@@ -140,13 +141,13 @@ class Site63Crossing : FacilityStructurePiece {
                 BlockBox(
                     pos.offset(direction.rotateYCounterclockwise()).offset(direction),
                     pos.offset(direction.rotateYCounterclockwise()).offset(direction, 6).offset(Direction.UP, 5)
-                ), Blocks.POLISHED_DEEPSLATE
+                ).coerce(chunkBox), Blocks.POLISHED_DEEPSLATE
             )
             world.fillBlocks(
                 BlockBox(
                     pos.offset(direction.rotateYCounterclockwise()).offset(direction, 5).offset(Direction.UP),
                     pos.offset(direction, 2).offset(Direction.UP, 4)
-                ), Blocks.AIR
+                ).coerce(chunkBox), Blocks.AIR
             )
         }
         if (front) {
@@ -154,13 +155,13 @@ class Site63Crossing : FacilityStructurePiece {
                 BlockBox(
                     pos.offset(direction, 7),
                     pos.offset(direction, 7).offset(direction.rotateYClockwise(), 5).offset(Direction.UP, 5)
-                ), Blocks.POLISHED_DEEPSLATE
+                ).coerce(chunkBox), Blocks.POLISHED_DEEPSLATE
             )
             world.fillBlocks(
                 BlockBox(
                     pos.offset(direction, 7).offset(direction.rotateYClockwise()).offset(Direction.UP),
                     pos.offset(direction, 6).offset(direction.rotateYClockwise(), 4).offset(Direction.UP, 4)
-                ), Blocks.AIR
+                ).coerce(chunkBox), Blocks.AIR
             )
         }
         if (right) {
@@ -168,13 +169,13 @@ class Site63Crossing : FacilityStructurePiece {
                 BlockBox(
                     pos.offset(direction.rotateYClockwise(), 6).offset(direction),
                     pos.offset(direction.rotateYClockwise(), 6).offset(direction, 6).offset(Direction.UP, 5)
-                ), Blocks.POLISHED_DEEPSLATE
+                ).coerce(chunkBox), Blocks.POLISHED_DEEPSLATE
             )
             world.fillBlocks(
                 BlockBox(
                     pos.offset(direction.rotateYClockwise(), 6).offset(direction, 2).offset(Direction.UP),
                     pos.offset(direction.rotateYClockwise(), 5).offset(direction, 5).offset(Direction.UP, 4)
-                ), Blocks.AIR
+                ).coerce(chunkBox), Blocks.AIR
             )
         }
     }

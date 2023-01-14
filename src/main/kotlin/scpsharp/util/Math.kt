@@ -21,10 +21,10 @@ operator fun BlockBox.plus(box: BlockBox) = BlockBox(
     max(maxX, box.maxX), max(maxY, box.maxY), max(maxZ, box.maxZ),
 )
 
-fun BlockBox.coerce(box: BlockBox) = BlockBox(
+fun BlockBox.coerce(box: BlockBox) = if (this.intersects(box)) BlockBox(
     minX.coerceAtLeast(box.minX), minY.coerceAtLeast(box.minY), minZ.coerceAtLeast(box.minZ),
     maxX.coerceAtMost(box.maxX), maxY.coerceAtMost(box.maxY), maxZ.coerceAtMost(box.maxZ),
-)
+) else null
 
 val Direction.asBlockRotation
     get() = when (this) {

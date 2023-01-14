@@ -29,4 +29,8 @@ fun StructureWorldAccess.fillBlocks(box: BlockBox, state: BlockState) {
     }
 }
 
-fun StructureWorldAccess.fillBlocks(box: BlockBox, block: Block) = fillBlocks(box, block.defaultState)
+fun StructureWorldAccess.fillBlocks(box: BlockBox?, block: Block) {
+    if (box != null) {
+        fillBlocks(box, block.defaultState)
+    }
+}
