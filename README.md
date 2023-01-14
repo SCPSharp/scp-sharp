@@ -34,7 +34,7 @@ Recipes for SCP-914 are able to display in REI.
 
 #### [Minecraft Meme Resource Pack](https://github.com/Teahouse-Studios/mcwzh-meme-resourcepack)
 
-We have a official translation support for `zh_meme`. This language only shows when the `mcwzh-meme-resourcepack` is installed.
+We have an official translation support for `zh_meme`. This language only shows when the `mcwzh-meme-resourcepack` is installed.
 
 ## FAQ
 
