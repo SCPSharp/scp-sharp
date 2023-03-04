@@ -20,8 +20,8 @@ import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableTextContent
 import net.minecraft.util.Identifier
-import scpsharp.content.subject.scp914.SCP914ControllerBlock
-import scpsharp.content.subject.scp914.SCP914Recipe
+import scpsharp.subject.scp914.SCP914ControllerBlock
+import scpsharp.subject.scp914.SCP914Recipe
 import scpsharp.util.id
 import java.util.*
 

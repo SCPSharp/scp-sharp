@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import scpsharp.content.subject.scp008.SCP008;
-import scpsharp.content.subject.scp008.SCP008StatusEffect;
+import scpsharp.subject.scp008.SCP008;
+import scpsharp.subject.scp008.SCP008StatusEffect;
 
 @Mixin(MilkBucketItem.class)
 public class MilkBucketItemMixin {

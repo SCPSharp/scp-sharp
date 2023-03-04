@@ -18,9 +18,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import scpsharp.content.subject.scp008.SCP008;
-import scpsharp.content.subject.scp008.SCP008ContainmentBlockEntity;
-import scpsharp.content.subject.scp008.SCP008StatusEffect;
+import scpsharp.subject.scp008.SCP008;
+import scpsharp.subject.scp008.SCP008ContainmentBlockEntity;
+import scpsharp.subject.scp008.SCP008StatusEffect;
 
 import java.util.Arrays;
 import java.util.Objects;

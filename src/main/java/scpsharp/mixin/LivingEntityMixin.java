@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import scpsharp.content.subject.scp714.SCP714;
-import scpsharp.content.subject.scp714.SCP714Item;
+import scpsharp.subject.scp714.SCP714;
+import scpsharp.subject.scp714.SCP714Item;
 
 @Mixin(LivingEntity.class)
 public class LivingEntityMixin {

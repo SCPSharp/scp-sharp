@@ -5,17 +5,17 @@
  */
 package scpsharp
 
-import scpsharp.content.facility.site63.Site63
-import scpsharp.content.misc.SCPMisc
-import scpsharp.content.subject.SCPSubjects
-import scpsharp.content.subject.SCPSubjectsClient
+import scpsharp.facility.site63.Site63
+import scpsharp.misc.SCPMisc
+import scpsharp.subject.SCPSubjects
+import scpsharp.subject.SCPSubjectsClient
 
 fun initMain() {
     SCPMisc
-    SCPSubjects
+    scpsharp.subject.SCPSubjects
     Site63
 }
 
 fun initClient() {
-    SCPSubjectsClient
+    scpsharp.subject.SCPSubjectsClient
 }

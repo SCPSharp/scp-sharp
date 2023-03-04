@@ -5,8 +5,8 @@
  */
 package scpsharp.integrate.rei
 
-import scpsharp.content.subject.scp914.SCP914ControllerBlock
-import scpsharp.content.subject.scp914.SCP914Recipe
+import scpsharp.subject.scp914.SCP914ControllerBlock
+import scpsharp.subject.scp914.SCP914Recipe
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
