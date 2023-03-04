@@ -98,9 +98,9 @@ modrinth {
     versionNumber = fullVersion
     versionName = fullVersion
     if(indraGit.headTag() == null) {
-        changelog = "See git for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
+        changelog = "See git for changelog. ${indraGit.describe()}"
     } else {
-        changelog = "See [GitHub](https://github.com/SCPSharp/scp-sharp/releases/tag/${indraGit.headTag().name}) for changelog. Based on git ${indraGit.branchName()} branch ${indraGit.describe()}"
+        changelog = "See [GitHub](https://github.com/SCPSharp/scp-sharp/releases/tag/${indraGit.headTag().name}) for changelog. ${indraGit.describe()}"
     }
 
     uploadFile = remapJar
