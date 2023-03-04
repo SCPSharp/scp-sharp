@@ -22,8 +22,6 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Rarity
 import net.minecraft.world.World
-import scpsharp.subject.SCPEntity
-import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 

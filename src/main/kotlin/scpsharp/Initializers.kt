@@ -7,8 +7,6 @@ package scpsharp
 
 import scpsharp.facility.site63.Site63
 import scpsharp.misc.SCPMisc
-import scpsharp.subject.SCPSubjects
-import scpsharp.subject.SCPSubjectsClient
 
 fun initMain() {
     SCPMisc

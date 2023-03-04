@@ -12,7 +12,6 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
-import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 

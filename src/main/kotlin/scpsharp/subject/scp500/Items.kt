@@ -18,7 +18,6 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
-import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 import kotlin.math.min

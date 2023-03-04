@@ -12,7 +12,6 @@ import net.minecraft.registry.Registry
 import net.minecraft.world.gen.structure.StructureType
 import scpsharp.facility.FacilityStructure
 import scpsharp.util.id
-import scpsharp.util.logger
 import java.util.*
 
 class Site63Structure(config: Config) : FacilityStructure(config) {

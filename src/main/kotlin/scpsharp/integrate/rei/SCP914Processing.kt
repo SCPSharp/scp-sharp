@@ -16,9 +16,7 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
 import me.shedaniel.rei.api.common.util.EntryIngredients
 import me.shedaniel.rei.api.common.util.EntryStacks
-import net.minecraft.text.MutableText
 import net.minecraft.text.Text
-import net.minecraft.text.TranslatableTextContent
 import net.minecraft.util.Identifier
 import scpsharp.subject.scp914.SCP914ControllerBlock
 import scpsharp.subject.scp914.SCP914Recipe

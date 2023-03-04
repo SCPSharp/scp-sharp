@@ -35,7 +35,6 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
 import net.minecraft.world.WorldView
-import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 import kotlin.math.abs

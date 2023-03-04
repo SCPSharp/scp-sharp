@@ -5,8 +5,6 @@
  */
 package scpsharp.integrate.rei
 
-import scpsharp.subject.scp914.SCP914ControllerBlock
-import scpsharp.subject.scp914.SCP914Recipe
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry
 import me.shedaniel.rei.api.client.registry.display.DisplayRegistry
@@ -14,6 +12,8 @@ import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin
 import me.shedaniel.rei.api.common.util.EntryIngredients
+import scpsharp.subject.scp914.SCP914ControllerBlock
+import scpsharp.subject.scp914.SCP914Recipe
 
 object REIServerPlugin : REIServerPlugin {
 
