@@ -31,9 +31,9 @@ dependencies {
     modImplementation 'net.fabricmc:fabric-language-kotlin:1.9.0+kotlin.1.8.0'
 
     modImplementation 'com.terraformersmc:modmenu:5.0.2'
-    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:10.0.581'
-    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:10.0.581'
-    modRuntimeOnly 'dev.architectury:architectury-fabric:7.0.66' // for REI
+    modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:10.0.592'
+    modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:10.0.592'
+    modRuntimeOnly 'dev.architectury:architectury-fabric:8.1.72' // for REI
 }
 
 indra {
