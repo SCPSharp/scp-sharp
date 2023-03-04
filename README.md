@@ -84,7 +84,7 @@ Yeah, everyone can create an account and do edits directly on our [wiki](https:/
 
 ### CC BY-SA 4.0
 
-This program is licensed under CC BY-SA 4.0(see `LICENSE` file or [CC Website](https://creativecommons.org/licenses/by-sa/4.0/) for more).
+This program is licensed under CC BY-SA 4.0(see `LICENSE` file or the [CC website](https://creativecommons.org/licenses/by-sa/4.0/) for more).
 
 > Copyright (C) 2023  SCPSharp Team
 > 
