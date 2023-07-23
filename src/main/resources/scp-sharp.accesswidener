@@ -3,5 +3,7 @@ accessWidener v1 named
 accessible field net/minecraft/entity/ai/goal/AttackGoal target Lnet/minecraft/entity/LivingEntity;
 accessible field net/minecraft/entity/ai/goal/AttackGoal cooldown I
 accessible field net/minecraft/entity/ai/goal/AttackGoal mob Lnet/minecraft/entity/mob/MobEntity;
+# SCP-008 Infection Mixin
+accessible field net/minecraft/entity/damage/DamageTracker entity Lnet/minecraft/entity/LivingEntity;
 # Facility Component Generator
 accessible field net/minecraft/registry/Registries ROOT Lnet/minecraft/registry/MutableRegistry;
