@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.nio.charset.StandardCharsets
 
 plugins {
-    id 'fabric-loom' version '1.1-SNAPSHOT'
+    id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'org.jetbrains.kotlin.jvm' version '1.8.10'
     id 'net.kyori.indra' version '2.2.0'
     id 'net.kyori.indra.licenser.spotless' version '2.2.0'
