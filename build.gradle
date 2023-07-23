@@ -5,9 +5,9 @@ import java.nio.charset.StandardCharsets
 plugins {
     id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'org.jetbrains.kotlin.jvm' version '1.8.10'
-    id 'net.kyori.indra' version '2.2.0'
-    id 'net.kyori.indra.licenser.spotless' version '2.2.0'
-    id 'net.kyori.indra.git' version '2.2.0'
+    id 'net.kyori.indra' version '3.1.2'
+    id 'net.kyori.indra.licenser.spotless' version '3.1.2'
+    id 'net.kyori.indra.git' version '3.1.2'
     id 'com.modrinth.minotaur' version '2.7.3'
     id 'maven-publish'
 }
