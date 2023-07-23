@@ -10,6 +10,7 @@ import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
 import net.minecraft.recipe.*
+import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Identifier
@@ -20,7 +21,7 @@ data class SCP914Recipe(
     private val id: Identifier,
     val source: Ingredient,
     val target: Ingredient,
-    private val output: ItemStack,
+    val output: ItemStack,
     val reverseOutput: ItemStack
 ) : Recipe<Inventory> {
 
@@ -40,11 +41,11 @@ data class SCP914Recipe(
 
     override fun getId() = id
 
-    override fun getOutput(): ItemStack = output
+    override fun getOutput(registryManager: DynamicRegistryManager) = output
 
     override fun matches(inventory: Inventory, world: World) = matcher.test(inventory.getStack(0))
 
-    override fun craft(inventory: Inventory): ItemStack {
+    override fun craft(inventory: Inventory, registryManager: DynamicRegistryManager): ItemStack {
         val input = inventory.getStack(0)
         return if (source.test(input)) {
             output

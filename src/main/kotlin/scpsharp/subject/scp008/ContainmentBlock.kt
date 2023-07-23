@@ -27,7 +27,7 @@ import net.minecraft.world.World
 import scpsharp.util.addItem
 import scpsharp.util.id
 
-object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.METAL)) {
+object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.create().mapColor(MapColor.GRAY)) {
 
     val IDENTIFIER = id("scp008_containment")
     val ITEM = BlockItem(this, FabricItemSettings())
@@ -49,8 +49,10 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.of(Material.
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState) = SCP008ContainmentBlockEntity(pos, state)
 
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun getRenderType(state: BlockState) = BlockRenderType.MODEL
 
+    @Suppress("OVERRIDE_DEPRECATION")
     override fun onUse(
         state: BlockState,
         world: World,
