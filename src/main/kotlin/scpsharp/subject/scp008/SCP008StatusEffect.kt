@@ -8,13 +8,13 @@ package scpsharp.subject.scp008
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityType
 import net.minecraft.entity.LivingEntity
-import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffect
 import net.minecraft.entity.effect.StatusEffectCategory
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
+import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.registry.tag.TagKey
 import scpsharp.util.id
@@ -22,9 +22,7 @@ import scpsharp.util.id
 object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b) {
 
     val IDENTIFIER = id("scp008_infected")
-    val DAMAGE_SOURCE: DamageSource = DamageSource("scp008")
-        .setBypassesArmor()
-        .setUnblockable()
+    val DAMAGE_SOURCE = RegistryKey.of(RegistryKeys.DAMAGE_TYPE, IDENTIFIER)
     val BYPASS_TAG: TagKey<EntityType<*>> = TagKey.of(RegistryKeys.ENTITY_TYPE, id("scp008_bypass"))
 
     init {
@@ -32,7 +30,7 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
     }
 
     fun infect(entity: LivingEntity, source: Entity? = null) {
-        if (!entity.type.isIn(BYPASS_TAG) && !scpsharp.subject.scp008.AntiSCP008Suit.isWoreFully(entity)) {
+        if (!entity.type.isIn(BYPASS_TAG) && !AntiSCP008Suit.isWoreFully(entity)) {
             SCP008.LOGGER.info("$entity infected SCP-008 because of $source")
             entity.addStatusEffect(
                 StatusEffectInstance(SCP008StatusEffect, 20 * (563 + entity.world.random.nextInt(50))),
@@ -49,7 +47,7 @@ object SCP008StatusEffect : StatusEffect(StatusEffectCategory.HARMFUL, 0xd6426b)
             if (entity is PlayerEntity) {
                 entity.incrementStat(SCP008.DYING_STAT)
             }
-            entity.damage(DAMAGE_SOURCE, Float.MAX_VALUE)
+            entity.damage(entity.world.damageSources.create(DAMAGE_SOURCE), Float.MAX_VALUE)
         }
     }
 
