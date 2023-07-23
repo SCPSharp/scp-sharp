@@ -9,7 +9,10 @@ package scpsharp.subject.scp914
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
-import net.minecraft.block.*
+import net.minecraft.block.Block
+import net.minecraft.block.BlockState
+import net.minecraft.block.Blocks
+import net.minecraft.block.MapColor
 import net.minecraft.entity.Entity
 import net.minecraft.entity.ItemEntity
 import net.minecraft.entity.player.PlayerEntity
@@ -40,7 +43,8 @@ import scpsharp.util.id
 import kotlin.math.abs
 
 object SCP914FrameworkBlock : Block(
-    FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY)
+    FabricBlockSettings.create()
+        .mapColor(MapColor.IRON_GRAY)
         .strength(-1f)
 ) {
 
@@ -54,7 +58,8 @@ object SCP914FrameworkBlock : Block(
 
 @Suppress("OVERRIDE_DEPRECATION")
 object SCP914ControllerBlock : Block(
-    FabricBlockSettings.of(Material.METAL, MapColor.IRON_GRAY)
+    FabricBlockSettings.create()
+        .mapColor(MapColor.IRON_GRAY)
         .strength(8f, 10f)
 ) {
 
@@ -92,7 +97,7 @@ object SCP914ControllerBlock : Block(
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState = super.getDefaultState()
-        .with(Properties.HORIZONTAL_FACING, ctx.playerFacing.opposite)
+        .with(Properties.HORIZONTAL_FACING, ctx.horizontalPlayerFacing.opposite)
 
     override fun onStateReplaced(state: BlockState, world: World, pos: BlockPos, newState: BlockState, moved: Boolean) {
         super.onStateReplaced(state, world, pos, newState, moved)
@@ -303,7 +308,7 @@ object SCP914ControllerBlock : Block(
         if (recipe == null) {
             SCP914.LOGGER.info("No recipe found for ${inventory.getStack(0)}")
         }
-        return recipe?.craft(inventory) ?: inventory.getStack(0).copy()
+        return recipe?.craft(inventory, world.registryManager) ?: inventory.getStack(0).copy()
     }
 
 }
