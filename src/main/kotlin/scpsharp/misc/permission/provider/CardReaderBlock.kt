@@ -21,8 +21,8 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NbtCompound
 import net.minecraft.nbt.NbtElement
 import net.minecraft.nbt.NbtString
-import net.minecraft.network.Packet
 import net.minecraft.network.listener.ClientPlayPacketListener
+import net.minecraft.network.packet.Packet
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
@@ -49,7 +49,8 @@ import scpsharp.util.addItem
 import scpsharp.util.id
 
 object CardReaderBlock : BlockWithEntity(
-    FabricBlockSettings.of(Material.METAL)
+    FabricBlockSettings.create()
+        .mapColor(MapColor.LIGHT_GRAY)
         .strength(2f)
 ), SCPPermissionEmitterBlock {
 
@@ -63,7 +64,7 @@ object CardReaderBlock : BlockWithEntity(
         Registry.register(Registries.BLOCK, IDENTIFIER, this)
         Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
         Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
-        SCPMisc.ITEM_GROUP.addItem(ITEM)
+        SCPMisc.ITEM_GROUP_KEY.addItem(ITEM)
 
         this.defaultState = defaultState.with(Properties.HORIZONTAL_FACING, Direction.WEST)
     }
@@ -111,7 +112,7 @@ object CardReaderBlock : BlockWithEntity(
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val direction = if (ctx.side.axis == Direction.Axis.Y) ctx.playerFacing.opposite!! else ctx.side!!
+        val direction = ctx.playerLookDirection
         if (ctx.world.getBlockState(ctx.blockPos.offset(direction.opposite)).isAir) return null
         return super.getDefaultState().with(Properties.HORIZONTAL_FACING, direction)
     }

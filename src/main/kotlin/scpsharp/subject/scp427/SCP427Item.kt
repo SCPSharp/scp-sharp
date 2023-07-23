@@ -19,6 +19,7 @@ import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.util.math.Box
 import net.minecraft.world.World
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
@@ -37,9 +38,9 @@ class SCP427Item private constructor(val open: Boolean) : Item(
 
         init {
             Registry.register(Registries.ITEM, CLOSED_IDENTIFIER, CLOSED_ITEM)
-            scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(CLOSED_ITEM)
+            SCPSubjects.ITEM_GROUP_KEY.addItem(CLOSED_ITEM)
             Registry.register(Registries.ITEM, OPEN_IDENTIFIER, OPEN_ITEM)
-            scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(OPEN_ITEM)
+            SCPSubjects.ITEM_GROUP_KEY.addItem(OPEN_ITEM)
         }
 
     }

@@ -16,47 +16,36 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
 
 object AntiSCP008Suit : ArmorMaterial {
 
-    val HELMET = ArmorItem(this, EquipmentSlot.HEAD, FabricItemSettings())
+    val HELMET = ArmorItem(this, ArmorItem.Type.HELMET, FabricItemSettings())
     val HELMET_ID = id("anti_scp008_suit_helmet")
-    val CHEST = ArmorItem(this, EquipmentSlot.CHEST, FabricItemSettings())
+    val CHEST = ArmorItem(this, ArmorItem.Type.CHESTPLATE, FabricItemSettings())
     val CHEST_ID = id("anti_scp008_suit_chest")
-    val LEGS = ArmorItem(this, EquipmentSlot.LEGS, FabricItemSettings())
+    val LEGS = ArmorItem(this, ArmorItem.Type.LEGGINGS, FabricItemSettings())
     val LEGS_ID = id("anti_scp008_suit_legs")
-    val FEET = ArmorItem(this, EquipmentSlot.FEET, FabricItemSettings())
+    val FEET = ArmorItem(this, ArmorItem.Type.BOOTS, FabricItemSettings())
     val FEET_ID = id("anti_scp008_suit_feet")
 
     init {
-        Registry.register(Registries.ITEM,
-            scpsharp.subject.scp008.AntiSCP008Suit.HELMET_ID,
-            scpsharp.subject.scp008.AntiSCP008Suit.HELMET
-        )
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(scpsharp.subject.scp008.AntiSCP008Suit.HELMET)
-        Registry.register(Registries.ITEM,
-            scpsharp.subject.scp008.AntiSCP008Suit.CHEST_ID,
-            scpsharp.subject.scp008.AntiSCP008Suit.CHEST
-        )
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(scpsharp.subject.scp008.AntiSCP008Suit.CHEST)
-        Registry.register(Registries.ITEM,
-            scpsharp.subject.scp008.AntiSCP008Suit.LEGS_ID,
-            scpsharp.subject.scp008.AntiSCP008Suit.LEGS
-        )
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(scpsharp.subject.scp008.AntiSCP008Suit.LEGS)
-        Registry.register(Registries.ITEM,
-            scpsharp.subject.scp008.AntiSCP008Suit.FEET_ID,
-            scpsharp.subject.scp008.AntiSCP008Suit.FEET
-        )
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(scpsharp.subject.scp008.AntiSCP008Suit.FEET)
+        Registry.register(Registries.ITEM, HELMET_ID, HELMET)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(HELMET)
+        Registry.register(Registries.ITEM, CHEST_ID, CHEST)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(CHEST)
+        Registry.register(Registries.ITEM, LEGS_ID, LEGS)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(LEGS)
+        Registry.register(Registries.ITEM, FEET_ID, FEET)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(FEET)
     }
 
-    override fun getDurability(slot: EquipmentSlot) = 195
+    override fun getDurability(type: ArmorItem.Type) = 195
 
-    override fun getProtectionAmount(slot: EquipmentSlot) = 1
+    override fun getProtection(type: ArmorItem.Type) = 1
 
     override fun getEnchantability() = 7
 
@@ -72,7 +61,7 @@ object AntiSCP008Suit : ArmorMaterial {
 
     fun isWoreFully(entity: Entity): Boolean {
         val items = entity.armorItems.map { it.item }
-        return scpsharp.subject.scp008.AntiSCP008Suit.HELMET in items && scpsharp.subject.scp008.AntiSCP008Suit.CHEST in items && scpsharp.subject.scp008.AntiSCP008Suit.LEGS in items && scpsharp.subject.scp008.AntiSCP008Suit.FEET in items
+        return HELMET in items && CHEST in items && LEGS in items && FEET in items
     }
 
 }

@@ -22,10 +22,12 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.util.Rarity
 import net.minecraft.world.World
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
-class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : scpsharp.subject.SCPEntity(entityType, world) {
+class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) :
+    scpsharp.subject.SCPEntity(entityType, world) {
 
     companion object {
 
@@ -48,7 +50,7 @@ class SCP173Entity(entityType: EntityType<out SCP173Entity>, world: World) : scp
         init {
             Registry.register(Registries.ENTITY_TYPE, IDENTIFIER, TYPE)
             Registry.register(Registries.ITEM, EGG_ITEM_IDENTIFIER, EGG_ITEM)
-            scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(EGG_ITEM)
+            SCPSubjects.ITEM_GROUP_KEY.addItem(EGG_ITEM)
             FabricDefaultAttributeRegistry.register(TYPE, createAttributes())
         }
 

@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.world.World
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
@@ -29,7 +30,7 @@ object SCP714Item : Item(
 
     init {
         Registry.register(Registries.ITEM, IDENTIFIER, SCP714Item)
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(this)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(this)
     }
 
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {

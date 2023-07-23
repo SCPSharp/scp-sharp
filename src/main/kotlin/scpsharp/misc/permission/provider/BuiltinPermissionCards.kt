@@ -26,7 +26,7 @@ object BuiltinPermissionCards {
 
     init {
         Registry.register(Registries.ITEM, O5_ID, O5_ITEM)
-        SCPMisc.ITEM_GROUP.addItem(O5_ITEM)
+        SCPMisc.ITEM_GROUP_KEY.addItem(O5_ITEM)
     }
 
 }

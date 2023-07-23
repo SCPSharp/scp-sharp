@@ -18,6 +18,7 @@ import net.minecraft.registry.Registry
 import net.minecraft.util.Hand
 import net.minecraft.util.TypedActionResult
 import net.minecraft.world.World
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 import kotlin.math.min
@@ -42,7 +43,7 @@ object SCP5001Item : Item(
 
     init {
         Registry.register(Registries.ITEM, IDENTIFIER, SCP5001Item)
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(this)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(this)
     }
 
     override fun finishUsing(stack: ItemStack, world: World, user: LivingEntity): ItemStack {
@@ -73,7 +74,7 @@ object SCP500JarItem : Item(
 
     init {
         Registry.register(Registries.ITEM, IDENTIFIER, SCP500JarItem)
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(this)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(this)
     }
 
     override fun use(world: World, user: PlayerEntity, hand: Hand): TypedActionResult<ItemStack> {

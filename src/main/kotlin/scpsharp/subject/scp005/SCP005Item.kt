@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.state.property.Properties
 import net.minecraft.util.ActionResult
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
@@ -25,7 +26,7 @@ object SCP005Item : Item(
 
     init {
         Registry.register(Registries.ITEM, scpsharp.subject.scp005.SCP005Item.IDENTIFIER, this)
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(this)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(this)
     }
 
     override fun useOnBlock(context: ItemUsageContext): ActionResult {

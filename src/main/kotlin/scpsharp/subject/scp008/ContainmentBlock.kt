@@ -24,6 +24,7 @@ import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.random.Random
 import net.minecraft.world.World
+import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
@@ -38,7 +39,7 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.create().map
         Registry.register(Registries.BLOCK, IDENTIFIER, this)
         Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
         Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
-        scpsharp.subject.SCPSubjects.ITEM_GROUP.addItem(ITEM)
+        SCPSubjects.ITEM_GROUP_KEY.addItem(ITEM)
         defaultState = defaultState.with(Properties.OPEN, false)
     }
 
