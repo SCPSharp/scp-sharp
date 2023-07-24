@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.text.Text
 import scpsharp.subject.scp005.SCP005
 import scpsharp.subject.scp008.SCP008
 import scpsharp.subject.scp008.SCP008Client
@@ -29,6 +30,7 @@ object SCPSubjects {
     val ITEM_GROUP_KEY = RegistryKey.of(RegistryKeys.ITEM_GROUP, id("scp_subjects"))
 
     val ITEM_GROUP: ItemGroup = FabricItemGroup.builder()
+        .displayName(Text.translatable("itemGroup.scpsharp.scp_subjects"))
         .icon { ItemStack(SCP914ControllerBlock.ITEM) }
         .build()
 

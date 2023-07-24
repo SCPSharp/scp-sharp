@@ -12,6 +12,7 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.text.Text
 import scpsharp.misc.permission.SCPPermission
 import scpsharp.misc.permission.provider.CardReaderBlock
 import scpsharp.util.id
@@ -21,6 +22,7 @@ object SCPMisc {
     val ITEM_GROUP_KEY = RegistryKey.of(RegistryKeys.ITEM_GROUP, id("scp_misc"))
 
     val ITEM_GROUP: ItemGroup = FabricItemGroup.builder()
+        .displayName(Text.translatable("itemGroup.scpsharp.scp_misc"))
         .icon { ItemStack(CardReaderBlock.ITEM) }
         .build()
 
