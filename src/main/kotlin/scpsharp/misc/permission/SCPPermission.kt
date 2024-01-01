@@ -37,9 +37,8 @@ object SCPPermission {
         for (x in -1..1) {
             for (y in -1..1) {
                 for (z in -1..1) {
-                    if (isReceivingStrongPermission(world, pos.add(x, y, z), id)) {
+                    if (isReceivingStrongPermission(world, pos.add(x, y, z), id))
                         return true
-                    }
                 }
             }
         }
@@ -47,7 +46,7 @@ object SCPPermission {
     }
 
     fun isReceivingStrongPermission(world: World, pos: BlockPos, id: Identifier): Boolean {
-        for (direction in Direction.values()) {
+        for (direction in Direction.entries) {
             val offsetPos = pos.offset(direction)
             val state = world.getBlockState(offsetPos)
             if (state.block is SCPPermissionEmitterBlock) {
