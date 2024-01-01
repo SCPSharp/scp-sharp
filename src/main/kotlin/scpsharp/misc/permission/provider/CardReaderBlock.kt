@@ -57,6 +57,7 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
             FabricBlockSettings.create()
                 .mapColor(MapColor.LIGHT_GRAY)
                 .strength(2f)
+                .nonOpaque()
         )
         val ITEM = BlockItem(BLOCK, FabricItemSettings())
         val ENTITY_TYPE: BlockEntityType<CardReaderBlockEntity> =
@@ -121,7 +122,7 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
         if (ctx.side.axis == Direction.Axis.Y) return null
-        if (ctx.world.getBlockState(ctx.blockPos.offset(ctx.side.opposite)).isAir) return null
+        if (!ctx.world.getBlockState(ctx.blockPos.offset(ctx.side.opposite)).isOpaque) return null
         return super.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.side)
     }
 
@@ -141,7 +142,7 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
         notify: Boolean
     ) {
         super.neighborUpdate(state, world, pos, block, fromPos, notify)
-        if (world.getBlockState(pos.offset(state[Properties.HORIZONTAL_FACING].opposite)).isAir)
+        if (!world.getBlockState(pos.offset(state[Properties.HORIZONTAL_FACING].opposite)).isOpaque)
             world.breakBlock(pos, true)
     }
 
