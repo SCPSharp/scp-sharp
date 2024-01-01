@@ -120,9 +120,9 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
     }
 
     override fun getPlacementState(ctx: ItemPlacementContext): BlockState? {
-        val direction = ctx.playerLookDirection
-        if (ctx.world.getBlockState(ctx.blockPos.offset(direction.opposite)).isAir) return null
-        return super.getDefaultState().with(Properties.HORIZONTAL_FACING, direction)
+        if (ctx.side.axis == Direction.Axis.Y) return null
+        if (ctx.world.getBlockState(ctx.blockPos.offset(ctx.side.opposite)).isAir) return null
+        return super.getDefaultState().with(Properties.HORIZONTAL_FACING, ctx.side)
     }
 
     override fun onPlaced(world: World, pos: BlockPos, state: BlockState, placer: LivingEntity?, itemStack: ItemStack) {
@@ -142,9 +142,8 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
         notify: Boolean
     ) {
         super.neighborUpdate(state, world, pos, block, fromPos, notify)
-        if (world.getBlockState(pos.offset(state[Properties.HORIZONTAL_FACING].opposite)).isAir) {
+        if (world.getBlockState(pos.offset(state[Properties.HORIZONTAL_FACING].opposite)).isAir)
             world.breakBlock(pos, true)
-        }
     }
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState) = CardReaderBlockEntity(pos, state)
