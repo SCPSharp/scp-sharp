@@ -12,7 +12,8 @@ import net.minecraft.registry.tag.TagKey
 import net.minecraft.world.World
 import scpsharp.util.id
 
-open class SCPEntity(entityType: EntityType<out scpsharp.subject.SCPEntity>, world: World) : PathAwareEntity(entityType, world) {
+open class SCPEntity(entityType: EntityType<out scpsharp.subject.SCPEntity>, world: World) :
+    PathAwareEntity(entityType, world) {
 
     companion object {
 

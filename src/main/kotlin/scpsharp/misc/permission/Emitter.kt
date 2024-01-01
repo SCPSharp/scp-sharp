@@ -15,7 +15,8 @@ interface SCPPermissionEmitterBlock {
 
     fun getAllProvidedPermissions(world: World, pos: BlockPos, state: BlockState): Collection<Identifier>
 
-    fun getAllProvidedPermissions(world: World, pos: BlockPos) = getAllProvidedPermissions(world, pos, world.getBlockState(pos))
+    fun getAllProvidedPermissions(world: World, pos: BlockPos) =
+        getAllProvidedPermissions(world, pos, world.getBlockState(pos))
 
     fun isEmitting(world: World, pos: BlockPos, id: Identifier) = id in getAllProvidedPermissions(world, pos)
 
