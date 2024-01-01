@@ -288,7 +288,7 @@ object SCP914ControllerBlock : Block(
     }
 
     fun processItem(mode: SCP914Mode, item: ItemStack, world: World): ItemStack {
-        SCP914.LOGGER.trace("Processing $item with $mode")
+        SCP914.LOGGER.trace("Processing {} with {}", item, mode)
         val inventory = SimpleInventory(
             when (mode) {
                 SCP914Mode.ROUGH -> processItem(SCP914Mode.COARSE, item, world)
