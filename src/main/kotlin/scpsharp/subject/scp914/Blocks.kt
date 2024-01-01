@@ -221,7 +221,7 @@ object SCP914ControllerBlock : Block(
         when (state[Properties.AGE_3]) {
             1 -> {
                 closeDoor(state, world, pos)
-                SCP914.LOGGER.info("Door of $pos closed")
+                SCP914.LOGGER.trace("Door of {} closed", pos)
                 world.setBlockState(pos, state.with(Properties.AGE_3, 2))
             }
 
@@ -233,7 +233,7 @@ object SCP914ControllerBlock : Block(
 
             3 -> {
                 openDoor(state, world, pos)
-                SCP914.LOGGER.info("Door of $pos open")
+                SCP914.LOGGER.trace("Door of {} open", pos)
                 world.setBlockState(pos, state.with(Properties.AGE_3, 0))
             }
         }
@@ -241,7 +241,7 @@ object SCP914ControllerBlock : Block(
 
     fun activate(state: BlockState, world: World, pos: BlockPos) {
         val mode = state[SCP914.MODE_PROPERTY]
-        SCP914.LOGGER.info("Activated at $world $pos with $mode")
+        SCP914.LOGGER.trace("Activated at {} {} with {}", world, pos, mode)
         val facing = state[Properties.HORIZONTAL_FACING].opposite
         val rVec = BlockPos(facing.rotateCounterclockwise(Direction.Axis.Y).vector).multiply(-1)
         val lVec = BlockPos(facing.rotateCounterclockwise(Direction.Axis.Y).vector).multiply(4)
@@ -288,7 +288,7 @@ object SCP914ControllerBlock : Block(
     }
 
     fun processItem(mode: SCP914Mode, item: ItemStack, world: World): ItemStack {
-        SCP914.LOGGER.info("Processing $item with $mode")
+        SCP914.LOGGER.trace("Processing $item with $mode")
         val inventory = SimpleInventory(
             when (mode) {
                 SCP914Mode.ROUGH -> processItem(SCP914Mode.COARSE, item, world)
