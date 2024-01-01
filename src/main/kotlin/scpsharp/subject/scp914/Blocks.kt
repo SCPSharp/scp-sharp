@@ -309,7 +309,8 @@ object SCP914ControllerBlock : Block(
         if (recipe == null) {
             SCP914.LOGGER.trace("No recipe found for {}", inventory.getStack(0))
         }
-        return recipe?.value?.craft(inventory, world.registryManager) ?: inventory.getStack(0).copy()
+        return recipe?.value?.craft(inventory, world.registryManager)?.takeIf { it.count <= it.maxCount }
+            ?: inventory.getStack(0).copy()
     }
 
 }
