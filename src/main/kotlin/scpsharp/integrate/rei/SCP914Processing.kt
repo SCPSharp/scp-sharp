@@ -16,6 +16,7 @@ import me.shedaniel.rei.api.common.display.basic.BasicDisplay
 import me.shedaniel.rei.api.common.entry.EntryIngredient
 import me.shedaniel.rei.api.common.util.EntryIngredients
 import me.shedaniel.rei.api.common.util.EntryStacks
+import net.minecraft.recipe.RecipeEntry
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
 import scpsharp.subject.scp914.SCP914ControllerBlock
@@ -55,8 +56,8 @@ object SCP914REICategory : DisplayCategory<SCP914REIDisplay> {
 class SCP914REIDisplay(inputs: List<EntryIngredient>, outputs: List<EntryIngredient>, location: Optional<Identifier>) :
     BasicDisplay(inputs, outputs, location) {
 
-    constructor(recipe: SCP914Recipe) : this(
-        listOf(EntryIngredients.ofIngredient(recipe.source)), listOf(EntryIngredients.of(recipe.output)),
+    constructor(recipe: RecipeEntry<SCP914Recipe>) : this(
+        listOf(EntryIngredients.ofIngredient(recipe.value.source)), listOf(EntryIngredients.of(recipe.value.output)),
         Optional.of(recipe.id)
     )
 

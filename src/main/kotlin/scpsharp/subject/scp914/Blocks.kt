@@ -298,18 +298,18 @@ object SCP914ControllerBlock : Block(
             }
         )
         val recipe = world.recipeManager.getAllMatches(SCP914Recipe.TYPE, inventory, world)
-            .filter { (mode == SCP914Mode.ROUGH || mode == SCP914Mode.COARSE) || it.source.test(inventory.getStack(0)) }
+            .filter {
+                (mode == SCP914Mode.ROUGH || mode == SCP914Mode.COARSE)
+                        || it.value.source.test(inventory.getStack(0))
+            }
             .firstOrNull {
-                (mode != SCP914Mode.ROUGH && mode != SCP914Mode.COARSE) || it.target.test(
-                    inventory.getStack(
-                        0
-                    )
-                )
+                (mode != SCP914Mode.ROUGH && mode != SCP914Mode.COARSE)
+                        || it.value.target.test(inventory.getStack(0))
             }
         if (recipe == null) {
-            SCP914.LOGGER.info("No recipe found for ${inventory.getStack(0)}")
+            SCP914.LOGGER.trace("No recipe found for {}", inventory.getStack(0))
         }
-        return recipe?.craft(inventory, world.registryManager) ?: inventory.getStack(0).copy()
+        return recipe?.value?.craft(inventory, world.registryManager) ?: inventory.getStack(0).copy()
     }
 
 }

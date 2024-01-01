@@ -5,6 +5,7 @@
  */
 package scpsharp.subject.scp008
 
+import com.mojang.serialization.MapCodec
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -28,18 +29,25 @@ import scpsharp.subject.SCPSubjects
 import scpsharp.util.addItem
 import scpsharp.util.id
 
-object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.create().mapColor(MapColor.GRAY)) {
+class SCP008ContainmentBlock(settings: Settings) : BlockWithEntity(settings) {
 
-    val IDENTIFIER = id("scp008_containment")
-    val ITEM = BlockItem(this, FabricItemSettings())
-    val ENTITY_TYPE: BlockEntityType<SCP008ContainmentBlockEntity> =
-        FabricBlockEntityTypeBuilder.create(::SCP008ContainmentBlockEntity, this).build()
+    companion object {
+        val IDENTIFIER = id("scp008_containment")
+        val BLOCK = SCP008ContainmentBlock(FabricBlockSettings.create().mapColor(MapColor.GRAY))
+        val ITEM = BlockItem(BLOCK, FabricItemSettings())
+        val ENTITY_TYPE: BlockEntityType<SCP008ContainmentBlockEntity> =
+            FabricBlockEntityTypeBuilder.create(::SCP008ContainmentBlockEntity, BLOCK).build()
+        val CODEC: MapCodec<SCP008ContainmentBlock> = createCodec(::SCP008ContainmentBlock)
+
+        init {
+            Registry.register(Registries.BLOCK, IDENTIFIER, BLOCK)
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
+            Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
+            SCPSubjects.ITEM_GROUP_KEY.addItem(ITEM)
+        }
+    }
 
     init {
-        Registry.register(Registries.BLOCK, IDENTIFIER, this)
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
-        Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
-        SCPSubjects.ITEM_GROUP_KEY.addItem(ITEM)
         defaultState = defaultState.with(Properties.OPEN, false)
     }
 
@@ -52,6 +60,8 @@ object SCP008ContainmentBlock : BlockWithEntity(FabricBlockSettings.create().map
 
     @Suppress("OVERRIDE_DEPRECATION")
     override fun getRenderType(state: BlockState) = BlockRenderType.MODEL
+
+    override fun getCodec() = CODEC
 
     @Suppress("OVERRIDE_DEPRECATION")
     override fun onUse(

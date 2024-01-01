@@ -7,6 +7,7 @@
 
 package scpsharp.misc.permission.provider
 
+import com.mojang.serialization.MapCodec
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
@@ -48,63 +49,70 @@ import scpsharp.misc.permission.SCPPermissionEmitterBlock
 import scpsharp.util.addItem
 import scpsharp.util.id
 
-object CardReaderBlock : BlockWithEntity(
-    FabricBlockSettings.create()
-        .mapColor(MapColor.LIGHT_GRAY)
-        .strength(2f)
-), SCPPermissionEmitterBlock {
+class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermissionEmitterBlock {
 
-    val IDENTIFIER = id("card_reader")
-    val ITEM = BlockItem(this, FabricItemSettings())
-    val ENTITY_TYPE: BlockEntityType<CardReaderBlockEntity> =
-        FabricBlockEntityTypeBuilder.create(::CardReaderBlockEntity, this).build()
-    private val SHAPES: Map<BlockState, VoxelShape> = getShapesForStates(CardReaderBlock::createVoxelShape)
+    companion object {
+        val IDENTIFIER = id("card_reader")
+        val BLOCK = CardReaderBlock(
+            FabricBlockSettings.create()
+                .mapColor(MapColor.LIGHT_GRAY)
+                .strength(2f)
+        )
+        val ITEM = BlockItem(BLOCK, FabricItemSettings())
+        val ENTITY_TYPE: BlockEntityType<CardReaderBlockEntity> =
+            FabricBlockEntityTypeBuilder.create(::CardReaderBlockEntity, BLOCK).build()
+        val CODEC: MapCodec<CardReaderBlock> = createCodec(::CardReaderBlock)
+
+        init {
+            Registry.register(Registries.BLOCK, IDENTIFIER, BLOCK)
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
+            Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
+            SCPMisc.ITEM_GROUP_KEY.addItem(ITEM)
+        }
+
+        private fun createVoxelShape(state: BlockState): VoxelShape =
+            when (state[Properties.HORIZONTAL_FACING]) {
+                Direction.WEST -> VoxelShapes.combineAndSimplify(
+                    createCuboidShape(13.0, 6.0, 9.0, 14.0, 10.0, 10.0),
+                    createCuboidShape(14.0, 5.0, 6.0, 16.0, 11.0, 10.0),
+                    BooleanBiFunction.OR
+                )
+
+                Direction.SOUTH -> VoxelShapes.combineAndSimplify(
+                    createCuboidShape(9.0, 6.0, 2.0, 10.0, 10.0, 3.0),
+                    createCuboidShape(6.0, 5.0, 0.0, 10.0, 11.0, 2.0),
+                    BooleanBiFunction.OR
+                )
+
+                Direction.EAST -> VoxelShapes.combineAndSimplify(
+                    createCuboidShape(2.0, 6.0, 6.0, 3.0, 10.0, 7.0),
+                    createCuboidShape(0.0, 5.0, 6.0, 2.0, 11.0, 10.0),
+                    BooleanBiFunction.OR
+                )
+
+                Direction.NORTH -> VoxelShapes.combineAndSimplify(
+                    createCuboidShape(6.0, 6.0, 13.0, 7.0, 10.0, 14.0),
+                    createCuboidShape(6.0, 5.0, 14.0, 10.0, 11.0, 16.0),
+                    BooleanBiFunction.OR
+                )
+
+                else -> throw IllegalStateException(state[Properties.HORIZONTAL_FACING].name)
+            }
+    }
+
+    private val shapes: Map<BlockState, VoxelShape> = getShapesForStates(CardReaderBlock::createVoxelShape)
 
     init {
-        Registry.register(Registries.BLOCK, IDENTIFIER, this)
-        Registry.register(Registries.BLOCK_ENTITY_TYPE, IDENTIFIER, ENTITY_TYPE)
-        Registry.register(Registries.ITEM, IDENTIFIER, ITEM)
-        SCPMisc.ITEM_GROUP_KEY.addItem(ITEM)
-
         this.defaultState = defaultState.with(Properties.HORIZONTAL_FACING, Direction.WEST)
     }
 
     override fun getRenderType(state: BlockState) = BlockRenderType.MODEL
 
     override fun getOutlineShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
-        SHAPES[state]
+        shapes[state]
 
     override fun getCollisionShape(state: BlockState, world: BlockView, pos: BlockPos, context: ShapeContext) =
-        SHAPES[state]
-
-    private fun createVoxelShape(state: BlockState): VoxelShape =
-        when (state[Properties.HORIZONTAL_FACING]) {
-            Direction.WEST -> VoxelShapes.combineAndSimplify(
-                createCuboidShape(13.0, 6.0, 9.0, 14.0, 10.0, 10.0),
-                createCuboidShape(14.0, 5.0, 6.0, 16.0, 11.0, 10.0),
-                BooleanBiFunction.OR
-            )
-
-            Direction.SOUTH -> VoxelShapes.combineAndSimplify(
-                createCuboidShape(9.0, 6.0, 2.0, 10.0, 10.0, 3.0),
-                createCuboidShape(6.0, 5.0, 0.0, 10.0, 11.0, 2.0),
-                BooleanBiFunction.OR
-            )
-
-            Direction.EAST -> VoxelShapes.combineAndSimplify(
-                createCuboidShape(2.0, 6.0, 6.0, 3.0, 10.0, 7.0),
-                createCuboidShape(0.0, 5.0, 6.0, 2.0, 11.0, 10.0),
-                BooleanBiFunction.OR
-            )
-
-            Direction.NORTH -> VoxelShapes.combineAndSimplify(
-                createCuboidShape(6.0, 6.0, 13.0, 7.0, 10.0, 14.0),
-                createCuboidShape(6.0, 5.0, 14.0, 10.0, 11.0, 16.0),
-                BooleanBiFunction.OR
-            )
-
-            else -> throw IllegalStateException(state[Properties.HORIZONTAL_FACING].name)
-        }
+        shapes[state]
 
     override fun appendProperties(builder: StateManager.Builder<Block, BlockState>) {
         super.appendProperties(builder)
@@ -121,6 +129,8 @@ object CardReaderBlock : BlockWithEntity(
         super.onPlaced(world, pos, state, placer, itemStack)
         neighborUpdate(state, world, pos, this, pos, false)
     }
+
+    override fun getCodec() = CODEC
 
     @Deprecated("Deprecated in Java")
     override fun neighborUpdate(

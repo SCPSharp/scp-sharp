@@ -5,20 +5,22 @@
  */
 package scpsharp.subject.scp914
 
-import com.google.gson.JsonObject
+import com.mojang.serialization.Codec
+import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.inventory.Inventory
 import net.minecraft.item.ItemStack
 import net.minecraft.network.PacketByteBuf
-import net.minecraft.recipe.*
+import net.minecraft.recipe.Ingredient
+import net.minecraft.recipe.Recipe
+import net.minecraft.recipe.RecipeSerializer
+import net.minecraft.recipe.RecipeType
 import net.minecraft.registry.DynamicRegistryManager
 import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
-import net.minecraft.util.Identifier
 import net.minecraft.world.World
 import scpsharp.util.id
 
 data class SCP914Recipe(
-    private val id: Identifier,
     val source: Ingredient,
     val target: Ingredient,
     val output: ItemStack,
@@ -38,10 +40,6 @@ data class SCP914Recipe(
     }
 
     private val matcher = source.or(target)
-
-    override fun getId() = id
-
-    override fun getOutput(registryManager: DynamicRegistryManager) = output
 
     override fun matches(inventory: Inventory, world: World) = matcher.test(inventory.getStack(0))
 
@@ -63,18 +61,27 @@ data class SCP914Recipe(
 
     override fun getType(): RecipeType<SCP914Recipe> = TYPE
 
+    override fun getResult(registryManager: DynamicRegistryManager?) = output
+
     open class Serializer : RecipeSerializer<SCP914Recipe> {
 
-        override fun read(id: Identifier, json: JsonObject) = SCP914Recipe(
-            id = id,
-            source = Ingredient.fromJson(json["source"]),
-            target = Ingredient.fromJson(json["target"]),
-            output = ShapedRecipe.outputFromJson(json.getAsJsonObject("output")),
-            reverseOutput = ShapedRecipe.outputFromJson(json.getAsJsonObject("reverse_output")),
-        )
+        companion object {
+            val CODEC: Codec<SCP914Recipe> =
+                RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SCP914Recipe> ->
+                    instance.group(
+                        Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("source").forGetter { it.source },
+                        Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("target").forGetter { it.target },
+                        ItemStack.RECIPE_RESULT_CODEC.fieldOf("output").forGetter { it.output },
+                        ItemStack.RECIPE_RESULT_CODEC.fieldOf("reverse_output").forGetter { it.reverseOutput },
+                    ).apply(instance) { source, target, output, reverseOutput ->
+                        SCP914Recipe(
+                            source, target, output, reverseOutput
+                        )
+                    }
+                }
+        }
 
-        override fun read(id: Identifier, buffer: PacketByteBuf) = SCP914Recipe(
-            id = id,
+        override fun read(buffer: PacketByteBuf) = SCP914Recipe(
             source = Ingredient.fromPacket(buffer),
             target = Ingredient.fromPacket(buffer),
             output = buffer.readItemStack(),
@@ -88,21 +95,30 @@ data class SCP914Recipe(
             buffer.writeItemStack(recipe.reverseOutput)
         }
 
+        override fun codec() = CODEC
+
     }
 
     open class SimpleSerializer : Serializer() {
 
-        override fun read(id: Identifier, json: JsonObject): SCP914Recipe {
-            val sourceItem = Registries.ITEM.get(Identifier(json["source"].asString))
-            val targetItem = Registries.ITEM.get(Identifier(json["target"].asString))
-            return SCP914Recipe(
-                id = id,
-                source = Ingredient.ofItems(sourceItem),
-                target = Ingredient.ofItems(targetItem),
-                output = ItemStack(targetItem),
-                reverseOutput = ItemStack(sourceItem)
-            )
+        companion object {
+            val CODEC: Codec<SCP914Recipe> =
+                RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SCP914Recipe> ->
+                    instance.group(
+                        Registries.ITEM.codec.fieldOf("source").forGetter { it.reverseOutput.item },
+                        Registries.ITEM.codec.fieldOf("target").forGetter { it.output.item },
+                    ).apply(instance) { source, target ->
+                        SCP914Recipe(
+                            Ingredient.ofItems(source),
+                            Ingredient.ofItems(target),
+                            ItemStack(target),
+                            ItemStack(source)
+                        )
+                    }
+                }
         }
+
+        override fun codec() = CODEC
 
     }
 
