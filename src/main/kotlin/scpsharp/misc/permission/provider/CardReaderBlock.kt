@@ -132,7 +132,6 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
 
     override fun getCodec() = CODEC
 
-    @Deprecated("Deprecated in Java")
     override fun neighborUpdate(
         state: BlockState,
         world: World,
@@ -148,7 +147,6 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
 
     override fun createBlockEntity(pos: BlockPos, state: BlockState) = CardReaderBlockEntity(pos, state)
 
-    @Deprecated("Deprecated in Java")
     override fun onUse(
         state: BlockState,
         world: World,
@@ -173,7 +171,6 @@ class CardReaderBlock(settings: Settings) : BlockWithEntity(settings), SCPPermis
         return super.onUse(state, world, pos, player, hand, hit)
     }
 
-    @Deprecated("Deprecated in Java")
     override fun scheduledTick(state: BlockState, world: ServerWorld, pos: BlockPos, random: Random) {
         super.scheduledTick(state, world, pos, random)
         val blockEntity = world.getBlockEntity(pos) as CardReaderBlockEntity
