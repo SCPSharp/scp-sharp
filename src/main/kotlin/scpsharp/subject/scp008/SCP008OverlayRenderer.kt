@@ -25,7 +25,7 @@ object SCP008OverlayRenderer : HudRenderCallback {
             val width = MinecraftClient.getInstance().window.scaledWidth
             val height = MinecraftClient.getInstance().window.scaledHeight
             RenderSystem.enableBlend()
-            drawContext.drawTexture(OVERLAY_TEXTURE, 0, 0, 0, 0, width, height)
+            drawContext.drawTexture(OVERLAY_TEXTURE, 0, 0, 0f, 0f, width, height, width, height)
         }
     }
 
