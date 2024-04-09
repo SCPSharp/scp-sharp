@@ -34,7 +34,7 @@ dependencies {
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:14.0.688'
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:14.0.688'
     // https://github.com/shedaniel/RoughlyEnoughItems/issues/1559
-    modCompileOnly "me.shedaniel.cloth:cloth-config:13.0.121"
+    modCompileOnly "me.shedaniel.cloth:cloth-config:14.0.125"
 //    modRuntimeOnly 'dev.architectury:architectury-fabric:9.1.10' // for REI
 }
 
