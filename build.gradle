@@ -30,7 +30,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation 'net.fabricmc:fabric-language-kotlin:1.10.17+kotlin.1.9.22'
 
-    modImplementation 'com.terraformersmc:modmenu:9.0.0'
+    modImplementation 'com.terraformersmc:modmenu:11.0.1'
     modCompileOnly 'me.shedaniel:RoughlyEnoughItems-api-fabric:14.0.688'
     modRuntimeOnly 'me.shedaniel:RoughlyEnoughItems-fabric:14.0.688'
     // https://github.com/shedaniel/RoughlyEnoughItems/issues/1559
